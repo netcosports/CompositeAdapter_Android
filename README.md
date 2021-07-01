@@ -1,0 +1,1 @@
+# CompositeAdapter_Android
