@@ -32,6 +32,8 @@ fun Project.initArtifactory(contextUrl: String, publications: Array<String>) {
                 defaults(
                     delegateClosureOf<GroovyObject> {
                         invokeMethod("publications", publications)
+                        invokeMethod("publishArtifacts", true)
+                        setPublishPom(true)
                     }
                 )
             }

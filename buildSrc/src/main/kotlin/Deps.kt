@@ -22,11 +22,7 @@ object Config {
     }
 
     object Publishing {
-
-        fun jvm() = arrayOf("jvm")
-        fun android() = arrayOf("androidDebug", "androidRelease")
-        fun ios() = arrayOf("iosArm64", "iosX64")
-        fun kmm() = arrayOf("kotlinMultiplatform", "metadata")
+        fun android() = arrayOf("aar")
 
         const val contextUrl = "https://artifactory-blr.netcodev.com/artifactory"
         const val compositeAdapterGroupId = "com.netcosports.composite-adapter"

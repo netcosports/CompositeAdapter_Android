@@ -35,12 +35,19 @@ dependencies {
     compileOnly(Config.Deps.AndroidX.swipeRefresh)
 }
 
+val androidSourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(android.sourceSets["main"].java.srcDirs)
+}
+
 initPublishing(
     artifactId = Config.Publishing.compositeAdapter,
     groupId = Config.Publishing.compositeAdapterGroupId,
-    version = Config.Publishing.compositeAdapterVersion
+    version = Config.Publishing.compositeAdapterVersion,
+    sources = "$buildDir/outputs/aar/${project.name}-release.aar",
+    sourcesJar = androidSourcesJar
 )
 initArtifactory(
     contextUrl = Config.Publishing.contextUrl,
-    publications = Config.Publishing.jvm() + Config.Publishing.kmm()
+    publications = Config.Publishing.android()
 )
