@@ -2,5 +2,5 @@
 <resources>
     <item name="common_loader_list_item" type="layout" />
     <item name="common_fullscreen_loader_list_item" type="layout" />
-    <item name="view_message_list_item" type="layout" />
+    <item name="sample_view_message_list_item" type="layout" />
 </resources>
