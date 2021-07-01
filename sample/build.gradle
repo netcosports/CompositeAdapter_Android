@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion ANDROID_BUILD_SDK_VERSION
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId "com.woffka.adapter.sample"
+
+        minSdkVersion ANDROID_MIN_SDK_VERSION
+        targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION
+
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    implementation "androidx.appcompat:appcompat:$android_x_appcompat"
+    implementation "androidx.recyclerview:recyclerview:$android_x_recycler"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$android_x_swipe_refresh_layout"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$android_x_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$android_x_lifecycle_version"
+
+    implementation project(":adapter")
+}
