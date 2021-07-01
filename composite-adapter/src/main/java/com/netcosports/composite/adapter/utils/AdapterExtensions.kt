@@ -16,17 +16,17 @@ fun <ITEM> View.getCompositeAdapterItem(): ITEM {
     return getTag(R.id.composite_adapter_item_tag) as ITEM
 }
 
+fun <VIEW_BINDING> RecyclerView.ViewHolder.setViewBinding(binding: VIEW_BINDING) {
+    itemView.setTag(R.id.composite_adapter_viewbinding_tag, binding)
+}
+
 inline fun <reified VIEW_BINDING> RecyclerView.ViewHolder.getViewBinding(
     crossinline delegate: (View) -> VIEW_BINDING
 ): VIEW_BINDING {
-    return itemView.getViewBinding(delegate)
-}
-
-inline fun <reified VIEW_BINDING> View.getViewBinding(crossinline delegate: (View) -> VIEW_BINDING): VIEW_BINDING {
-    val binding = getTag(R.id.composite_adapter_viewbinding_tag)
+    val binding = itemView.getTag(R.id.composite_adapter_viewbinding_tag)
     return if (binding == null) {
-        delegate(this).also {
-            setTag(R.id.composite_adapter_viewbinding_tag, it)
+        delegate(itemView).also {
+            setViewBinding(it)
         }
     } else {
         binding as VIEW_BINDING
