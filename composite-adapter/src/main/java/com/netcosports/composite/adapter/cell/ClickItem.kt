@@ -1,4 +1,4 @@
-package com.netcosports.composite.adapter.holder
+package com.netcosports.composite.adapter.cell
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView

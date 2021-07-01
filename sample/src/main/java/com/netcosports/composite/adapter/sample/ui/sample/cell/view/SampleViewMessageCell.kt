@@ -9,7 +9,7 @@ import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.netcosports.composite.adapter.cell.Cell
 import com.netcosports.composite.adapter.decoration.ItemDecoration
-import com.netcosports.composite.adapter.holder.ClickItem
+import com.netcosports.composite.adapter.cell.ClickItem
 import com.netcosports.composite.adapter.sample.R
 import com.netcosports.composite.adapter.sample.domain.entity.MessageEntity
 
@@ -40,7 +40,7 @@ data class SampleViewMessageCell(
         )
     }
 
-    override fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewMessageViewHolder).apply {
             text.text = data.text
         }

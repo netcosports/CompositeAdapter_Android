@@ -2,7 +2,7 @@ package com.netcosports.composite.adapter.sample.ui.sample.cell.databinding
 
 import com.netcosports.composite.adapter.cell.Cell
 import com.netcosports.composite.adapter.decoration.ItemDecoration
-import com.netcosports.composite.adapter.holder.ClickItem
+import com.netcosports.composite.adapter.cell.ClickItem
 import com.netcosports.composite.adapter.sample.R
 import com.netcosports.composite.adapter.sample.domain.entity.MessageEntity
 

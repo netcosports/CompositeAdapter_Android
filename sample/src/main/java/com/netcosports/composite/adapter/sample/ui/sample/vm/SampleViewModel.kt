@@ -12,7 +12,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.netcosports.composite.adapter.cell.Cell
 import com.netcosports.composite.adapter.decoration.SpaceItemDecoration
-import com.netcosports.composite.adapter.holder.ClickItem
+import com.netcosports.composite.adapter.cell.ClickItem
 import com.netcosports.composite.adapter.sample.ui.sample.cell.common.SampleErrorCell
 import com.netcosports.composite.adapter.sample.ui.sample.cell.common.SampleFullScreenErrorCell
 import com.netcosports.composite.adapter.sample.ui.sample.cell.common.SampleFullScreenLoaderCell

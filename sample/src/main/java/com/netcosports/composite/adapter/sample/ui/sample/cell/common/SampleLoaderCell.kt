@@ -7,7 +7,6 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.netcosports.composite.adapter.cell.Cell
-import com.netcosports.composite.adapter.holder.CellViewHolder
 import com.netcosports.composite.adapter.sample.R
 
 data class SampleLoaderCell(
@@ -18,7 +17,7 @@ data class SampleLoaderCell(
     override val layoutId: Int = R.layout.common_loader_list_item
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CellViewHolder(FrameLayout(inflater.context).apply {
+        return SampleCellViewHolder(FrameLayout(inflater.context).apply {
             layoutParams = RecyclerView.LayoutParams(
                 RecyclerView.LayoutParams.MATCH_PARENT,
                 RecyclerView.LayoutParams.WRAP_CONTENT
@@ -33,5 +32,5 @@ data class SampleLoaderCell(
         })
     }
 
-    override fun onBind(holder: RecyclerView.ViewHolder, position: Int) = Unit
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = Unit
 }

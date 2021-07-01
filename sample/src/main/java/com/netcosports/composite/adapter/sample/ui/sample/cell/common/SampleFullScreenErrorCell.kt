@@ -1,7 +1,7 @@
 package com.netcosports.composite.adapter.sample.ui.sample.cell.common
 
 import androidx.recyclerview.widget.RecyclerView
-import com.netcosports.composite.adapter.holder.ClickItem
+import com.netcosports.composite.adapter.cell.ClickItem
 import com.netcosports.composite.adapter.sample.R
 import com.netcosports.composite.adapter.sample.databinding.CommonFullscreenErrorListItemBinding
 import com.netcosports.composite.adapter.sample.ui.sample.cell.viewbinding.SampleViewBindingCell
@@ -16,7 +16,7 @@ data class SampleFullScreenErrorCell(
     override val layoutId: Int = R.layout.common_fullscreen_error_list_item
     override val onClickListener: ((ClickItem<String>) -> Unit) = { onRetryClickListener() }
 
-    override fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder.getViewBinding(CommonFullscreenErrorListItemBinding::bind)).apply {
             message.text = data
         }

@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.netcosports.composite.adapter.decoration.ItemDecoration
-import com.netcosports.composite.adapter.holder.ClickItem
 
 interface Cell<T> {
 
@@ -22,8 +21,8 @@ interface Cell<T> {
 
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
-    fun onBind(holder: RecyclerView.ViewHolder, position: Int, payloads: List<Any>): Boolean = false
-    fun onBind(holder: RecyclerView.ViewHolder, position: Int)
+    fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: List<Any>): Boolean = false
+    fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
 
     fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) = Unit
     fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) = Unit

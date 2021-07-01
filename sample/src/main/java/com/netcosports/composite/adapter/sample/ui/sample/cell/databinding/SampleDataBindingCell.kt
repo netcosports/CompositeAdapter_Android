@@ -14,7 +14,7 @@ interface SampleDataBindingCell<T> : Cell<T> {
         return DataBindingViewHolder.create(inflater, layoutId, parent)
     }
 
-    override fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as DataBindingViewHolder).apply {
             bindings.setVariable(BR.item, data)
             bindings.executePendingBindings()

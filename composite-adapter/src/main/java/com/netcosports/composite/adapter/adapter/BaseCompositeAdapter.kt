@@ -48,7 +48,7 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
         if (payloads.isNotEmpty() && payloads.all { it == Cell.CELL_DECORATION_PAYLOAD }) {
             storeCellInHolder(holder, position)
         } else {
-            if (!getItem(position).onBind(holder, position, payloads)) {
+            if (!getItem(position).onBindViewHolder(holder, position, payloads)) {
                 super.onBindViewHolder(holder, position, payloads)
             }
         }
@@ -66,7 +66,7 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
     }
 
     protected open fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
-        getItem(position).onBind(holder, position)
+        getItem(position).onBindViewHolder(holder, position)
     }
 
     protected open fun onBindClickListener(holder: RecyclerView.ViewHolder, position: Int) {
