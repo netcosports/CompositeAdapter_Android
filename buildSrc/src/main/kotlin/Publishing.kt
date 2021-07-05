@@ -21,6 +21,11 @@ fun Project.initPublishing(artifactId: String, groupId: String, version: String,
 
                 this.artifact(sources)
                 this.artifact(sourcesJar.get())
+                this.pom {
+                    this.name.set("CompositeAdapter")
+                    this.description.set("RecyclerView Adapter that delegates all UI logic to a Cell<T> created by the ViewModel")
+                    this.url.set("https://github.com/netcosports/CompositeAdapter_Android")
+                }
             }
         }
     }
