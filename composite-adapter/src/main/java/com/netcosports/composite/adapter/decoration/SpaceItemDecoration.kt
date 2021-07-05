@@ -8,14 +8,14 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-open class SpaceItemDecoration<CELL>(
+open class SpaceItemDecoration<ITEM>(
     val top: Int = 0,
     val bottom: Int = 0,
     val start: Int = 0,
     val end: Int = 0
-) : ItemDecoration<CELL> {
+) : ItemDecoration<ITEM> {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State, item: CELL) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State, item: ITEM) {
         outRect.left = start
         outRect.top = top
         outRect.right = end
