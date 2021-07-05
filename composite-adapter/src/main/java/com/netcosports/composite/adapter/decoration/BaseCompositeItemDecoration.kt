@@ -1,3 +1,7 @@
+/*
+ * Copyright 2021 Origins Digital. Use of this source code is governed by the Apache 2.0 license.
+ */
+
 package com.netcosports.composite.adapter.decoration
 
 import android.graphics.Rect
