@@ -11,8 +11,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.netcosports.composite.adapter.cell.Cell
-import com.netcosports.composite.adapter.decoration.SpaceItemDecoration
 import com.netcosports.composite.adapter.cell.ClickItem
+import com.netcosports.composite.adapter.decoration.SpaceItemDecoration
+import com.netcosports.composite.adapter.sample.domain.entity.MessageEntity
+import com.netcosports.composite.adapter.sample.ui.di.SampleDI
 import com.netcosports.composite.adapter.sample.ui.sample.cell.common.SampleErrorCell
 import com.netcosports.composite.adapter.sample.ui.sample.cell.common.SampleFullScreenErrorCell
 import com.netcosports.composite.adapter.sample.ui.sample.cell.common.SampleFullScreenLoaderCell
@@ -20,13 +22,7 @@ import com.netcosports.composite.adapter.sample.ui.sample.cell.common.SampleLoad
 import com.netcosports.composite.adapter.sample.ui.sample.cell.databinding.SampleDataBindingMessageCell
 import com.netcosports.composite.adapter.sample.ui.sample.cell.view.SampleViewMessageCell
 import com.netcosports.composite.adapter.sample.ui.sample.cell.viewbinding.SampleViewBindingMessageCell
-import com.netcosports.composite.adapter.sample.domain.entity.MessageEntity
-import com.netcosports.composite.adapter.sample.ui.di.SampleDI
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.util.*
 
 class SampleViewModel : ViewModel() {
@@ -247,6 +243,14 @@ class SampleViewModel : ViewModel() {
         } else {
             SampleErrorCell(data = error, onRetryClickListener = onRetryClickListener)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        clickJob?.cancel()
+        loadJob?.cancel()
+        toast?.cancel()
+        toast = null
     }
 
     companion object {
