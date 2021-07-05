@@ -22,7 +22,7 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
 
     private val innerClickListener: View.OnClickListener = View.OnClickListener { v ->
         val holder = v.tag as RecyclerView.ViewHolder
-        val position = holder.adapterPosition
+        val position = holder.bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) { //sometimes it happens
             getItem(position).onClicked(holder.context, holder, position)
         }
