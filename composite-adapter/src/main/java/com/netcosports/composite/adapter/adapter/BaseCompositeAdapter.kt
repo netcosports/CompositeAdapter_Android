@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.netcosports.composite.adapter.cell.Cell
+import com.netcosports.composite.adapter.utils.compositeAdapterViewHolder
 import com.netcosports.composite.adapter.utils.context
 import com.netcosports.composite.adapter.utils.getCompositeAdapterItem
 import com.netcosports.composite.adapter.utils.setCompositeAdapterItem
@@ -21,7 +22,7 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
 ) : ListAdapter<DATA, RecyclerView.ViewHolder>(config) {
 
     private val innerClickListener: View.OnClickListener = View.OnClickListener { v ->
-        val holder = v.tag as RecyclerView.ViewHolder
+        val holder = v.compositeAdapterViewHolder
         val position = holder.bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) { //sometimes it happens
             getItem(position).onClicked(holder.context, holder, position)
@@ -66,7 +67,7 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
     }
 
     protected open fun storeHolderInView(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tag = holder
+        holder.itemView.compositeAdapterViewHolder = holder
     }
 
     protected open fun onBind(holder: RecyclerView.ViewHolder, position: Int) {

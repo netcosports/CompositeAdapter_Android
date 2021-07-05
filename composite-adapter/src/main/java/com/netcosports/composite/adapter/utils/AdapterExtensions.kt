@@ -11,17 +11,19 @@ import com.netcosports.composite.adapter.R
 
 val RecyclerView.ViewHolder.context: Context get() = itemView.context
 
-fun <ITEM> View.setCompositeAdapterItem(item: ITEM) {
-    setTag(R.id.composite_adapter_item_tag, item)
-}
+var View.compositeAdapterViewHolder: RecyclerView.ViewHolder
+    get() = getTag(R.id.composite_adapter_view_holder_tag) as RecyclerView.ViewHolder
+    set(value) {
+        setTag(R.id.composite_adapter_view_holder_tag, value)
+    }
 
 fun <ITEM> View.getCompositeAdapterItem(): ITEM {
     @Suppress("UNCHECKED_CAST")
     return getTag(R.id.composite_adapter_item_tag) as ITEM
 }
 
-fun <VIEW_BINDING> RecyclerView.ViewHolder.setViewBinding(binding: VIEW_BINDING) {
-    itemView.setTag(R.id.composite_adapter_viewbinding_tag, binding)
+fun <ITEM> View.setCompositeAdapterItem(item: ITEM) {
+    setTag(R.id.composite_adapter_item_tag, item)
 }
 
 inline fun <reified VIEW_BINDING> RecyclerView.ViewHolder.getViewBinding(
@@ -35,4 +37,8 @@ inline fun <reified VIEW_BINDING> RecyclerView.ViewHolder.getViewBinding(
     } else {
         binding as VIEW_BINDING
     }
+}
+
+fun <VIEW_BINDING> RecyclerView.ViewHolder.setViewBinding(binding: VIEW_BINDING) {
+    itemView.setTag(R.id.composite_adapter_viewbinding_tag, binding)
 }
