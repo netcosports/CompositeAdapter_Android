@@ -10,11 +10,10 @@ import com.netcosports.composite.adapter.utils.getViewBinding
 data class SampleErrorCell(
     override val uniqueId: String = "ErrorCell",
     override val data: String,
-    val onRetryClickListener: () -> Unit
+    override val onClickListener: ((ClickItem<String>) -> Unit)
 ) : SampleViewBindingCell<String> {
 
     override val layoutId: Int = R.layout.common_error_list_item
-    override val onClickListener: ((ClickItem<String>) -> Unit) = { onRetryClickListener() }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder.getViewBinding(CommonErrorListItemBinding::bind)).apply {

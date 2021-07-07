@@ -137,9 +137,9 @@ class SampleMapper(
 
     fun getErrorCell(error: String, fullscreen: Boolean, onRetryClickListener: () -> Unit): Cell<*> {
         return if (fullscreen) {
-            SampleFullScreenErrorCell(data = error, onRetryClickListener = onRetryClickListener)
+            SampleFullScreenErrorCell(data = error, onClickListener = { onRetryClickListener() })
         } else {
-            SampleErrorCell(data = error, onRetryClickListener = onRetryClickListener)
+            SampleErrorCell(data = error, onClickListener = { onRetryClickListener() })
         }
     }
 }
