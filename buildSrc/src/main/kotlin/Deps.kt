@@ -22,10 +22,7 @@ object Config {
     }
 
     object Publishing {
-        fun android() = arrayOf("aar")
-
-        const val contextUrl = "https://artifactory-blr.netcodev.com/artifactory"
-        const val compositeAdapterGroupId = "com.netcosports.composite-adapter"
+        const val compositeAdapterGroupId = "com.netcosports.compositeadapter"
         const val compositeAdapterVersion = Build.versionName //"1.0.0"
 
         const val compositeAdapter = "composite-adapter"

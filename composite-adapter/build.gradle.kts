@@ -39,15 +39,15 @@ val androidSourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(android.sourceSets["main"].java.srcDirs)
 }
+/*val emptyJavadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+}*/
 
 initPublishing(
     artifactId = Config.Publishing.compositeAdapter,
     groupId = Config.Publishing.compositeAdapterGroupId,
     version = Config.Publishing.compositeAdapterVersion,
     sources = "$buildDir/outputs/aar/${project.name}-release.aar",
-    sourcesJar = androidSourcesJar
-)
-initArtifactory(
-    contextUrl = Config.Publishing.contextUrl,
-    publications = Config.Publishing.android()
+    sourcesJar = androidSourcesJar/*,
+    javadocJar = emptyJavadocJar*/
 )

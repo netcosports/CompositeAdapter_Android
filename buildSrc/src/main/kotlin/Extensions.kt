@@ -2,8 +2,14 @@ import org.gradle.api.Project
 
 const val MASTER_BRANCH = "master"
 
-val Project.repoUsername: String get() = properties["repoUsername"].toString()
-val Project.repoPassword: String get() = properties["repoPassword"].toString()
+val Project.gpgSigningKey: String get() = getPropertyByName("gpgSigningKey")
+val Project.gpgSigningPassphrase: String get() = getPropertyByName("gpgSigningPassphrase")
+val Project.sonatypeUsername: String get() = getPropertyByName("sonatypeUsername")
+val Project.sonatypePassword: String get() = getPropertyByName("sonatypePassword")
+
+private fun Project.getPropertyByName(name: String): String {
+    return properties[name].toString()
+}
 
 fun getBranchName(): String {
     return System.getenv("BRANCH_NAME") ?: MASTER_BRANCH
