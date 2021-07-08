@@ -59,5 +59,6 @@ dependencies {
     implementation(Config.Deps.AndroidX.lifecycleViewModelKtx)
     implementation(Config.Deps.AndroidX.lifecycleLiveDataKtx)
 
+//    implementation(Config.Deps.CompositeAdapter.compositeAdapter)
     implementation(project(Config.Deps.Libs.compositeAdapter))
 }
