@@ -35,7 +35,7 @@ fun Project.initPublishing(
         repositories {
             maven {
                 this.name = "sonatype"
-                this.url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+                this.url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                 this.credentials {
                     this.username = sonatypeUsername
                     this.password = sonatypePassword
