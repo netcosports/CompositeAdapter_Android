@@ -9,7 +9,7 @@
 object CompositeAdapter {
     const val compositeAdapterVersion = "1.0.0"
 
-    const val compositeAdapter = "com.originsdigital.compositeadapter:${compositeAdapterVersion}"
+    const val compositeAdapter = "io.github.netcosports.compositeadapter:${compositeAdapterVersion}"
 }
 ```
 

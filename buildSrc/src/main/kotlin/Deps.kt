@@ -14,15 +14,15 @@ object Config {
         val javaVersion = JavaVersion.VERSION_1_8
 
         const val repoName = "CompositeAdapter_Android"
-        const val packageNameDev = "com.originsdigital.compositeadapter.sample"
-        const val packageNameProd = "com.originsdigital.compositeadapter.sample"
+        const val packageNameDev = "io.github.netcosports.compositeadapter.sample"
+        const val packageNameProd = "io.github.netcosports.compositeadapter.sample"
 
         const val versionName = "1.0.0"
         const val versionOffset = 0
     }
 
     object Publishing {
-        const val compositeAdapterGroupId = "com.originsdigital.compositeadapter"
+        const val compositeAdapterGroupId = "io.github.netcosports.compositeadapter"
         const val compositeAdapterVersion = Build.versionName //"1.0.0"
 
         const val compositeAdapter = "composite-adapter"
