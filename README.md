@@ -1,3 +1,6 @@
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.netcosports.compositeadapter/composite-adapter?color=orange)](https://repo1.maven.org/maven2/io/github/netcosports/compositeadapter/composite-adapter/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
 # CompositeAdapter
 
   The `CompositeAdapter` is a `RecyclerView Adapter` that delegates all UI logic to a `Cell<T>` created by the `ViewModel`.
@@ -9,7 +12,7 @@
 object CompositeAdapter {
     const val compositeAdapterVersion = "1.0.0"
 
-    const val compositeAdapter = "io.github.netcosports.compositeadapter:${compositeAdapterVersion}"
+    const val compositeAdapter = "io.github.netcosports.compositeadapter:composite-adapter:${compositeAdapterVersion}"
 }
 ```
 
