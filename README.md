@@ -142,7 +142,7 @@ adapter.submitList(items)
 </pre>
 
   - Forget about `androidx.recyclerview.widget.ItemDecoration` and use
-  `com.originsdigital.composite.adapter.decoration.ItemDecoration<Cell<T>>` with the additional parameter `Cell<T>` instead.
+  `com.originsdigital.compositeadapter.decoration.ItemDecoration<Cell<T>>` with the additional parameter `Cell<T>` instead.
 ```
 interface ItemDecoration<Item> {
 

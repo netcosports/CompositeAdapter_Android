@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.originsdigital.composite.adapter.sample.domain.entity.MessageEntity" />
+            type="com.originsdigital.compositeadapter.sample.domain.entity.MessageEntity" />
     </data>
 
     <TextView

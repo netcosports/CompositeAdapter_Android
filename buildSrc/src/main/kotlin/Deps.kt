@@ -14,8 +14,8 @@ object Config {
         val javaVersion = JavaVersion.VERSION_1_8
 
         const val repoName = "CompositeAdapter_Android"
-        const val packageNameDev = "com.originsdigital.composite.adapter.sample"
-        const val packageNameProd = "com.originsdigital.composite.adapter.sample"
+        const val packageNameDev = "com.originsdigital.compositeadapter.sample"
+        const val packageNameProd = "com.originsdigital.compositeadapter.sample"
 
         const val versionName = "1.0.0"
         const val versionOffset = 0
