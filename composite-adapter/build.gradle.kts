@@ -32,7 +32,6 @@ dependencies {
 
     implementation(Config.Deps.AndroidX.appcompat)
     compileOnly(Config.Deps.AndroidX.recycler)
-    compileOnly(Config.Deps.AndroidX.swipeRefresh)
 }
 
 val androidSourcesJar by tasks.registering(Jar::class) {
