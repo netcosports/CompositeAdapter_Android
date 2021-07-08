@@ -70,6 +70,33 @@ fun Project.initPublishing(
                         }
                     }
 
+                    this.developers {
+                        this.developer {
+                            this.id.set("Woffkaa")
+                            this.name.set("Vladimir Garkovich")
+                            this.email.set("vladimir.garkovich@gmail.com")
+                            this.url.set("https://github.com/Woffkaa")
+                            this.organization.set("ORIGINS Digital")
+                            this.organizationUrl.set("https://github.com/netcosports")
+                        }
+                        this.developer {
+                            this.id.set("zakharchanka")
+                            this.name.set("Yaroslav Zakharchenko")
+                            this.email.set("yaraslau.zakharchanka@origins-digital.com")
+                            this.url.set("https://github.com/zakharchanka")
+                            this.organization.set("ORIGINS Digital")
+                            this.organizationUrl.set("https://github.com/netcosports")
+                        }
+                        this.developer {
+                            this.id.set("alexanderbliznyuk")
+                            this.name.set("Alexander Blizniuk")
+                            this.email.set("bliznyuk.alexander@gmail.com")
+                            this.url.set("https://github.com/alexanderbliznyuk")
+                            this.organization.set("ORIGINS Digital")
+                            this.organizationUrl.set("https://github.com/netcosports")
+                        }
+                    }
+
                     this.scm {
                         this.url.set("https://github.com/netcosports/CompositeAdapter_Android")
                         this.connection.set("scm:git:git://github.com/netcosports/CompositeAdapter_Android.git")
