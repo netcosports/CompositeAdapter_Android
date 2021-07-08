@@ -37,8 +37,8 @@ fun Project.initPublishing(
                 this.name = "sonatype"
                 this.url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                 this.credentials {
-                    username = sonatypeUsername
-                    password = sonatypePassword
+                    this.username = sonatypeUsername
+                    this.password = sonatypePassword
                 }
             }
         }
