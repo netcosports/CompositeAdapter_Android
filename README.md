@@ -9,7 +9,7 @@
 object CompositeAdapter {
     const val compositeAdapterVersion = "1.0.0"
 
-    const val compositeAdapter = "com.netcosports.composite-adapter:${compositeAdapterVersion}"
+    const val compositeAdapter = "com.originsdigital.compositeadapter:${compositeAdapterVersion}"
 }
 ```
 
@@ -142,7 +142,7 @@ adapter.submitList(items)
 </pre>
 
   - Forget about `androidx.recyclerview.widget.ItemDecoration` and use
-  `com.netcosports.composite.adapter.decoration.ItemDecoration<Cell<T>>` with the additional parameter `Cell<T>` instead.
+  `com.originsdigital.composite.adapter.decoration.ItemDecoration<Cell<T>>` with the additional parameter `Cell<T>` instead.
 ```
 interface ItemDecoration<Item> {
 

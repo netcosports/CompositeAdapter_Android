@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.netcosports.composite.adapter.sample">
+    package="com.originsdigital.composite.adapter.sample">
 
     <application
         android:name=".ui.SampleApplication"
