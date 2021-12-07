@@ -49,9 +49,13 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
         return item.onCreateViewHolder(inflater, parent, item.viewType)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
-        if (payloads.isNotEmpty() && payloads.all { it == Cell.CELL_DECORATION_PAYLOAD }) {
-            storeCellInHolder(holder, position)
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isNotEmpty() && payloads.all { it == Cell.CELL_INTERNAL_PAYLOAD }) {
+            handleInternalPayload(holder, position, payloads)
         } else {
             if (!getItem(position).onBindViewHolder(holder, position, payloads)) {
                 super.onBindViewHolder(holder, position, payloads)
@@ -61,9 +65,18 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         storeHolderInView(holder, position)
-        onBind(holder, position)
-        onBindClickListener(holder, position)
         storeCellInHolder(holder, position)
+        onBindClickListener(holder, position)
+        onBind(holder, position)
+    }
+
+    protected open fun handleInternalPayload(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        storeCellInHolder(holder, position)
+        onBindClickListener(holder, position)
     }
 
     protected open fun storeHolderInView(holder: RecyclerView.ViewHolder, position: Int) {

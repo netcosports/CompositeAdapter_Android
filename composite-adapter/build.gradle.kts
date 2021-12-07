@@ -4,12 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Config.Build.compileSdk)
-    buildToolsVersion(Config.Build.buildTools)
+    compileSdk = Config.Build.compileSdk
 
     defaultConfig {
-        minSdkVersion(Config.Build.minSdk)
-        targetSdkVersion(Config.Build.targetSdk)
+        minSdk = Config.Build.minSdk
+        targetSdk = Config.Build.targetSdk
     }
 
     buildTypes {
@@ -25,6 +24,10 @@ android {
         sourceCompatibility = Config.Build.javaVersion
         targetCompatibility = Config.Build.javaVersion
     }
+
+    kotlinOptions {
+        jvmTarget = Config.Build.javaVersion.toString()
+    }
 }
 
 dependencies {
@@ -32,7 +35,6 @@ dependencies {
 
     implementation(Config.Deps.AndroidX.appcompat)
     compileOnly(Config.Deps.AndroidX.recycler)
-    compileOnly(Config.Deps.AndroidX.swipeRefresh)
 }
 
 val androidSourcesJar by tasks.registering(Jar::class) {

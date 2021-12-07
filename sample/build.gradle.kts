@@ -5,12 +5,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Config.Build.compileSdk)
-    buildToolsVersion(Config.Build.buildTools)
+    compileSdk = Config.Build.compileSdk
 
     defaultConfig {
-        minSdkVersion(Config.Build.sampleMinSdk)
-        targetSdkVersion(Config.Build.targetSdk)
+        minSdk = Config.Build.minSdk
+        targetSdk = Config.Build.targetSdk
 
         versionCode = getCustomVersionCode()
         versionName = getCustomVersionName()
@@ -25,15 +24,15 @@ android {
         }
     }
 
-    flavorDimensions("env")
+    flavorDimensions.add("env")
     productFlavors {
         create("development") {
-            dimension("env")
+            dimension = "env"
             applicationId = Config.Build.packageNameDev
         }
 
         create("production") {
-            dimension("env")
+            dimension = "env"
             applicationId = Config.Build.packageNameProd
         }
     }
@@ -41,6 +40,10 @@ android {
     compileOptions {
         sourceCompatibility = Config.Build.javaVersion
         targetCompatibility = Config.Build.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = Config.Build.javaVersion.toString()
     }
 
     buildFeatures {
