@@ -37,12 +37,13 @@ interface Cell<T> {
     fun areContentsTheSame(newItem: Cell<*>): Boolean = data == newItem.data
     fun getChangePayload(newItem: Cell<*>): Any? = null
     fun areDecorationsTheSame(newItem: Cell<*>): Boolean = decoration == newItem.decoration
+    fun areOnClickListenersTheSame(newItem: Cell<*>): Boolean = onClickListener == newItem.onClickListener
 
     fun onClicked(context: Context, holder: RecyclerView.ViewHolder, position: Int) {
         onClickListener?.invoke(ClickItem(context, holder, position, data))
     }
 
     companion object {
-        const val CELL_DECORATION_PAYLOAD = "CELL_DECORATION"
+        const val CELL_INTERNAL_PAYLOAD = "CELL_INTERNAL_PAYLOAD"
     }
 }
