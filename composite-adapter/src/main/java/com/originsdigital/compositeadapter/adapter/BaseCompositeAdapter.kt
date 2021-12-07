@@ -61,9 +61,9 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         storeHolderInView(holder, position)
-        onBind(holder, position)
-        onBindClickListener(holder, position)
         storeCellInHolder(holder, position)
+        onBindClickListener(holder, position)
+        onBind(holder, position)
     }
 
     protected open fun storeHolderInView(holder: RecyclerView.ViewHolder, position: Int) {
