@@ -10,7 +10,7 @@ object Config {
         const val sampleMinSdk = 21
         const val targetSdk = compileSdk
 
-        val javaVersion = JavaVersion.VERSION_1_8
+        val javaVersion = JavaVersion.VERSION_11
 
         const val packageNameDev = "io.github.netcosports.compositeadapter.sample"
         const val packageNameProd = "io.github.netcosports.compositeadapter.sample"
@@ -40,13 +40,20 @@ object Config {
             const val appcompat = "androidx.appcompat:appcompat:1.4.0"
             const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
             const val recycler = "androidx.recyclerview:recyclerview:1.2.1"
-            const val lifecycleVersion = "2.4.0"
+            const val core = "androidx.core:core-ktx:1.6.0"
+            private const val lifecycleVersion = "2.4.0"
+            const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
             const val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
             const val lifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
         }
 
+        object Material {
+            const val material = "com.google.android.material:material:1.4.0"
+        }
+
         object Coroutines {
-            const val version = "1.5.2"
+            private const val version = "1.5.2"
+            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
             const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         }
 
@@ -56,12 +63,25 @@ object Config {
             }
         }
 
+        object Koin {
+            private const val version = "3.1.2"
+            const val core = "io.insert-koin:koin-core:$version"
+            const val android = "io.insert-koin:koin-android:$version"
+        }
+
         object Kotlin {
             const val kotlinJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Build.kotlinVersion}"
         }
 
         object Libs {
             const val compositeAdapter = ":composite-adapter"
+
+            const val baseCore = ":sample:features:base:core"
+            const val baseUI = ":sample:features:base:ui"
+
+            const val messagesData = ":sample:features:messages:data"
+            const val messagesCore = ":sample:features:messages:core"
+            const val messagesUI = ":sample:features:messages:ui"
         }
     }
 }

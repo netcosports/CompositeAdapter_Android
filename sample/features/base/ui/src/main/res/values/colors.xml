@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/dusty_orange</color>
+    <color name="colorPrimaryVariant">@color/dusty_orange</color>
+    <color name="colorOnPrimary">@color/compositeadapter_white</color>
+    <color name="colorSecondary">@color/dusty_orange</color>
+    <color name="colorSecondaryVariant">@color/dusty_orange</color>
+    <color name="colorOnSecondary">@color/compositeadapter_white</color>
+    <color name="colorError">@color/pinkish_red</color>
+    <color name="colorOnError">@color/compositeadapter_white</color>
+    <color name="colorSurface">@color/compositeadapter_white</color>
+    <color name="colorOnSurface">@color/compositeadapter_black</color>
+    <color name="colorBackground">@color/compositeadapter_white</color>
+    <color name="colorOnBackground">@color/compositeadapter_black</color>
+    
+    <color name="compositeadapter_white">#FFFFFF</color>
+    <color name="compositeadapter_black">#000000</color>
+    <color name="compositeadapter_transparent">#00000000</color>
+
+    <color name="dusty_orange">#F47A31</color>
+    <color name="pinkish_red">#EB2227</color>
+</resources>
