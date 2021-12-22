@@ -11,7 +11,7 @@
         android:theme="@style/SamplesTheme">
 
         <activity
-            android:name=".ui.sample.SamplesActivity"
+            android:name=".ui.SamplesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
