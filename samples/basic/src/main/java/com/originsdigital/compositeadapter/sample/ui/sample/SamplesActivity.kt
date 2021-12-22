@@ -8,23 +8,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.messages.ui.SampleViewModel
-import com.originsdigital.compositeadapter.sample.databinding.SampleActivityBinding
+import com.originsdigital.compositeadapter.sample.databinding.SamplesActivityBinding
 
-class SampleActivity : AppCompatActivity() {
+class SamplesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val viewModel = ViewModelProvider(this)[SampleViewModel::class.java]
 
-        val binding = SampleActivityBinding.inflate(layoutInflater)
+        val binding = SamplesActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener { viewModel.onRefresh() }
 
             val adapter = CompositeAdapter()
-            val layoutManager = LinearLayoutManager(this@SampleActivity)
+            val layoutManager = LinearLayoutManager(this@SamplesActivity)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = layoutManager
             recyclerView.addItemDecoration(CompositeItemDecoration())
@@ -34,10 +34,10 @@ class SampleActivity : AppCompatActivity() {
                 }
             })
 
-            viewModel.state.refreshingData.observe(this@SampleActivity) { isRefreshing ->
+            viewModel.state.refreshingData.observe(this@SamplesActivity) { isRefreshing ->
                 swipeRefreshLayout.isRefreshing = isRefreshing
             }
-            viewModel.state.cellsData.observe(this@SampleActivity) { items ->
+            viewModel.state.cellsData.observe(this@SamplesActivity) { items ->
                 adapter.submitList(items)
             }
         }

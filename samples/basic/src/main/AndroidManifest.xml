@@ -2,16 +2,16 @@
     package="com.originsdigital.compositeadapter.sample">
 
     <application
-        android:name=".ui.SampleApplication"
+        android:name=".ui.SamplesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/SampleTheme">
+        android:theme="@style/SamplesTheme">
 
         <activity
-            android:name=".ui.sample.SampleActivity"
+            android:name=".ui.sample.SamplesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
