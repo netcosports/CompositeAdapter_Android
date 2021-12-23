@@ -76,6 +76,8 @@ object Config {
         object Libs {
             const val compositeAdapter = ":composite-adapter"
 
+            const val differentBindings = ":samples:different-bindings"
+
             const val baseCore = ":sample:features:base:core"
             const val baseUI = ":sample:features:base:ui"
 

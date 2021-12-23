@@ -1,22 +1,20 @@
-package com.originsdigital.compositeadapter.sample.ui
+package com.originsdigital.compositeadapter.sample.basic.ui.cell
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
-import com.originsdigital.compositeadapter.sample.R
-import com.originsdigital.compositeadapter.sample.databinding.SampleListItemBinding
-import com.originsdigital.compositeadapter.ui.cell.viewbinding.ViewBindingCell
-import com.originsdigital.compositeadapter.utils.getViewBinding
+import com.originsdigital.compositeadapter.sample.basic.R
+import com.originsdigital.compositeadapter.sample.basic.databinding.SampleListItemBinding
+import com.originsdigital.compositeadapter.sample.basic.ui.entity.SampleUI
 
 data class SampleCell(
     override val data: SampleUI,
     override val decoration: ItemDecoration<out Cell<*>>? = null,
     override val onClickListener: ((ClickItem<SampleUI>) -> Unit)? = null
-) : ViewBindingCell<SampleUI> {
+) : Cell<SampleUI> {
 
     override val uniqueId: String = data.type.name
     override val layoutId: Int = R.layout.sample_list_item
@@ -26,14 +24,16 @@ data class SampleCell(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return SampleViewHolder(inflater.inflate(layoutId, parent, false))
+        return SampleViewHolder(SampleListItemBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder.getViewBinding(SampleListItemBinding::bind)).apply {
+        (holder as SampleViewHolder).binding.apply {
             text.text = data.name
         }
     }
 
-    class SampleViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    private class SampleViewHolder(
+        val binding: SampleListItemBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 }

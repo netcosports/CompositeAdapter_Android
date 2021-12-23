@@ -2,8 +2,8 @@ rootProject.name = "CompositeAdapter_Android"
 
 include(":composite-adapter")
 
-//include(":sample:app")
 include(":samples:basic")
+include(":samples:different-bindings")
 
 include(":sample:features:base:core")
 include(":sample:features:base:ui")
