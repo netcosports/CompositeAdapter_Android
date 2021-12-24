@@ -46,7 +46,7 @@ class SamplesActivity : AppCompatActivity() {
             val name = when (type) {
                 SampleUI.Type.DECORATIONS -> "Decorations"
                 SampleUI.Type.DIFFERENT_BINDINGS -> "ViewBindings/DataBindings/Programmatically View"
-                SampleUI.Type.INNER_RECYCLER -> "Inner RecyclerView/ViewPager/Etc"
+                SampleUI.Type.INNER_RECYCLER -> "Inner RecyclerView/ViewPager/Etc and how to save scroll state"
             }
             val onClickListener: (ClickItem<SampleUI>) -> Unit = { item ->
                 startActivity(

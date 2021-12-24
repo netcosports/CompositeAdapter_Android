@@ -42,10 +42,6 @@ data class InnerRecyclerItemCell(
         }
     }
 
-    private class SampleViewHolder(
-        val binding: InnerRecyclerItemListItemBinding
-    ) : RecyclerView.ViewHolder(binding.root)
-
     private fun Context.dpToPx(dp: Float): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
     }
@@ -64,4 +60,8 @@ data class InnerRecyclerItemCell(
         }
         clipToOutline = true
     }
+
+    private class SampleViewHolder(
+        val binding: InnerRecyclerItemListItemBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 }

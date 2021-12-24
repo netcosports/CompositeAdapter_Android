@@ -9,25 +9,26 @@ import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
-import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecyclerListItemBinding
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecycler1ListItemBinding
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerUI
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.layoutmanager.PercentWidthLinearLayoutManager
 
-data class InnerRecyclerCell(
+// More code but more clearer and `correct` than `InnerRecycler2Cell`
+data class InnerRecycler1Cell(
     override val data: InnerRecyclerUI,
     override val decoration: ItemDecoration<out Cell<*>>? = null,
     override val onClickListener: ((ClickItem<InnerRecyclerUI>) -> Unit)? = null
 ) : Cell<InnerRecyclerUI> {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.inner_recycler_list_item
+    override val layoutId: Int = R.layout.inner_recycler_1_list_item
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return SampleViewHolder(InnerRecyclerListItemBinding.inflate(inflater, parent, false))
+        return SampleViewHolder(InnerRecycler1ListItemBinding.inflate(inflater, parent, false))
     }
 
     // This is the correct way to optimize bindings with payloads
@@ -51,7 +52,12 @@ data class InnerRecyclerCell(
     }
 
     private fun submitData(holder: RecyclerView.ViewHolder) {
-        (holder as SampleViewHolder).submitList(data.cells)
+        (holder as SampleViewHolder).setData(data)
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        (holder as SampleViewHolder).onViewRecycled(data)
     }
 
     // We do not need to animate the InnerRecyclerCell, because it has its own CompositeAdapter,
@@ -64,7 +70,7 @@ data class InnerRecyclerCell(
     }
 
     private class SampleViewHolder(
-        binding: InnerRecyclerListItemBinding
+        private val binding: InnerRecycler1ListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val adapter = CompositeAdapter()
@@ -77,8 +83,16 @@ data class InnerRecyclerCell(
             }
         }
 
-        fun submitList(cells: List<Cell<*>>) {
-            adapter.submitList(cells)
+        fun setData(data: InnerRecyclerUI) {
+            if (binding.recyclerView.recycledViewPool != data.recycledViewPool) {
+                binding.recyclerView.setRecycledViewPool(data.recycledViewPool)
+            }
+            adapter.submitList(data.cells)
+            data.scrollStatesHolder.setupRecyclerView(data.id, binding.recyclerView)
+        }
+
+        fun onViewRecycled(data: InnerRecyclerUI) {
+            data.scrollStatesHolder.onRecycled(data.id, binding.recyclerView)
         }
     }
 }

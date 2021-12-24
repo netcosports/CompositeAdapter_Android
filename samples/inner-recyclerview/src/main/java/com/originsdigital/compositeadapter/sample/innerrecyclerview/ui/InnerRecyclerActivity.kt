@@ -16,10 +16,11 @@ import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.decoration.SpaceItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecycler2Cell
-import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecyclerCell
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecycler1Cell
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecyclerItemCell
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerItemUI
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerUI
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.stateholder.ScrollStatesHolder
 import kotlin.random.Random
 
 class InnerRecyclerActivity : AppCompatActivity() {
@@ -69,6 +70,9 @@ class InnerRecyclerActivity : AppCompatActivity() {
     //should be inside ViewModel/UIMapper
     private class DataHolder(space: Int) {
 
+        private val scrollStatesHolder = ScrollStatesHolder()
+        private val recycledViewPool = RecyclerView.RecycledViewPool()
+
         private val singleItemDecoration: ItemDecoration<Cell<*>>
         private val firstItemDecoration: ItemDecoration<Cell<*>>
         private val middleItemDecoration: ItemDecoration<Cell<*>>
@@ -103,6 +107,10 @@ class InnerRecyclerActivity : AppCompatActivity() {
 
         //should be inside ViewModel/UIMapper
         fun generateData(): List<Cell<*>> {
+            // Cells do the same, but
+            // InnerRecycler1Cell - more code but more clearer and `correct`
+            // InnerRecycler2Cell - less code (can be less with `ViewBindingCell`)
+            val useClearerVersion = Random.nextBoolean()
             return (0..20).map { recyclerId ->
                 val size = 10
                 val cells = (0..size).mapIndexed { index, itemId ->
@@ -122,13 +130,12 @@ class InnerRecyclerActivity : AppCompatActivity() {
                 }
                 val recyclerUI = InnerRecyclerUI(
                     id = recyclerId.toString(),
-                    cells = cells
+                    cells = cells,
+                    recycledViewPool = recycledViewPool,
+                    scrollStatesHolder = scrollStatesHolder
                 )
-                // Cells do the same, but
-                // InnerRecyclerCell - more code but more clearer and `correct`
-                // InnerRecycler2Cell - less code (can be less with `ViewBindingCell`)
-                if (Random.nextBoolean()) {
-                    InnerRecyclerCell(
+                if (useClearerVersion) {
+                    InnerRecycler1Cell(
                         data = recyclerUI
                     )
                 } else {
