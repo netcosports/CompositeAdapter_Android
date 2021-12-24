@@ -9,10 +9,10 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 open class SpaceItemDecoration<ITEM>(
-    val top: Int = 0,
-    val bottom: Int = 0,
-    val start: Int = 0,
-    val end: Int = 0
+    open val top: Int = 0,
+    open val bottom: Int = 0,
+    open val start: Int = 0,
+    open val end: Int = 0
 ) : ItemDecoration<ITEM> {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State, item: ITEM) {
