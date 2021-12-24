@@ -78,6 +78,7 @@ object Config {
 
             const val decorations = ":samples:decorations"
             const val differentBindings = ":samples:different-bindings"
+            const val innerRecyclerview = ":samples:inner-recyclerview"
 
             const val baseCore = ":sample:features:base:core"
             const val baseUI = ":sample:features:base:ui"

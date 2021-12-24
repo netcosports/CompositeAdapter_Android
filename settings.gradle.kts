@@ -5,6 +5,7 @@ include(":composite-adapter")
 include(":samples:basic")
 include(":samples:decorations")
 include(":samples:different-bindings")
+include(":samples:inner-recyclerview")
 
 include(":sample:features:base:core")
 include(":sample:features:base:ui")

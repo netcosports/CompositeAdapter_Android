@@ -14,6 +14,7 @@ import com.originsdigital.compositeadapter.sample.basic.ui.cell.SampleCell
 import com.originsdigital.compositeadapter.sample.basic.ui.entity.SampleUI
 import com.originsdigital.compositeadapter.sample.decorations.ui.DecorationsActivity
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.DifferentBindingsActivity
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.InnerRecyclerActivity
 
 class SamplesActivity : AppCompatActivity() {
 
@@ -48,16 +49,19 @@ class SamplesActivity : AppCompatActivity() {
                 SampleUI.Type.INNER_RECYCLER -> "Inner RecyclerView/ViewPager/Etc"
             }
             val onClickListener: (ClickItem<SampleUI>) -> Unit = { item ->
-                @Suppress("UNUSED_VARIABLE")
-                val result = when (item.item.type) {
-                    SampleUI.Type.DECORATIONS -> {
-                        startActivity(DecorationsActivity.getLaunchIntent(this))
+                startActivity(
+                    when (item.item.type) {
+                        SampleUI.Type.DECORATIONS -> {
+                            DecorationsActivity.getLaunchIntent(this)
+                        }
+                        SampleUI.Type.DIFFERENT_BINDINGS -> {
+                            DifferentBindingsActivity.getLaunchIntent(this)
+                        }
+                        SampleUI.Type.INNER_RECYCLER -> {
+                            InnerRecyclerActivity.getLaunchIntent(this)
+                        }
                     }
-                    SampleUI.Type.DIFFERENT_BINDINGS -> {
-                        startActivity(DifferentBindingsActivity.getLaunchIntent(this))
-                    }
-                    SampleUI.Type.INNER_RECYCLER -> Unit
-                }
+                )
             }
             SampleCell(
                 data = SampleUI(

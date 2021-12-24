@@ -1,0 +1,67 @@
+package com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell
+
+import android.content.Context
+import android.graphics.Outline
+import android.util.TypedValue
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.ViewOutlineProvider
+import androidx.recyclerview.widget.RecyclerView
+import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.decoration.ItemDecoration
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecyclerItemListItemBinding
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerItemUI
+
+data class InnerRecyclerItemCell(
+    override val data: InnerRecyclerItemUI,
+    override val decoration: ItemDecoration<out Cell<*>>? = null,
+    override val onClickListener: ((ClickItem<InnerRecyclerItemUI>) -> Unit)? = null
+) : Cell<InnerRecyclerItemUI> {
+
+    override val uniqueId: String = data.id
+    override val layoutId: Int = R.layout.inner_recycler_item_list_item
+
+    override fun onCreateViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): RecyclerView.ViewHolder {
+        return SampleViewHolder(
+            InnerRecyclerItemListItemBinding.inflate(inflater, parent, false).also { holder ->
+                holder.root.applyRoundCorners(holder.root.context.dpToPx(6f))
+            }
+        )
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as SampleViewHolder).binding.apply {
+            text.text = data.name
+        }
+    }
+
+    private class SampleViewHolder(
+        val binding: InnerRecyclerItemListItemBinding
+    ) : RecyclerView.ViewHolder(binding.root)
+
+    private fun Context.dpToPx(dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
+    }
+
+    private fun View.applyRoundCorners(radius: Float) {
+        outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                outline.setRoundRect(
+                    0,
+                    0,
+                    view.width,
+                    view.height,
+                    radius
+                )
+            }
+        }
+        clipToOutline = true
+    }
+}
