@@ -23,5 +23,9 @@
         <activity
             android:name="com.originsdigital.compositeadapter.sample.differentbindings.ui.DifferentBindingsActivity"
             android:exported="false" />
+
+        <activity
+            android:name="com.originsdigital.compositeadapter.sample.decorations.ui.DecorationsActivity"
+            android:exported="false" />
     </application>
 </manifest>

@@ -5,6 +5,6 @@ data class SampleUI(
     val type: Type
 ) {
     enum class Type {
-        DIFFERENT_BINDINGS, DECORATIONS, INNER_RECYCLER
+        DECORATIONS, DIFFERENT_BINDINGS, INNER_RECYCLER
     }
 }

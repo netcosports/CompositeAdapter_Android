@@ -3,6 +3,7 @@ rootProject.name = "CompositeAdapter_Android"
 include(":composite-adapter")
 
 include(":samples:basic")
+include(":samples:decorations")
 include(":samples:different-bindings")
 
 include(":sample:features:base:core")

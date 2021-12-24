@@ -1,6 +1,7 @@
 package com.originsdigital.compositeadapter.sample.basic.ui
 
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.sample.basic.ui.cell.SampleCell
 import com.originsdigital.compositeadapter.sample.basic.ui.entity.SampleUI
+import com.originsdigital.compositeadapter.sample.decorations.ui.DecorationsActivity
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.DifferentBindingsActivity
 
 class SamplesActivity : AppCompatActivity() {
@@ -18,6 +20,10 @@ class SamplesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(generateView())
+    }
+
+    private fun generateView(): View {
         val compositeAdapter = CompositeAdapter().apply {
             submitList(generateData())
         }
@@ -30,24 +36,26 @@ class SamplesActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(CompositeItemDecoration())
         }
-        setContentView(recyclerView)
+        return recyclerView
     }
 
     //should be inside ViewModel
     private fun generateData(): List<Cell<*>> {
         return SampleUI.Type.values().map { type ->
             val name = when (type) {
-                SampleUI.Type.DIFFERENT_BINDINGS -> "ViewBindings/DataBindings/Programmatically View"
                 SampleUI.Type.DECORATIONS -> "Decorations"
+                SampleUI.Type.DIFFERENT_BINDINGS -> "ViewBindings/DataBindings/Programmatically View"
                 SampleUI.Type.INNER_RECYCLER -> "Inner RecyclerView/ViewPager/Etc"
             }
             val onClickListener: (ClickItem<SampleUI>) -> Unit = { item ->
                 @Suppress("UNUSED_VARIABLE")
                 val result = when (item.item.type) {
+                    SampleUI.Type.DECORATIONS -> {
+                        startActivity(DecorationsActivity.getLaunchIntent(this))
+                    }
                     SampleUI.Type.DIFFERENT_BINDINGS -> {
                         startActivity(DifferentBindingsActivity.getLaunchIntent(this))
                     }
-                    SampleUI.Type.DECORATIONS -> Unit
                     SampleUI.Type.INNER_RECYCLER -> Unit
                 }
             }

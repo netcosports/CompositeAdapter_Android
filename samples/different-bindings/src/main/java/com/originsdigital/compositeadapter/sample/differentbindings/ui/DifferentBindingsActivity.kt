@@ -3,6 +3,7 @@ package com.originsdigital.compositeadapter.sample.differentbindings.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,10 @@ class DifferentBindingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(generateView())
+    }
+
+    private fun generateView(): View {
         val compositeAdapter = CompositeAdapter().apply {
             submitList(generateData())
         }
@@ -43,7 +48,7 @@ class DifferentBindingsActivity : AppCompatActivity() {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        setContentView(swipeRefreshLayout)
+        return swipeRefreshLayout
     }
 
     //should be inside ViewModel
