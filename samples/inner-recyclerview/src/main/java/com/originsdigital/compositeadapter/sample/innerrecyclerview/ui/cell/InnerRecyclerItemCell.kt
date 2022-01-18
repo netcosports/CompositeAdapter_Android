@@ -12,7 +12,7 @@ import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
-import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecyclerItemListItemBinding
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecyclerItemCellBinding
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerItemUI
 
 data class InnerRecyclerItemCell(
@@ -22,7 +22,7 @@ data class InnerRecyclerItemCell(
 ) : Cell<InnerRecyclerItemUI> {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.inner_recycler_item_list_item
+    override val layoutId: Int = R.layout.inner_recycler_item_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -30,7 +30,7 @@ data class InnerRecyclerItemCell(
         viewType: Int
     ): RecyclerView.ViewHolder {
         return SampleViewHolder(
-            InnerRecyclerItemListItemBinding.inflate(inflater, parent, false).also { holder ->
+            InnerRecyclerItemCellBinding.inflate(inflater, parent, false).also { holder ->
                 holder.root.applyRoundCorners(holder.root.context.dpToPx(6f))
             }
         )
@@ -62,6 +62,6 @@ data class InnerRecyclerItemCell(
     }
 
     private class SampleViewHolder(
-        val binding: InnerRecyclerItemListItemBinding
+        val binding: InnerRecyclerItemCellBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }

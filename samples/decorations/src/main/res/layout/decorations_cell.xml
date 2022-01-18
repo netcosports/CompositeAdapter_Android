@@ -7,4 +7,5 @@
     android:background="?selectableItemBackground"
     android:padding="20dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    android:textColor="@android:color/white"
     tools:text="TEXT" />

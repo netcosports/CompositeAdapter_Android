@@ -6,7 +6,7 @@ import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.differentbindings.R
-import com.originsdigital.compositeadapter.sample.differentbindings.databinding.DifferentBindingsDataBinding2ListItemBinding
+import com.originsdigital.compositeadapter.sample.differentbindings.databinding.DifferentBindingsDataBinding2CellBinding
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseCell
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseViewHolder
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.entity.DifferentBindingsUI
@@ -19,7 +19,7 @@ data class DifferentBindingsDataBinding2MessageCell(
 ) : BaseCell<DifferentBindingsUI, DifferentBindingsDataBinding2MessageCell.CustomViewHolder>() {
 
     override val uniqueId: String = data.type.name
-    override val layoutId: Int = R.layout.different_bindings_data_binding_2_list_item
+    override val layoutId: Int = R.layout.different_bindings_data_binding_2_cell
 
     override fun createViewHolder(
         inflater: LayoutInflater,
@@ -27,7 +27,7 @@ data class DifferentBindingsDataBinding2MessageCell(
         viewType: Int
     ): CustomViewHolder {
         return CustomViewHolder(
-            DifferentBindingsDataBinding2ListItemBinding.inflate(
+            DifferentBindingsDataBinding2CellBinding.inflate(
                 inflater,
                 parent,
                 false
@@ -44,6 +44,6 @@ data class DifferentBindingsDataBinding2MessageCell(
     }
 
     class CustomViewHolder(
-        val binding: DifferentBindingsDataBinding2ListItemBinding
+        val binding: DifferentBindingsDataBinding2CellBinding
     ) : BaseViewHolder(binding.root)
 }

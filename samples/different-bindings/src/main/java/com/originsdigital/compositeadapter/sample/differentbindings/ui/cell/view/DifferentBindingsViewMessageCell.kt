@@ -22,7 +22,7 @@ data class DifferentBindingsViewMessageCell(
 ) : BaseCell<DifferentBindingsUI, DifferentBindingsViewMessageCell.CustomViewHolder>() {
 
     override val uniqueId: String = data.type.name
-    override val layoutId: Int = R.layout.different_bindings_view_list_item
+    override val layoutId: Int = R.layout.different_bindings_view_cell
 
     override fun createViewHolder(
         inflater: LayoutInflater,

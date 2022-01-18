@@ -9,7 +9,7 @@ import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
-import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecycler2ListItemBinding
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecycler2CellBinding
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerUI
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.layoutmanager.PercentWidthLinearLayoutManager
 
@@ -21,7 +21,7 @@ data class InnerRecycler2Cell(
 ) : Cell<InnerRecyclerUI> {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.inner_recycler_2_list_item
+    override val layoutId: Int = R.layout.inner_recycler_2_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -29,7 +29,7 @@ data class InnerRecycler2Cell(
         viewType: Int
     ): RecyclerView.ViewHolder {
         return SampleViewHolder(
-            InnerRecycler2ListItemBinding.inflate(inflater, parent, false).also { binding ->
+            InnerRecycler2CellBinding.inflate(inflater, parent, false).also { binding ->
                 // Don't forget that Cell can survive the configuration changes inside the ViewModel
                 // or in some other way. So you MUST NOT store any link to
                 // Adapter/View/ViewHolder/Fragment/Context/etc in the Cell
@@ -72,6 +72,6 @@ data class InnerRecycler2Cell(
     }
 
     private class SampleViewHolder(
-        val binding: InnerRecycler2ListItemBinding
+        val binding: InnerRecycler2CellBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }

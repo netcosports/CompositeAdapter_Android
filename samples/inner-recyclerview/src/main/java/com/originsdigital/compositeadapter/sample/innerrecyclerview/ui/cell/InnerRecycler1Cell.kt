@@ -9,7 +9,7 @@ import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
-import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecycler1ListItemBinding
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecycler1CellBinding
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerUI
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.layoutmanager.PercentWidthLinearLayoutManager
 
@@ -21,14 +21,14 @@ data class InnerRecycler1Cell(
 ) : Cell<InnerRecyclerUI> {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.inner_recycler_1_list_item
+    override val layoutId: Int = R.layout.inner_recycler_1_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return SampleViewHolder(InnerRecycler1ListItemBinding.inflate(inflater, parent, false))
+        return SampleViewHolder(InnerRecycler1CellBinding.inflate(inflater, parent, false))
     }
 
     // This is the correct way to optimize bindings with payloads
@@ -70,7 +70,7 @@ data class InnerRecycler1Cell(
     }
 
     private class SampleViewHolder(
-        private val binding: InnerRecycler1ListItemBinding
+        private val binding: InnerRecycler1CellBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val adapter = CompositeAdapter()

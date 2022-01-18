@@ -7,7 +7,7 @@ import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.decorations.R
-import com.originsdigital.compositeadapter.sample.decorations.databinding.DecorationsListItemBinding
+import com.originsdigital.compositeadapter.sample.decorations.databinding.DecorationsCellBinding
 import com.originsdigital.compositeadapter.sample.decorations.ui.entity.DecorationsUI
 
 data class DecorationsCell(
@@ -17,14 +17,14 @@ data class DecorationsCell(
 ) : Cell<DecorationsUI> {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.decorations_list_item
+    override val layoutId: Int = R.layout.decorations_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return SampleViewHolder(DecorationsListItemBinding.inflate(inflater, parent, false))
+        return SampleViewHolder(DecorationsCellBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -34,6 +34,6 @@ data class DecorationsCell(
     }
 
     private class SampleViewHolder(
-        val binding: DecorationsListItemBinding
+        val binding: DecorationsCellBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }
