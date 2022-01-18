@@ -52,14 +52,6 @@ data class InnerRecycler2Cell(
         }
     }
 
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-        super.onViewRecycled(holder)
-        data.scrollStatesHolder.onRecycled(
-            uniqueId,
-            (holder as SampleViewHolder).binding.recyclerView
-        )
-    }
-
     // We do not need to animate the InnerRecyclerCell, because it has its own CompositeAdapter,
     // which will calculate the diffs of his cells and animate these changes within itself.
     // The same for the ViewPager1/ViewPager2/Webview/VideoPlayer/other complex view.

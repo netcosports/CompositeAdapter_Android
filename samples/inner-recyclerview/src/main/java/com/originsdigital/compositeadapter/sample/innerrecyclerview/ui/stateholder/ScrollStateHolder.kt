@@ -30,10 +30,6 @@ class ScrollStateHolder {
         recyclerView.addOnScrollListener(scrollListener)
     }
 
-    fun onRecycled(recyclerView: RecyclerView) {
-        saveScrollState(recyclerView)
-    }
-
     private fun saveScrollState(recyclerView: RecyclerView) {
         if (pendingScroll) {
             pendingScroll = false

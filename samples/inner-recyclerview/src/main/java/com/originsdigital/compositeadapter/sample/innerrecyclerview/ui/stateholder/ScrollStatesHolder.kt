@@ -10,10 +10,6 @@ class ScrollStatesHolder {
         getStateHolder(uniqueId).setupRecyclerView(recyclerView)
     }
 
-    fun onRecycled(uniqueId: String, recyclerView: RecyclerView) {
-        getStateHolder(uniqueId).onRecycled(recyclerView)
-    }
-
     private fun getStateHolder(uniqueId: String): ScrollStateHolder {
         return stateHolders[uniqueId] ?: ScrollStateHolder().also { stateHolder ->
             stateHolders[uniqueId] = stateHolder
