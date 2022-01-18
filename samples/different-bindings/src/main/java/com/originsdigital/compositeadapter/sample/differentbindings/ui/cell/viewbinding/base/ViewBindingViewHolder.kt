@@ -1,6 +1,8 @@
 package com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.viewbinding.base
 
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseViewHolder
 
-open class ViewBindingViewHolder(view: View) : RecyclerView.ViewHolder(view)
+class ViewBindingViewHolder<VIEW_BINDING : ViewBinding>(
+    val binding: VIEW_BINDING
+) : BaseViewHolder(binding.root)

@@ -2,16 +2,23 @@ package com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.vie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.originsdigital.compositeadapter.cell.Cell
+import androidx.viewbinding.ViewBinding
+import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseCell
 
-interface ViewBindingCell<T> : Cell<T> {
+abstract class ViewBindingCell<DATA, VIEW_BINDING : ViewBinding>
+    : BaseCell<DATA, ViewBindingViewHolder<VIEW_BINDING>>() {
 
-    override fun onCreateViewHolder(
+    abstract fun createViewBinding(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
-        return ViewBindingViewHolder(inflater.inflate(layoutId, parent, false))
+    ): VIEW_BINDING
+
+    final override fun createViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewBindingViewHolder<VIEW_BINDING> {
+        return ViewBindingViewHolder(createViewBinding(inflater, parent, viewType))
     }
 }

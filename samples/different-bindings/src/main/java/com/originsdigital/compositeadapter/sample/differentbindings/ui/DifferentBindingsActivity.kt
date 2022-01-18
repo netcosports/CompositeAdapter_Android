@@ -69,13 +69,13 @@ class DifferentBindingsActivity : AppCompatActivity() {
                     listOf(
                         DifferentBindingsViewBinding1MessageCell(
                             data = DifferentBindingsUI(
-                                name = "Cell with custom ViewHolder",
+                                name = "Cell with default ViewHolder",
                                 type = type
                             )
                         ),
                         DifferentBindingsViewBinding2MessageCell(
                             data = DifferentBindingsUI(
-                                name = "Cell with default ViewHolder",
+                                name = "Cell with custom ViewHolder",
                                 type = type
                             )
                         )

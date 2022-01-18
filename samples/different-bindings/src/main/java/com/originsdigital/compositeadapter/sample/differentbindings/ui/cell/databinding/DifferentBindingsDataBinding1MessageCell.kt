@@ -4,7 +4,9 @@ import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.differentbindings.R
+import com.originsdigital.compositeadapter.sample.differentbindings.databinding.DifferentBindingsDataBinding1ListItemBinding
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.databinding.base.DataBindingCell
+import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.databinding.base.DataBindingViewHolder
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.entity.DifferentBindingsUI
 
 // ViewBinding is better anyway
@@ -12,13 +14,15 @@ data class DifferentBindingsDataBinding1MessageCell(
     override val data: DifferentBindingsUI,
     override val decoration: ItemDecoration<out Cell<*>>? = null,
     override val onClickListener: ((ClickItem<DifferentBindingsUI>) -> Unit)? = null
-) : DataBindingCell<DifferentBindingsUI> {
+) : DataBindingCell<DifferentBindingsUI, DifferentBindingsDataBinding1ListItemBinding>() {
 
     override val uniqueId: String = data.type.name
     override val layoutId: Int = R.layout.different_bindings_data_binding_1_list_item
 
-    // We do not need `onBindViewHolder` because everything is done inside the DataBindingCell
-//    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        super.onBindViewHolder(holder, position)
-//    }
+    override fun onBindViewHolder(
+        holder: DataBindingViewHolder<DifferentBindingsDataBinding1ListItemBinding>,
+        position: Int
+    ) {
+        // Do nothing, because everything is done inside the DataBindingCell
+    }
 }

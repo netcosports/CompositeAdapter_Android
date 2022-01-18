@@ -2,25 +2,26 @@ package com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.dat
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.originsdigital.compositeadapter.cell.Cell
+import androidx.databinding.ViewDataBinding
 import com.originsdigital.compositeadapter.sample.differentbindings.BR
+import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseCell
 
 // ViewBinding is better anyway
-interface DataBindingCell<T> : Cell<T> {
+abstract class DataBindingCell<DATA, DATA_BINDING : ViewDataBinding>
+    : BaseCell<DATA, DataBindingViewHolder<DATA_BINDING>>() {
 
-    override fun onCreateViewHolder(
+    final override fun createViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
+    ): DataBindingViewHolder<DATA_BINDING> {
         return DataBindingViewHolder.create(inflater, layoutId, parent)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as DataBindingViewHolder).apply {
-            bindings.setVariable(BR.item, data)
-            bindings.executePendingBindings()
+    override fun onBindViewHolder(holder: DataBindingViewHolder<DATA_BINDING>, position: Int) {
+        (holder.binding).apply {
+            setVariable(BR.item, data)
+            executePendingBindings()
         }
     }
 }

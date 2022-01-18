@@ -4,26 +4,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView
+import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseViewHolder
 
 // ViewBinding is better anyway
-class DataBindingViewHolder(
-    val bindings: ViewDataBinding
-) : RecyclerView.ViewHolder(bindings.root) {
+class DataBindingViewHolder<DATA_BINDING : ViewDataBinding>(
+    val binding: DATA_BINDING
+) : BaseViewHolder(binding.root) {
 
     companion object {
-        fun create(
+        fun <DATA_BINDING : ViewDataBinding> create(
             inflater: LayoutInflater,
             layoutResId: Int,
             parent: ViewGroup
-        ): DataBindingViewHolder {
+        ): DataBindingViewHolder<DATA_BINDING> {
             return DataBindingViewHolder(
                 DataBindingUtil.inflate(
                     inflater,
                     layoutResId,
                     parent,
                     false
-                )
+                ) as DATA_BINDING
             )
         }
     }
