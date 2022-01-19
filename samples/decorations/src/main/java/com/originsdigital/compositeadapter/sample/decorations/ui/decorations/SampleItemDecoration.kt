@@ -8,10 +8,12 @@ import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.decoration.SpaceItemDecoration
+import kotlin.math.roundToInt
 
 data class SampleItemDecoration(
     private val type: Type,
     private val radius: Float,
+    private val strokeWidth: Float,
     private val dividerHeight: Int,
     @ColorInt val dividerColorInt: Int,
     @ColorInt val backgroundColorInt: Int,
@@ -25,6 +27,9 @@ data class SampleItemDecoration(
         color = dividerColorInt
     }
     private val backgroundPaint = Paint().apply {
+        style = Paint.Style.STROKE
+        isAntiAlias = true
+        strokeWidth = this@SampleItemDecoration.strokeWidth
         color = backgroundColorInt
     }
     private val itemBounds = Rect()
@@ -38,6 +43,9 @@ data class SampleItemDecoration(
     ) {
         super.onDraw(canvas, view, parent, state, item)
         parent.layoutManager?.getDecoratedBoundsWithMargins(view, itemBounds)
+        val translationY = view.translationY.roundToInt()
+        itemBounds.bottom = itemBounds.bottom + translationY
+        itemBounds.top = itemBounds.top + translationY
         val drawBottomDivider: Boolean
         val roundedTop: Boolean
         val roundedBottom: Boolean
@@ -65,6 +73,7 @@ data class SampleItemDecoration(
         }
         canvas.drawRoundedRect(
             paint = backgroundPaint,
+            strokeWidth = strokeWidth / 2,
             left = itemBounds.left.toFloat() + start,
             top = itemBounds.top.toFloat() + top,
             right = itemBounds.right.toFloat() - end,
@@ -83,6 +92,7 @@ data class SampleItemDecoration(
 
     private fun Canvas.drawRoundedRect(
         paint: Paint,
+        strokeWidth: Float,
         left: Float,
         top: Float,
         right: Float,
@@ -94,10 +104,10 @@ data class SampleItemDecoration(
         save()
         clipRect(left, top, right, bottom)
         drawRoundRect(
-            left,
-            if (withTop) top else top - radius,
-            right,
-            if (withBottom) bottom else bottom + radius,
+            left + strokeWidth,
+            if (withTop) top + strokeWidth else top - radius,
+            right - strokeWidth,
+            if (withBottom) bottom - strokeWidth else bottom + radius,
             radius,
             radius,
             paint

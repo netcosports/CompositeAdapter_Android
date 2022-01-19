@@ -28,7 +28,8 @@ class DecorationsActivity : AppCompatActivity() {
 
         val dataHolder = DataHolder(
             space = dpToPx(20f).toInt(),
-            radius = dpToPx(6f),
+            radius = dpToPx(8f),
+            strokeWidth = dpToPx(2f),
             dividerHeight = dpToPx(1f).toInt(),
             dividerColorInt = Color.GRAY,
             backgroundColorInt = Color.DKGRAY
@@ -75,6 +76,7 @@ class DecorationsActivity : AppCompatActivity() {
     private class DataHolder(
         space: Int,
         radius: Float,
+        strokeWidth: Float,
         dividerHeight: Int,
         @ColorInt dividerColorInt: Int,
         @ColorInt backgroundColorInt: Int
@@ -89,6 +91,7 @@ class DecorationsActivity : AppCompatActivity() {
             singleItemDecoration = SampleItemDecoration(
                 type = SampleItemDecoration.Type.SINGLE,
                 radius = radius,
+                strokeWidth = strokeWidth,
                 dividerHeight = dividerHeight,
                 dividerColorInt = dividerColorInt,
                 backgroundColorInt = backgroundColorInt,
@@ -100,6 +103,7 @@ class DecorationsActivity : AppCompatActivity() {
             topItemDecoration = SampleItemDecoration(
                 type = SampleItemDecoration.Type.TOP,
                 radius = radius,
+                strokeWidth = strokeWidth,
                 dividerHeight = dividerHeight,
                 dividerColorInt = dividerColorInt,
                 backgroundColorInt = backgroundColorInt,
@@ -111,6 +115,7 @@ class DecorationsActivity : AppCompatActivity() {
             middleItemDecoration = SampleItemDecoration(
                 type = SampleItemDecoration.Type.MIDDLE,
                 radius = radius,
+                strokeWidth = strokeWidth,
                 dividerHeight = dividerHeight,
                 dividerColorInt = dividerColorInt,
                 backgroundColorInt = backgroundColorInt,
@@ -121,6 +126,7 @@ class DecorationsActivity : AppCompatActivity() {
             bottomItemDecoration = SampleItemDecoration(
                 type = SampleItemDecoration.Type.BOTTOM,
                 radius = radius,
+                strokeWidth = strokeWidth,
                 dividerHeight = dividerHeight,
                 dividerColorInt = dividerColorInt,
                 backgroundColorInt = backgroundColorInt,
