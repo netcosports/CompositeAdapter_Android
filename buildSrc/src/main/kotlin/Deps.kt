@@ -80,12 +80,16 @@ object Config {
             const val differentBindings = ":samples:different-bindings"
             const val innerRecyclerview = ":samples:inner-recyclerview"
 
-            const val baseCore = ":sample:features:base:core"
-            const val baseUI = ":sample:features:base:ui"
-
-            const val messagesData = ":sample:features:messages:data"
-            const val messagesCore = ":sample:features:messages:core"
-            const val messagesUI = ":sample:features:messages:ui"
+            const val stateAsCells = ":samples:state-as-cells:app"
+            const val baseCore = ":samples:state-as-cells:features:base:core"
+            const val baseUI = ":samples:state-as-cells:features:base:ui"
+            const val homeData = ":samples:state-as-cells:features:home:data"
+            const val homeCore = ":samples:state-as-cells:features:home:core"
+            const val homeUI = ":samples:state-as-cells:features:home:ui"
+            const val storiesCore = ":samples:state-as-cells:features:stories:core"
+            const val storiesUI = ":samples:state-as-cells:features:stories:ui"
+            const val newsCore = ":samples:state-as-cells:features:news:core"
+            const val newsUI = ":samples:state-as-cells:features:news:ui"
         }
     }
 }

@@ -15,6 +15,7 @@ import com.originsdigital.compositeadapter.sample.basic.ui.entity.SampleUI
 import com.originsdigital.compositeadapter.sample.decorations.ui.DecorationsActivity
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.DifferentBindingsActivity
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.InnerRecyclerActivity
+import com.originsdigital.compositeadapter.stateascells.home.ui.HomeActivity
 
 class SamplesActivity : AppCompatActivity() {
 
@@ -47,6 +48,7 @@ class SamplesActivity : AppCompatActivity() {
                 SampleUI.Type.DECORATIONS -> "Decorations"
                 SampleUI.Type.DIFFERENT_BINDINGS -> "ViewBindings/DataBindings/Programmatically View"
                 SampleUI.Type.INNER_RECYCLER -> "Inner RecyclerView/ViewPager/Etc and how to save scroll state"
+                SampleUI.Type.STATE_AS_CELLS -> "State as List of Cells"
             }
             val onClickListener: (ClickItem<SampleUI>) -> Unit = { item ->
                 startActivity(
@@ -59,6 +61,9 @@ class SamplesActivity : AppCompatActivity() {
                         }
                         SampleUI.Type.INNER_RECYCLER -> {
                             InnerRecyclerActivity.getLaunchIntent(this)
+                        }
+                        SampleUI.Type.STATE_AS_CELLS -> {
+                            HomeActivity.getLaunchIntent(this)
                         }
                     }
                 )

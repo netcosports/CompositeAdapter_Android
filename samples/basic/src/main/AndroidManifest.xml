@@ -31,5 +31,9 @@
         <activity
             android:name="com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.InnerRecyclerActivity"
             android:exported="false" />
+
+        <activity
+            android:name="com.originsdigital.compositeadapter.stateascells.home.ui.HomeActivity"
+            android:exported="false" />
     </application>
 </manifest>

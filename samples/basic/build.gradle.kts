@@ -65,4 +65,5 @@ dependencies {
     implementation(project(Config.Deps.Libs.decorations))
     implementation(project(Config.Deps.Libs.differentBindings))
     implementation(project(Config.Deps.Libs.innerRecyclerview))
+    implementation(project(Config.Deps.Libs.stateAsCells))
 }

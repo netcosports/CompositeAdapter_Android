@@ -15,8 +15,8 @@ import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.decoration.SpaceItemDecoration
-import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecycler2Cell
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecycler1Cell
+import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecycler2Cell
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.cell.InnerRecyclerItemCell
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerItemUI
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.InnerRecyclerUI
