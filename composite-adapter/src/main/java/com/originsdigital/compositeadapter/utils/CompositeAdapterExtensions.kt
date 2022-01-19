@@ -8,6 +8,7 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.R
+import com.originsdigital.compositeadapter.cell.Cell
 
 val RecyclerView.ViewHolder.context: Context get() = itemView.context
 
@@ -16,6 +17,22 @@ var View.compositeAdapterViewHolder: RecyclerView.ViewHolder
     set(value) {
         setTag(R.id.composite_adapter_view_holder_tag, value)
     }
+
+fun <CELL : Cell<*>> CELL.getCompositeAdapterItem(viewHolder: RecyclerView.ViewHolder): CELL {
+    return viewHolder.itemView.getCompositeAdapterItem()
+}
+
+fun <CELL : Cell<*>> CELL.getCompositeAdapterItem(root: View): CELL {
+    return root.getCompositeAdapterItem()
+}
+
+fun <ITEM> RecyclerView.ViewHolder.getCompositeAdapterItem(): ITEM {
+    return itemView.getCompositeAdapterItem()
+}
+
+fun <ITEM> RecyclerView.ViewHolder.setCompositeAdapterItem(item: ITEM) {
+    return itemView.setCompositeAdapterItem(item)
+}
 
 fun <ITEM> View.getCompositeAdapterItem(): ITEM {
     @Suppress("UNCHECKED_CAST")
