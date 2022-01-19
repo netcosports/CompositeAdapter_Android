@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 
+@Suppress("UNUSED_PARAMETER")
 abstract class BaseCell<DATA, VIEW_HOLDER : BaseViewHolder> : Cell<DATA> {
 
     abstract fun createViewHolder(
