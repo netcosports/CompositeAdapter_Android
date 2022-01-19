@@ -26,12 +26,17 @@ fun <ITEM> View.setCompositeAdapterItem(item: ITEM) {
     setTag(R.id.composite_adapter_item_tag, item)
 }
 
+@Deprecated(
+    level = DeprecationLevel.ERROR,
+    message = "Get 'ViewBinding' from the 'ViewHolder'"
+)
 inline fun <reified VIEW_BINDING> RecyclerView.ViewHolder.getViewBinding(
     crossinline delegate: (View) -> VIEW_BINDING
 ): VIEW_BINDING {
     val binding = itemView.getTag(R.id.composite_adapter_viewbinding_tag)
     return if (binding == null) {
         delegate(itemView).also {
+            @Suppress("DEPRECATION_ERROR")
             setViewBinding(it)
         }
     } else {
@@ -39,6 +44,10 @@ inline fun <reified VIEW_BINDING> RecyclerView.ViewHolder.getViewBinding(
     }
 }
 
+@Deprecated(
+    level = DeprecationLevel.ERROR,
+    message = "Save 'ViewBinding' in the 'ViewHolder'"
+)
 fun <VIEW_BINDING> RecyclerView.ViewHolder.setViewBinding(binding: VIEW_BINDING) {
     itemView.setTag(R.id.composite_adapter_viewbinding_tag, binding)
 }
