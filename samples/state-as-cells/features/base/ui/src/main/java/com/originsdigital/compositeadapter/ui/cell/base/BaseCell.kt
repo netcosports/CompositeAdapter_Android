@@ -1,11 +1,9 @@
 package com.originsdigital.compositeadapter.ui.cell.base
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.cell.ClickItem
 
 abstract class BaseCell<DATA, VIEW_HOLDER : BaseViewHolder> : Cell<DATA> {
 
@@ -27,10 +25,6 @@ abstract class BaseCell<DATA, VIEW_HOLDER : BaseViewHolder> : Cell<DATA> {
     fun onViewDetachedFromWindow(holder: VIEW_HOLDER) = Unit
 
     fun onViewRecycled(holder: VIEW_HOLDER) = Unit
-
-    fun onClicked(context: Context, holder: VIEW_HOLDER, position: Int) {
-        onClickListener?.invoke(ClickItem(context, holder, position, data))
-    }
 
     final override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -62,10 +56,6 @@ abstract class BaseCell<DATA, VIEW_HOLDER : BaseViewHolder> : Cell<DATA> {
 
     final override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         onViewRecycled(castHolder(holder))
-    }
-
-    final override fun onClicked(context: Context, holder: RecyclerView.ViewHolder, position: Int) {
-        onClicked(context, castHolder(holder), position)
     }
 
     protected fun castHolder(holder: RecyclerView.ViewHolder): VIEW_HOLDER {
