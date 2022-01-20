@@ -44,9 +44,6 @@ data class InnerRecycler2Cell(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as SampleViewHolder).binding.apply {
-            if (recyclerView.recycledViewPool != data.recycledViewPool) {
-                recyclerView.setRecycledViewPool(data.recycledViewPool)
-            }
             (recyclerView.adapter as CompositeAdapter).submitList(data.cells)
             data.scrollStatesHolder.setupRecyclerView(uniqueId, holder.binding.recyclerView)
         }

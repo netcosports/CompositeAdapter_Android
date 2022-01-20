@@ -79,9 +79,6 @@ data class InnerRecycler1Cell(
         }
 
         fun setData(data: InnerRecyclerUI) {
-            if (binding.recyclerView.recycledViewPool != data.recycledViewPool) {
-                binding.recyclerView.setRecycledViewPool(data.recycledViewPool)
-            }
             adapter.submitList(data.cells)
             data.scrollStatesHolder.setupRecyclerView(data.id, binding.recyclerView)
         }

@@ -71,7 +71,6 @@ class InnerRecyclerActivity : AppCompatActivity() {
     private class DataHolder(space: Int) {
 
         private val scrollStatesHolder = ScrollStatesHolder()
-        private val recycledViewPool = RecyclerView.RecycledViewPool()
 
         private val singleItemDecoration: ItemDecoration<Cell<*>>
         private val firstItemDecoration: ItemDecoration<Cell<*>>
@@ -131,7 +130,6 @@ class InnerRecyclerActivity : AppCompatActivity() {
                 val recyclerUI = InnerRecyclerUI(
                     id = recyclerId.toString(),
                     cells = cells,
-                    recycledViewPool = recycledViewPool,
                     scrollStatesHolder = scrollStatesHolder
                 )
                 if (useClearerVersion) {

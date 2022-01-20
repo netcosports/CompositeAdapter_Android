@@ -3,7 +3,7 @@ import org.gradle.api.JavaVersion
 object Config {
 
     object Build {
-        const val kotlinVersion = "1.6.0"
+        const val kotlinVersion = "1.6.10"
 
         const val compileSdk = 31
         const val minSdk = 17
@@ -37,10 +37,10 @@ object Config {
 
     object Deps {
         object AndroidX {
-            const val appcompat = "androidx.appcompat:appcompat:1.4.0"
+            const val appcompat = "androidx.appcompat:appcompat:1.4.1"
             const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
             const val recycler = "androidx.recyclerview:recyclerview:1.2.1"
-            const val core = "androidx.core:core-ktx:1.6.0"
+            const val core = "androidx.core:core-ktx:1.7.0"
             private const val lifecycleVersion = "2.4.0"
             const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
             const val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
@@ -48,11 +48,11 @@ object Config {
         }
 
         object Material {
-            const val material = "com.google.android.material:material:1.4.0"
+            const val material = "com.google.android.material:material:1.5.0"
         }
 
         object Coroutines {
-            private const val version = "1.5.2"
+            private const val version = "1.6.0"
             const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
             const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         }
@@ -64,7 +64,7 @@ object Config {
         }
 
         object Koin {
-            private const val version = "3.1.2"
+            private const val version = "3.1.5"
             const val core = "io.insert-koin:koin-core:$version"
             const val android = "io.insert-koin:koin-android:$version"
         }
