@@ -93,21 +93,21 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
     }
 
     protected open fun storeCellInHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.setCompositeAdapterItem(getItem(position))
+        holder.setCompositeAdapterItem(getItem(position))
     }
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
-        holder.itemView.getCompositeAdapterItem<DATA>().onViewAttachedToWindow(holder)
+        holder.getCompositeAdapterItem<DATA>().onViewAttachedToWindow(holder)
     }
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         super.onViewDetachedFromWindow(holder)
-        holder.itemView.getCompositeAdapterItem<DATA>().onViewDetachedFromWindow(holder)
+        holder.getCompositeAdapterItem<DATA>().onViewDetachedFromWindow(holder)
     }
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         super.onViewRecycled(holder)
-        holder.itemView.getCompositeAdapterItem<DATA>().onViewRecycled(holder)
+        holder.getCompositeAdapterItem<DATA>().onViewRecycled(holder)
     }
 }
