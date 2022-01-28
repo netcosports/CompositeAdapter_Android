@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.decorations.R
 import com.originsdigital.compositeadapter.sample.decorations.databinding.DecorationsCellBinding
@@ -12,9 +13,9 @@ import com.originsdigital.compositeadapter.sample.decorations.ui.entity.Decorati
 
 data class DecorationsCell(
     override val data: DecorationsUI,
-    override val decoration: ItemDecoration<out Cell<*>>? = null,
+    override val decoration: ItemDecoration<GenericCell>? = null,
     override val onClickListener: ((ClickItem<DecorationsUI>) -> Unit)? = null
-) : Cell<DecorationsUI> {
+) : Cell<DecorationsUI, DecorationsCell.SampleViewHolder> {
 
     override val uniqueId: String = data.id
     override val layoutId: Int = R.layout.decorations_cell
@@ -23,17 +24,15 @@ data class DecorationsCell(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
+    ): SampleViewHolder {
         return SampleViewHolder(DecorationsCellBinding.inflate(inflater, parent, false))
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as SampleViewHolder).binding.apply {
-            text.text = data.name
-        }
+    override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.binding.text.text = data.name
     }
 
-    private class SampleViewHolder(
+    class SampleViewHolder(
         val binding: DecorationsCellBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }

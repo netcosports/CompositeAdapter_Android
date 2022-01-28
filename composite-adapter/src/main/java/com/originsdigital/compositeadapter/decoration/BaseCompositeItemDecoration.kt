@@ -11,7 +11,12 @@ import com.originsdigital.compositeadapter.utils.getCompositeAdapterItem
 
 abstract class BaseCompositeItemDecoration<ITEM> : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         getItemOffsets(outRect, view, parent, state, getItemFromView(view))
 
         if (parent.isRTL) {

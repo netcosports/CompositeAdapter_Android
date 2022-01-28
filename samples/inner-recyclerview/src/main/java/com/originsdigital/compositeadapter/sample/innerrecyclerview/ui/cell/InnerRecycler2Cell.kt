@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
@@ -16,9 +17,9 @@ import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.layoutman
 // less code (can be less with `ViewBindingCell`) than `InnerRecycler1Cell`
 data class InnerRecycler2Cell(
     override val data: InnerRecyclerUI,
-    override val decoration: ItemDecoration<out Cell<*>>? = null,
+    override val decoration: ItemDecoration<GenericCell>? = null,
     override val onClickListener: ((ClickItem<InnerRecyclerUI>) -> Unit)? = null
-) : Cell<InnerRecyclerUI> {
+) : Cell<InnerRecyclerUI, InnerRecycler2Cell.SampleViewHolder> {
 
     override val uniqueId: String = data.id
     override val layoutId: Int = R.layout.inner_recycler_2_cell
@@ -27,7 +28,7 @@ data class InnerRecycler2Cell(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
+    ): SampleViewHolder {
         return SampleViewHolder(
             InnerRecycler2CellBinding.inflate(inflater, parent, false).also { binding ->
                 // Don't forget that Cell can survive the configuration changes inside the ViewModel
@@ -42,8 +43,8 @@ data class InnerRecycler2Cell(
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as SampleViewHolder).binding.apply {
+    override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.binding.apply {
             (recyclerView.adapter as CompositeAdapter).submitList(data.cells)
             data.scrollStatesHolder.setupRecyclerView(uniqueId, holder.binding.recyclerView)
         }
@@ -54,13 +55,13 @@ data class InnerRecycler2Cell(
     // The same for the ViewPager1/ViewPager2/Webview/VideoPlayer/other complex view.
     // `onBindViewHolder` with `payload` will be called. But its empty so it will call
     // `onBindViewHolder` without `payload` where submitList is called
-    override fun getChangePayload(newItem: Cell<*>): Any = RECYCLER_VIEW_PAYLOAD
+    override fun getChangePayload(newItem: GenericCell): Any = RECYCLER_VIEW_PAYLOAD
 
     companion object {
         private const val RECYCLER_VIEW_PAYLOAD = "RECYCLER_VIEW"
     }
 
-    private class SampleViewHolder(
+    class SampleViewHolder(
         val binding: InnerRecycler2CellBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }

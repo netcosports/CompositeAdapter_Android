@@ -1,8 +1,8 @@
 package com.originsdigital.compositeadapter.stateascells.home.ui
 
 import androidx.lifecycle.viewModelScope
-import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.core.entity.Scene
 import com.originsdigital.compositeadapter.core.extensions.isEmpty
 import com.originsdigital.compositeadapter.home.core.repository.HomeRepository
@@ -83,6 +83,6 @@ class HomeViewModel(
 
     data class State(
         val isRefreshing: Boolean,
-        val cells: List<Cell<*>>
+        val cells: List<GenericCell>
     )
 }

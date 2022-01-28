@@ -15,7 +15,13 @@ open class SpaceItemDecoration<ITEM>(
     open val end: Int = 0
 ) : ItemDecoration<ITEM> {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State, item: ITEM) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        item: ITEM
+    ) {
         outRect.left = start
         outRect.top = top
         outRect.right = end

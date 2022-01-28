@@ -2,8 +2,8 @@ package com.originsdigital.compositeadapter.news.ui.cell
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.news.core.entity.NewsEntity
 import com.originsdigital.compositeadapter.news.ui.R
@@ -13,7 +13,7 @@ import com.originsdigital.compositeadapter.ui.cell.viewbinding.ViewBindingViewHo
 
 data class NewsCell(
     override val data: NewsEntity,
-    override val decoration: ItemDecoration<out Cell<*>>?,
+    override val decoration: ItemDecoration<GenericCell>?,
     override val onClickListener: ((ClickItem<NewsEntity>) -> Unit)?
 ) : ViewBindingCell<NewsEntity, NewsCellBinding>() {
 

@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
-import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.sample.basic.ui.cell.SampleCell
 import com.originsdigital.compositeadapter.sample.basic.ui.entity.SampleUI
@@ -42,7 +42,7 @@ class SamplesActivity : AppCompatActivity() {
     }
 
     //should be inside ViewModel
-    private fun generateData(): List<Cell<*>> {
+    private fun generateData(): List<GenericCell> {
         return SampleUI.Type.values().map { type ->
             val name = when (type) {
                 SampleUI.Type.DECORATIONS -> "Decorations"

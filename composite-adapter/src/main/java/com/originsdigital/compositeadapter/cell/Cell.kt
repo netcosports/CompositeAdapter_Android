@@ -11,7 +11,9 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 
-interface Cell<T> {
+typealias GenericCell = Cell<out Any?, out RecyclerView.ViewHolder>
+
+interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
     val uniqueId: String
     val data: T
@@ -20,26 +22,27 @@ interface Cell<T> {
     val layoutId: Int
     val viewType: Int get() = layoutId
 
-    val decoration: ItemDecoration<out Cell<*>>? get() = null
+    val decoration: ItemDecoration<GenericCell>? get() = null
+
     val onClickListener: ((ClickItem<T>) -> Unit)? get() = null
 
-    fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+    fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): VIEW_HOLDER
 
-    fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: List<Any>): Boolean = false
-    fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
+    fun onBindViewHolder(holder: VIEW_HOLDER, position: Int, payloads: List<Any>): Boolean = false
+    fun onBindViewHolder(holder: VIEW_HOLDER, position: Int)
 
-    fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) = Unit
-    fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) = Unit
+    fun onViewAttachedToWindow(holder: VIEW_HOLDER) = Unit
+    fun onViewDetachedFromWindow(holder: VIEW_HOLDER) = Unit
 
-    fun onViewRecycled(holder: RecyclerView.ViewHolder) = Unit
+    fun onViewRecycled(holder: VIEW_HOLDER) = Unit
 
-    fun areItemsTheSame(newItem: Cell<*>): Boolean = viewType == newItem.viewType && uniqueId == newItem.uniqueId
-    fun areContentsTheSame(newItem: Cell<*>): Boolean = data == newItem.data
-    fun getChangePayload(newItem: Cell<*>): Any? = null
-    fun areDecorationsTheSame(newItem: Cell<*>): Boolean = decoration == newItem.decoration
-    fun areOnClickListenersTheSame(newItem: Cell<*>): Boolean = onClickListener == newItem.onClickListener
+    fun areItemsTheSame(newItem: GenericCell): Boolean = viewType == newItem.viewType && uniqueId == newItem.uniqueId
+    fun areContentsTheSame(newItem: GenericCell): Boolean = data == newItem.data
+    fun getChangePayload(newItem: GenericCell): Any? = null
+    fun areDecorationsTheSame(newItem: GenericCell): Boolean = decoration == newItem.decoration
+    fun areOnClickListenersTheSame(newItem: GenericCell): Boolean = onClickListener == newItem.onClickListener
 
-    fun onClicked(context: Context, holder: RecyclerView.ViewHolder, position: Int) {
+    fun onClicked(context: Context, holder: VIEW_HOLDER, position: Int) {
         onClickListener?.invoke(ClickItem(context, holder, position, data))
     }
 

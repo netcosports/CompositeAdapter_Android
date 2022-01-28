@@ -8,16 +8,16 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.GenericCell
 
-open class CompositeItemDecoration : BaseCompositeItemDecoration<Cell<*>>() {
+open class CompositeItemDecoration : BaseCompositeItemDecoration<GenericCell>() {
 
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: Cell<*>
+        item: GenericCell
     ) {
         getDecoration(item)?.getItemOffsets(outRect, view, parent, state, item)
     }
@@ -32,7 +32,11 @@ open class CompositeItemDecoration : BaseCompositeItemDecoration<Cell<*>>() {
     }
 
     protected open fun onDraw(
-        canvas: Canvas, view: View, parent: RecyclerView, state: RecyclerView.State, item: Cell<*>
+        canvas: Canvas,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        item: GenericCell
     ) {
         getDecoration(item)?.onDraw(canvas, view, parent, state, item)
     }
@@ -47,13 +51,16 @@ open class CompositeItemDecoration : BaseCompositeItemDecoration<Cell<*>>() {
     }
 
     protected open fun onDrawOver(
-        canvas: Canvas, view: View, parent: RecyclerView, state: RecyclerView.State, item: Cell<*>
+        canvas: Canvas,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        item: GenericCell
     ) {
         getDecoration(item)?.onDrawOver(canvas, view, parent, state, item)
     }
 
-    protected fun getDecoration(cell: Cell<*>): ItemDecoration<Cell<*>>? {
-        @Suppress("UNCHECKED_CAST")
-        return cell.decoration as ItemDecoration<Cell<*>>?
+    protected fun getDecoration(cell: GenericCell): ItemDecoration<GenericCell>? {
+        return cell.decoration
     }
 }

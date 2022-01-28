@@ -6,8 +6,9 @@ package com.originsdigital.compositeadapter.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
 import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.GenericCell
 
-open class CellItemCallback<CELL : Cell<*>> : DiffUtil.ItemCallback<CELL>() {
+open class CellItemCallback<CELL : GenericCell> : DiffUtil.ItemCallback<CELL>() {
 
     override fun areItemsTheSame(oldItem: CELL, newItem: CELL): Boolean {
         return oldItem.areItemsTheSame(newItem)

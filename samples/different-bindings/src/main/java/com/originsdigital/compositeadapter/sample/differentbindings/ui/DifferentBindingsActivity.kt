@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
-import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.databinding.DifferentBindingsDataBinding1MessageCell
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.databinding.DifferentBindingsDataBinding2MessageCell
@@ -52,7 +52,7 @@ class DifferentBindingsActivity : AppCompatActivity() {
     }
 
     //should be inside ViewModel
-    private fun generateData(): List<Cell<*>> {
+    private fun generateData(): List<GenericCell> {
         return DifferentBindingsUI.Type.values().map { type ->
             when (type) {
                 DifferentBindingsUI.Type.VIEW -> {

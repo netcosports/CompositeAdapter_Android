@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
@@ -16,9 +17,9 @@ import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.layoutman
 // More code but more clearer and `correct` than `InnerRecycler2Cell`
 data class InnerRecycler1Cell(
     override val data: InnerRecyclerUI,
-    override val decoration: ItemDecoration<out Cell<*>>? = null,
+    override val decoration: ItemDecoration<GenericCell>? = null,
     override val onClickListener: ((ClickItem<InnerRecyclerUI>) -> Unit)? = null
-) : Cell<InnerRecyclerUI> {
+) : Cell<InnerRecyclerUI, InnerRecycler1Cell.SampleViewHolder> {
 
     override val uniqueId: String = data.id
     override val layoutId: Int = R.layout.inner_recycler_1_cell
@@ -27,7 +28,7 @@ data class InnerRecycler1Cell(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
+    ): SampleViewHolder {
         return SampleViewHolder(InnerRecycler1CellBinding.inflate(inflater, parent, false))
     }
 
@@ -35,7 +36,7 @@ data class InnerRecycler1Cell(
     // But you can skip this overload, so `onBindViewHolder` with `payload` will call
     // `onBindViewHolder` without `payload`, and result will be the same in this case
     override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
+        holder: SampleViewHolder,
         position: Int,
         payloads: List<Any>
     ): Boolean {
@@ -47,24 +48,24 @@ data class InnerRecycler1Cell(
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
         submitData(holder)
     }
 
-    private fun submitData(holder: RecyclerView.ViewHolder) {
-        (holder as SampleViewHolder).setData(data)
+    private fun submitData(holder: SampleViewHolder) {
+        holder.setData(data)
     }
 
     // We do not need to animate the InnerRecyclerCell, because it has its own CompositeAdapter,
     // which will calculate the diffs of his cells and animate these changes within itself.
     // The same for the ViewPager1/ViewPager2/Webview/VideoPlayer/other complex view.
-    override fun getChangePayload(newItem: Cell<*>): Any = RECYCLER_VIEW_PAYLOAD
+    override fun getChangePayload(newItem: GenericCell): Any = RECYCLER_VIEW_PAYLOAD
 
     companion object {
         private const val RECYCLER_VIEW_PAYLOAD = "RECYCLER_VIEW"
     }
 
-    private class SampleViewHolder(
+    class SampleViewHolder(
         private val binding: InnerRecycler1CellBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 

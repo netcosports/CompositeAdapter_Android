@@ -3,14 +3,14 @@ package com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.dat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.sample.differentbindings.BR
-import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseCell
 
 // ViewBinding is better anyway
 abstract class DataBindingCell<DATA, DATA_BINDING : ViewDataBinding>
-    : BaseCell<DATA, DataBindingViewHolder<DATA_BINDING>>() {
+    : Cell<DATA, DataBindingViewHolder<DATA_BINDING>> {
 
-    final override fun createViewHolder(
+    final override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int

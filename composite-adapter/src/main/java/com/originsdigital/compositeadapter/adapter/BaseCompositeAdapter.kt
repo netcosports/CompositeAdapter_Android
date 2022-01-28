@@ -12,17 +12,19 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.utils.compositeAdapterViewHolder
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.utils.context
 import com.originsdigital.compositeadapter.utils.getCompositeAdapterItem
+import com.originsdigital.compositeadapter.utils.getCompositeAdapterViewHolder
 import com.originsdigital.compositeadapter.utils.setCompositeAdapterItem
+import com.originsdigital.compositeadapter.utils.setCompositeAdapterViewHolder
 
-abstract class BaseCompositeAdapter<DATA : Cell<*>>(
-    config: AsyncDifferConfig<DATA>
-) : ListAdapter<DATA, RecyclerView.ViewHolder>(config) {
+abstract class BaseCompositeAdapter<CELL : GenericCell>(
+    config: AsyncDifferConfig<GenericCell>
+) : ListAdapter<GenericCell, RecyclerView.ViewHolder>(config) {
 
     private val innerClickListener: View.OnClickListener = View.OnClickListener { v ->
-        val holder = v.compositeAdapterViewHolder
+        val holder = v.getCompositeAdapterViewHolder<RecyclerView.ViewHolder>()
         val position = holder.bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) {
             getItem(position).onClicked(holder.context, holder, position)
@@ -30,14 +32,17 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
     }
 
     private lateinit var inflater: LayoutInflater
-    private val typeInstances: SparseArray<DATA> = SparseArray()
+    private val typeInstances: SparseArray<GenericCell> = SparseArray()
 
-    public override fun getItem(position: Int): DATA = super.getItem(position)
+    public override fun getItem(position: Int): Cell<*, RecyclerView.ViewHolder> {
+        @Suppress("UNCHECKED_CAST")
+        return super.getItem(position) as Cell<*, RecyclerView.ViewHolder>
+    }
 
     override fun getItemViewType(position: Int): Int {
-        val item = getItem(position)
-        return item.viewType.also {
-            typeInstances.put(it, item)
+        val cell = getItem(position)
+        return cell.viewType.also { viewType ->
+            typeInstances.put(viewType, cell)
         }
     }
 
@@ -80,7 +85,7 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
     }
 
     protected open fun storeHolderInView(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.compositeAdapterViewHolder = holder
+        holder.itemView.setCompositeAdapterViewHolder(holder)
     }
 
     protected open fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
@@ -98,16 +103,19 @@ abstract class BaseCompositeAdapter<DATA : Cell<*>>(
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
-        holder.getCompositeAdapterItem<DATA>().onViewAttachedToWindow(holder)
+        holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
+            .onViewAttachedToWindow(holder)
     }
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         super.onViewDetachedFromWindow(holder)
-        holder.getCompositeAdapterItem<DATA>().onViewDetachedFromWindow(holder)
+        holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
+            .onViewDetachedFromWindow(holder)
     }
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         super.onViewRecycled(holder)
-        holder.getCompositeAdapterItem<DATA>().onViewRecycled(holder)
+        holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
+            .onViewRecycled(holder)
     }
 }
