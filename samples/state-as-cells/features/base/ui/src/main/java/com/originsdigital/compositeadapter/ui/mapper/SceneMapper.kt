@@ -217,7 +217,7 @@ class SceneMapper(
 
     fun getSmallLoaderCell(
         uniqueLoaderId: String,
-        decoration: ItemDecoration<GenericCell>? = stateItemDecoration,
+        decoration: ItemDecoration<*>? = stateItemDecoration,
         @DimenRes height: Int? = null
     ): GenericCell {
         return CommonLoaderCell(
@@ -232,7 +232,7 @@ class SceneMapper(
     fun getErrorCell(
         isFull: Boolean,
         error: CommonErrorUI,
-        decoration: ItemDecoration<GenericCell>? = stateItemDecoration,
+        decoration: ItemDecoration<*>? = stateItemDecoration,
         onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return if (isFull) {
@@ -252,7 +252,7 @@ class SceneMapper(
 
     fun getFullErrorCell(
         error: CommonErrorUI,
-        decoration: ItemDecoration<GenericCell>? = null,
+        decoration: ItemDecoration<*>? = null,
         onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return CommonFullErrorCell(
@@ -264,7 +264,7 @@ class SceneMapper(
 
     fun getSmallErrorCell(
         error: CommonErrorUI,
-        decoration: ItemDecoration<GenericCell>? = stateItemDecoration,
+        decoration: ItemDecoration<*>? = stateItemDecoration,
         onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return CommonErrorCell(

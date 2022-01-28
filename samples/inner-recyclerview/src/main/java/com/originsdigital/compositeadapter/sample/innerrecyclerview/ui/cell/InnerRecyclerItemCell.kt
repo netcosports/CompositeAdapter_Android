@@ -10,7 +10,6 @@ import android.view.ViewOutlineProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
-import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecyclerItemCellBinding
@@ -18,7 +17,7 @@ import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.In
 
 data class InnerRecyclerItemCell(
     override val data: InnerRecyclerItemUI,
-    override val decoration: ItemDecoration<GenericCell>? = null,
+    override val decoration: ItemDecoration<*>? = null,
     override val onClickListener: ((ClickItem<InnerRecyclerItemUI>) -> Unit)? = null
 ) : Cell<InnerRecyclerItemUI, InnerRecyclerItemCell.SampleViewHolder> {
 

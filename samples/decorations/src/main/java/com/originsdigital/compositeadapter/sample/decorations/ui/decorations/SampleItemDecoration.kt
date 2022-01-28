@@ -6,8 +6,8 @@ import android.graphics.Rect
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
-import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.SpaceItemDecoration
+import com.originsdigital.compositeadapter.sample.decorations.ui.cell.DecorationsCell
 import kotlin.math.roundToInt
 
 data class SampleItemDecoration(
@@ -21,7 +21,7 @@ data class SampleItemDecoration(
     override val bottom: Int = 0,
     override val start: Int = 0,
     override val end: Int = 0
-) : SpaceItemDecoration<GenericCell>() {
+) : SpaceItemDecoration<DecorationsCell>() {
 
     private val dividerPaint = Paint().apply {
         color = dividerColorInt
@@ -39,7 +39,7 @@ data class SampleItemDecoration(
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: GenericCell
+        item: DecorationsCell
     ) {
         super.onDraw(canvas, view, parent, state, item)
         parent.layoutManager?.getDecoratedBoundsWithMargins(view, itemBounds)

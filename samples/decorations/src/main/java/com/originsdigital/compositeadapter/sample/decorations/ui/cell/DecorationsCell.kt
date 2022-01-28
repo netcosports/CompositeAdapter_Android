@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
-import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.decorations.R
 import com.originsdigital.compositeadapter.sample.decorations.databinding.DecorationsCellBinding
@@ -13,7 +12,7 @@ import com.originsdigital.compositeadapter.sample.decorations.ui.entity.Decorati
 
 data class DecorationsCell(
     override val data: DecorationsUI,
-    override val decoration: ItemDecoration<GenericCell>? = null,
+    override val decoration: ItemDecoration<*>? = null,
     override val onClickListener: ((ClickItem<DecorationsUI>) -> Unit)? = null
 ) : Cell<DecorationsUI, DecorationsCell.SampleViewHolder> {
 

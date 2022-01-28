@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
-import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.differentbindings.R
 import com.originsdigital.compositeadapter.sample.differentbindings.databinding.DifferentBindingsDataBinding2CellBinding
@@ -14,7 +13,7 @@ import com.originsdigital.compositeadapter.sample.differentbindings.ui.entity.Di
 // ViewBinding is better anyway
 data class DifferentBindingsDataBinding2MessageCell(
     override val data: DifferentBindingsUI,
-    override val decoration: ItemDecoration<GenericCell>? = null,
+    override val decoration: ItemDecoration<*>? = null,
     override val onClickListener: ((ClickItem<DifferentBindingsUI>) -> Unit)? = null
 ) : Cell<DifferentBindingsUI, DifferentBindingsDataBinding2MessageCell.CustomViewHolder> {
 

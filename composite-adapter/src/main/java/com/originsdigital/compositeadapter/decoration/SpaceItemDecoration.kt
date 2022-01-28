@@ -8,7 +8,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-open class SpaceItemDecoration<ITEM>(
+open class SpaceItemDecoration<in ITEM>(
     open val top: Int = 0,
     open val bottom: Int = 0,
     open val start: Int = 0,

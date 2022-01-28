@@ -22,9 +22,9 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
     val layoutId: Int
     val viewType: Int get() = layoutId
 
-    val decoration: ItemDecoration<GenericCell>? get() = null
+    val decoration: ItemDecoration<*>?
 
-    val onClickListener: ((ClickItem<T>) -> Unit)? get() = null
+    val onClickListener: ((ClickItem<T>) -> Unit)?
 
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): VIEW_HOLDER
 

@@ -9,7 +9,6 @@ import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
-import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.differentbindings.R
 import com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.base.BaseViewHolder
@@ -17,7 +16,7 @@ import com.originsdigital.compositeadapter.sample.differentbindings.ui.entity.Di
 
 data class DifferentBindingsViewMessageCell(
     override val data: DifferentBindingsUI,
-    override val decoration: ItemDecoration<GenericCell>? = null,
+    override val decoration: ItemDecoration<*>? = null,
     override val onClickListener: ((ClickItem<DifferentBindingsUI>) -> Unit)? = null
 ) : Cell<DifferentBindingsUI, DifferentBindingsViewMessageCell.CustomViewHolder> {
 

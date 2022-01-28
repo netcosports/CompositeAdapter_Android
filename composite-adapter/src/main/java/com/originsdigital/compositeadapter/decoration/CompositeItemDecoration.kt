@@ -61,6 +61,7 @@ open class CompositeItemDecoration : BaseCompositeItemDecoration<GenericCell>() 
     }
 
     protected fun getDecoration(cell: GenericCell): ItemDecoration<GenericCell>? {
-        return cell.decoration
+        @Suppress("UNCHECKED_CAST")
+        return cell.decoration as ItemDecoration<GenericCell>?
     }
 }

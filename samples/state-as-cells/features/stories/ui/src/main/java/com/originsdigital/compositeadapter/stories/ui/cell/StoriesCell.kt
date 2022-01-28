@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
 import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.stories.ui.R
@@ -14,7 +15,8 @@ import com.originsdigital.compositeadapter.ui.utils.initRecyclerView
 
 data class StoriesCell(
     override val data: List<StoryCell>,
-    override val decoration: ItemDecoration<GenericCell>? = null
+    override val decoration: ItemDecoration<*>? = null,
+    override val onClickListener: ((ClickItem<List<StoryCell>>) -> Unit)? = null
 ) : Cell<List<StoryCell>, StoriesCell.CustomViewHolder> {
 
     override val uniqueId: String = "StoriesCell"

@@ -17,7 +17,7 @@ import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.layoutman
 // less code (can be less with `ViewBindingCell`) than `InnerRecycler1Cell`
 data class InnerRecycler2Cell(
     override val data: InnerRecyclerUI,
-    override val decoration: ItemDecoration<GenericCell>? = null,
+    override val decoration: ItemDecoration<*>? = null,
     override val onClickListener: ((ClickItem<InnerRecyclerUI>) -> Unit)? = null
 ) : Cell<InnerRecyclerUI, InnerRecycler2Cell.SampleViewHolder> {
 
