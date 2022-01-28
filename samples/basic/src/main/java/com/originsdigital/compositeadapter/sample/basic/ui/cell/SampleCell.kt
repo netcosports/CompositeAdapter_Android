@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.basic.R
 import com.originsdigital.compositeadapter.sample.basic.databinding.SampleCellBinding
@@ -13,7 +13,7 @@ import com.originsdigital.compositeadapter.sample.basic.ui.entity.SampleUI
 data class SampleCell(
     override val data: SampleUI,
     override val decoration: ItemDecoration<*>? = null,
-    override val onClickListener: ((ClickItem<SampleUI>) -> Unit)? = null
+    override val onClickListener: ((GenericClickItem<SampleUI>) -> Unit)? = null
 ) : Cell<SampleUI, SampleCell.SampleViewHolder> {
 
     override val uniqueId: String = data.type.name

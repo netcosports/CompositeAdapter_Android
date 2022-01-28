@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
 import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.cell.GenericCell
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
@@ -18,7 +18,7 @@ import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.layoutman
 data class InnerRecycler2Cell(
     override val data: InnerRecyclerUI,
     override val decoration: ItemDecoration<*>? = null,
-    override val onClickListener: ((ClickItem<InnerRecyclerUI>) -> Unit)? = null
+    override val onClickListener: ((GenericClickItem<InnerRecyclerUI>) -> Unit)? = null
 ) : Cell<InnerRecyclerUI, InnerRecycler2Cell.SampleViewHolder> {
 
     override val uniqueId: String = data.id

@@ -3,8 +3,8 @@ package com.originsdigital.compositeadapter.ui.mapper
 import android.app.Application
 import android.util.TypedValue
 import androidx.annotation.DimenRes
-import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.cell.GenericCell
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.core.entity.Scene
 import com.originsdigital.compositeadapter.core.log
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
@@ -116,7 +116,7 @@ class SceneMapper(
 
     fun <DATA> mapSceneToCells(
         scene: Scene<DATA>,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit,
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit,
         dataDelegate: (Scene.Data<DATA>) -> List<GenericCell>
     ): List<GenericCell> {
         return mapScene(
@@ -141,7 +141,7 @@ class SceneMapper(
     fun <DATA> mapSmallSceneToCell(
         scene: Scene<DATA>,
         uniqueId: String,
-        onRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
+        onRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
         dataDelegate: (Scene.Data<DATA>) -> GenericCell
     ): GenericCell {
         return mapSceneToCell(
@@ -164,7 +164,7 @@ class SceneMapper(
     fun <DATA> mapSmallSceneToCellOrNull(
         scene: Scene<DATA>,
         uniqueId: String,
-        onRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
+        onRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
         dataDelegate: (Scene.Data<DATA>) -> GenericCell?
     ): GenericCell? {
         return mapSceneToCellOrNull(
@@ -188,7 +188,7 @@ class SceneMapper(
     fun <DATA> mapSmallSceneToCells(
         scene: Scene<DATA>,
         uniqueId: String,
-        onRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
+        onRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
         dataDelegate: (Scene.Data<DATA>) -> List<GenericCell>
     ): List<GenericCell> {
         return mapSceneToCells(
@@ -233,7 +233,7 @@ class SceneMapper(
         isFull: Boolean,
         error: CommonErrorUI,
         decoration: ItemDecoration<*>? = stateItemDecoration,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return if (isFull) {
             getFullErrorCell(
@@ -253,7 +253,7 @@ class SceneMapper(
     fun getFullErrorCell(
         error: CommonErrorUI,
         decoration: ItemDecoration<*>? = null,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return CommonFullErrorCell(
             data = error,
@@ -265,7 +265,7 @@ class SceneMapper(
     fun getSmallErrorCell(
         error: CommonErrorUI,
         decoration: ItemDecoration<*>? = stateItemDecoration,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return CommonErrorCell(
             data = error,

@@ -3,8 +3,8 @@ package com.originsdigital.compositeadapter.stateascells.home.ui
 import android.app.Application
 import android.content.Context
 import android.util.TypedValue
-import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.cell.GenericCell
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.core.entity.Scene
 import com.originsdigital.compositeadapter.decoration.SpaceItemDecoration
 import com.originsdigital.compositeadapter.news.core.entity.NewsEntity
@@ -68,10 +68,10 @@ class HomeUIMapper(
     fun mapState(
         storiesScene: Scene<List<StoryEntity>>,
         newsScene: Scene<List<NewsEntity>>,
-        onStoriesRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
-        onNewsRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
-        onStoryClickListener: ((ClickItem<StoryEntity>) -> Unit),
-        onNewsClickListener: ((ClickItem<NewsEntity>) -> Unit)
+        onStoriesRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
+        onNewsRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
+        onStoryClickListener: ((GenericClickItem<StoryEntity>) -> Unit),
+        onNewsClickListener: ((GenericClickItem<NewsEntity>) -> Unit)
     ): HomeViewModel.State {
         val storiesCell = sceneMapper.mapSmallSceneToCell(
             scene = storiesScene,
@@ -93,7 +93,7 @@ class HomeUIMapper(
 
     private fun mapStories(
         storiesScene: Scene.Data<List<StoryEntity>>,
-        onStoryClickListener: ((ClickItem<StoryEntity>) -> Unit)
+        onStoryClickListener: ((GenericClickItem<StoryEntity>) -> Unit)
     ): GenericCell {
         return StoriesCell(
             data = storiesScene.data.mapIndexed { index, story ->
@@ -113,7 +113,7 @@ class HomeUIMapper(
 
     private fun mapNews(
         newsScene: Scene.Data<List<NewsEntity>>,
-        onNewsClickListener: ((ClickItem<NewsEntity>) -> Unit)
+        onNewsClickListener: ((GenericClickItem<NewsEntity>) -> Unit)
     ): List<GenericCell> {
         return newsScene.data.mapIndexed { index, story ->
             val decoration = when (index) {

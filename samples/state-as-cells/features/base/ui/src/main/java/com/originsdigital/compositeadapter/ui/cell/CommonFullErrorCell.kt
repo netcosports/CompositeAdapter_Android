@@ -2,7 +2,7 @@ package com.originsdigital.compositeadapter.ui.cell
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.ui.R
 import com.originsdigital.compositeadapter.ui.cell.viewbinding.ViewBindingCell
@@ -13,7 +13,7 @@ import com.originsdigital.compositeadapter.ui.entity.CommonErrorUI
 data class CommonFullErrorCell(
     override val data: CommonErrorUI,
     override val decoration: ItemDecoration<*>? = null,
-    override val onClickListener: ((ClickItem<CommonErrorUI>) -> Unit)? = null
+    override val onClickListener: ((GenericClickItem<CommonErrorUI>) -> Unit)? = null
 ) : ViewBindingCell<CommonErrorUI, CommonFullErrorCellBinding>() {
 
     override val uniqueId = data.id

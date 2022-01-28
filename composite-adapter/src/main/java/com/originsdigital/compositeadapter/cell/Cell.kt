@@ -24,7 +24,7 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
     val decoration: ItemDecoration<*>?
 
-    val onClickListener: ((ClickItem<T>) -> Unit)?
+    val onClickListener: ((ClickItem<T, VIEW_HOLDER>) -> Unit)?
 
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): VIEW_HOLDER
 
@@ -36,11 +36,14 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
     fun onViewRecycled(holder: VIEW_HOLDER) = Unit
 
-    fun areItemsTheSame(newItem: GenericCell): Boolean = viewType == newItem.viewType && uniqueId == newItem.uniqueId
+    fun areItemsTheSame(newItem: GenericCell): Boolean =
+        viewType == newItem.viewType && uniqueId == newItem.uniqueId
+
     fun areContentsTheSame(newItem: GenericCell): Boolean = data == newItem.data
     fun getChangePayload(newItem: GenericCell): Any? = null
     fun areDecorationsTheSame(newItem: GenericCell): Boolean = decoration == newItem.decoration
-    fun areOnClickListenersTheSame(newItem: GenericCell): Boolean = onClickListener == newItem.onClickListener
+    fun areOnClickListenersTheSame(newItem: GenericCell): Boolean =
+        onClickListener == newItem.onClickListener
 
     fun onClicked(context: Context, holder: VIEW_HOLDER, position: Int) {
         onClickListener?.invoke(ClickItem(context, holder, position, data))

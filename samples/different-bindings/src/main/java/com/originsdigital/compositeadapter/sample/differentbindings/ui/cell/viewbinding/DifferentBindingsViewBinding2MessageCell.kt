@@ -3,7 +3,7 @@ package com.originsdigital.compositeadapter.sample.differentbindings.ui.cell.vie
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.differentbindings.R
 import com.originsdigital.compositeadapter.sample.differentbindings.databinding.DifferentBindingsViewBinding2CellBinding
@@ -13,7 +13,7 @@ import com.originsdigital.compositeadapter.sample.differentbindings.ui.entity.Di
 data class DifferentBindingsViewBinding2MessageCell(
     override val data: DifferentBindingsUI,
     override val decoration: ItemDecoration<*>? = null,
-    override val onClickListener: ((ClickItem<DifferentBindingsUI>) -> Unit)? = null
+    override val onClickListener: ((GenericClickItem<DifferentBindingsUI>) -> Unit)? = null
 ) : Cell<DifferentBindingsUI, DifferentBindingsViewBinding2MessageCell.CustomViewHolder> {
 
     override val uniqueId: String = data.type.name
