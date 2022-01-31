@@ -23,11 +23,12 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
     config: AsyncDifferConfig<GenericCell>
 ) : ListAdapter<GenericCell, RecyclerView.ViewHolder>(config) {
 
-    private val innerClickListener: View.OnClickListener = View.OnClickListener { v ->
-        val holder = v.getCompositeAdapterViewHolder<RecyclerView.ViewHolder>()
+    private val innerClickListener: View.OnClickListener = View.OnClickListener { view ->
+        val holder = view.getCompositeAdapterViewHolder<RecyclerView.ViewHolder>()
         val position = holder.bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) {
-            getItem(position).onClicked(holder.context, holder, position)
+            val cell = holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
+            cell.onClicked(holder.context, holder, position)
         }
     }
 
@@ -59,7 +60,9 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if (payloads.isNotEmpty() && payloads.all { it == Cell.CELL_INTERNAL_PAYLOAD }) {
+        val isInternalPayloads = (payloads.isNotEmpty()
+                && payloads.all { payload -> payload == Cell.CELL_INTERNAL_PAYLOAD })
+        if (isInternalPayloads) {
             handleInternalPayload(holder, position, payloads)
         } else {
             if (!getItem(position).onBindViewHolder(holder, position, payloads)) {
