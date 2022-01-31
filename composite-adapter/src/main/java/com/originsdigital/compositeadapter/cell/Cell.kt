@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Origins Digital. Use of this source code is governed by the Apache 2.0 license.
+ * Copyright 2021-2022 Origins Digital. Use of this source code is governed by the Apache 2.0 license.
  */
 
 package com.originsdigital.compositeadapter.cell
@@ -36,14 +36,11 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
     fun onViewRecycled(holder: VIEW_HOLDER) = Unit
 
-    fun areItemsTheSame(newItem: GenericCell): Boolean =
-        viewType == newItem.viewType && uniqueId == newItem.uniqueId
-
+    fun areItemsTheSame(newItem: GenericCell): Boolean = viewType == newItem.viewType && uniqueId == newItem.uniqueId
     fun areContentsTheSame(newItem: GenericCell): Boolean = data == newItem.data
     fun getChangePayload(newItem: GenericCell): Any? = null
     fun areDecorationsTheSame(newItem: GenericCell): Boolean = decoration == newItem.decoration
-    fun areOnClickListenersTheSame(newItem: GenericCell): Boolean =
-        onClickListener == newItem.onClickListener
+    fun areOnClickListenersTheSame(newItem: GenericCell): Boolean = onClickListener == newItem.onClickListener
 
     fun onClicked(context: Context, holder: VIEW_HOLDER, position: Int) {
         onClickListener?.invoke(ClickItem(context, holder, position, data))

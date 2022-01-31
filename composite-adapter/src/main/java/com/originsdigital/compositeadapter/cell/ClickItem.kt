@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Origins Digital. Use of this source code is governed by the Apache 2.0 license.
+ * Copyright 2021-2022 Origins Digital. Use of this source code is governed by the Apache 2.0 license.
  */
 
 package com.originsdigital.compositeadapter.cell
