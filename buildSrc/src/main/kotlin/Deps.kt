@@ -15,7 +15,7 @@ object Config {
         const val packageNameDev = "io.github.netcosports.compositeadapter.sample"
         const val packageNameProd = "io.github.netcosports.compositeadapter.sample"
 
-        const val versionName = "1.0.2"
+        const val versionName = "1.1.0"
         const val versionOffset = 0
     }
 
