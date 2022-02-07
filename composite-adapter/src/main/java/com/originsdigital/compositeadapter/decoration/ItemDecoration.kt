@@ -9,14 +9,14 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-interface ItemDecoration<in Item> {
+interface ItemDecoration<in ITEM> {
 
     fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: Item
+        item: ITEM
     ) = Unit
 
     fun onDraw(
@@ -24,7 +24,7 @@ interface ItemDecoration<in Item> {
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: Item
+        item: ITEM
     ) = Unit
 
     fun onDrawOver(
@@ -32,6 +32,6 @@ interface ItemDecoration<in Item> {
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: Item
+        item: ITEM
     ) = Unit
 }
