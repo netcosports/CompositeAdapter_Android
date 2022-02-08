@@ -2,206 +2,216 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 # CompositeAdapter
-
-  The `CompositeAdapter` is a `RecyclerView Adapter` that delegates all UI logic to a `Cell<T>` created by the `ViewModel`.
-  `Cell<T>`s handles all work with `ViewHolder`s, `DiffUtil`s and `ItemDecoration`s.
+The `CompositeAdapter` extends `ListAdapter` and delegates all UI logic to a `Cell<DATA, VIEW_HOLDER>` created by the `ViewModel`.
+`Cell`s handles all work with `ViewHolder`s, `DiffUtil`s and `ItemDecoration`s.
 
 # Dependencies
-
 ```
-object CompositeAdapter {
-    const val compositeAdapterVersion = "1.0.0"
-
-    const val compositeAdapter = "io.github.netcosports.compositeadapter:composite-adapter:${compositeAdapterVersion}"
+repositories {
+    mavenCentral()
 }
+
+implementation("io.github.netcosports.compositeadapter:composite-adapter:${compositeAdapterVersion}")
 ```
 
-#  Usage
+# Samples
+| Sample | Description |
+| ------ | ----------- |
+| [Basic](https://github.com/netcosports/CompositeAdapter_Android/tree/main/samples/basic/src/main/java/com/originsdigital/compositeadapter/sample/basic/ui) | A simple setup how to create and show `Cell` inside `CompositeAdapter` |
+| [Decorations](https://github.com/netcosports/CompositeAdapter_Android/tree/main/samples/decorations/src/main/java/com/originsdigital/compositeadapter/sample/decorations/ui) | Using a different `ItemDecoration` for each `Cell` |
+| [Different bindings](https://github.com/netcosports/CompositeAdapter_Android/tree/main/samples/different-bindings/src/main/java/com/originsdigital/compositeadapter/sample/differentbindings/ui) | Using `ViewBinding`/`DataBinding`/`CustomViews` |
+| [Inner RecyclerView/Webview/VideoPlayer<br/>or other complex view](https://github.com/netcosports/CompositeAdapter_Android/tree/main/samples/inner-recyclerview/src/main/java/com/originsdigital/compositeadapter/sample/innerrecyclerview/ui) | Handle binding for complex `views` via `payload` and save the scroll state of inner `RecyclerViews` |
+| [State as Cells](https://github.com/netcosports/CompositeAdapter_Android/tree/main/samples/state-as-cells/features/home/ui/src/main/java/com/originsdigital/compositeadapter/stateascells/home/ui) | Show all requests (including Loading/Error/Empty/Data states and SwipeRefresh/Reload/Error actions) in a single `RecyclerView` without any additional `Views` |
 
-##  ViewHolder
-
-  - Forget about `ViewHolder`s for each `viewType`, you don't need it anymore. Instead, implement a simple and consistent
-  `ViewHolder`, for example:
-<pre>
-//<b>ViewBinding</b> or <b>Custom View</b>
-class SampleCellViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-//<b>DataBinding</b>
-class SampleDataBindingViewHolder(val bindings: ViewDataBinding) : RecyclerView.ViewHolder(bindings.root) {
-
-    companion object {
-        fun create(inflater: LayoutInflater, layoutResId: Int, parent: ViewGroup): DataBindingViewHolder {
-            return DataBindingViewHolder(DataBindingUtil.inflate(inflater, layoutResId, parent, false))
-        }
-    }
-}
-</pre>
-  and use this `ViewHolder` in all `Cell<T>`s.
-
-##  Cell&lt;T&gt;
-
-  - If you are using `ViewBinding` or `DataBinding`, its good idea to have a base `Cell<T>` with default implementation of
-  `onCreateViewHolder`.
-
-  `ViewBinding`:
-<pre>
-interface SampleViewBindingCell<T> : Cell<T> {
-
-    override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        //we already have <b>layoutId</b> in the <b>Cell&lt;T&gt;</b>, so we can create a `SampleCellViewHolder` with `ViewBinding`
-        return SampleCellViewHolder(inflater.inflate(layoutId, parent, false))
-    }
-}
-</pre>
-  `DataBinding`:
-<pre>
-interface SampleDataBindingCell<T> : Cell<T> {
-
-    override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        //we already have a <b>layoutId</b> in the <b>Cell&lt;T&gt;</b>, so we can create a `DataBindingViewHolder` with `ViewDataBinding`
-        return DataBindingViewHolder.create(inflater, layoutId, parent)
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as DataBindingViewHolder).apply {
-            //and we already have a <b>data</b> in the <b>Cell&lt;T&gt;</b>, just set it via `setVariable` and use it in the `layout`
-            bindings.setVariable(BR.item, data)
-            bindings.executePendingBindings()
-        }
-    }
-}
-</pre>
-  Now you don't need to copy and paste this code into every `Cell<T>`.
-
-  - Then you can implement a simple `Cell<T>`, but forget about the `var` fields in the class for `data` field of the `Cell<T>`.
-  You `must` use the `kotlin data class` (or with correct `equals`/`hashCode`) for the `data` field of the `Cell<T>`.
+# Usage
+## 1. Implement [SampleCell](https://github.com/netcosports/CompositeAdapter_Android/blob/main/samples/basic/src/main/java/com/originsdigital/compositeadapter/sample/basic/ui/cell/SampleCell.kt):
 <pre>
 data class SampleCell(
-    override val data: T, //<b>Must be kotlin data class</b> or with correct <b>equals</b>/<b>hashCode</b>
-) : SampleViewBindingCell&lt;T&gt; {
+    override val data: SampleUI, // <b>Must be kotlin data class</b> or with correct <b>equals</b>
+    override val decoration: ItemDecoration&lt;*&gt;? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
+    override val onClickListener: ((GenericClickItem&lt;SampleUI&gt;) -&gt; Unit)? = null // Root <b>View.OnClickListener</b>
+) : Cell&lt;SampleUI, SampleCell.SampleViewHolder&gt; {
 
-    override val uniqueId: String = data.id //<b>Must be unique</b> for this <b>viewType</b> (by default <b>viewType</b> == <b>layoutId</b>)
-    override val layoutId: Int = R.layout.layout_id //Can be generated via <b>layout_ids.xml</b> (by default <b>viewType</b> == <b>layoutId</b>)
+    override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b> (by default <b>viewType</b> == <b>layoutId</b>)
+    override val layoutId: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b> (by default <b>viewType</b> == <b>layoutId</b>)
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //If you are using <b>ViewBinding</b>, you can get stored <b>bindings</b> from the <b>ViewHolder</b> like this:
-        (holder.getViewBinding(SampleBinding::bind)).apply {
-            //TODO this.root
-        }
-        //Or cast <b>holder.itemView</b> to your <b>Custom View</b>
-        //Or cast <b>holder</b> to your <b>DataBindingViewHolder</b> with <b>ViewDataBinding</b>
-        //Or cast <b>holder</b> to your custom <b>ViewHolder</b>
+    override fun onCreateViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): SampleViewHolder {
+        return SampleViewHolder(SampleCellBinding.inflate(inflater, parent, false))
     }
+
+    override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.binding.text.text = data.name
+    }
+
+    class SampleViewHolder(
+        val binding: SampleCellBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 }
 </pre>
-  - But `Cell<T>` has all methods related to `ViewHolder`, `DiffUtil.ItemCallback` and `ItemDecoration`, the full list is here:
+## 2. Setup RecyclerView:
 <pre>
-interface Cell&lt;T&gt; {
-
-    val uniqueId: String //Must be unique for this viewType (by default viewType == layoutId)
-    val data: T //Must be <b>kotlin data class</b> or with correct equals/hashCode
-
-    @get:LayoutRes
-    val layoutId: Int //Can be generated via layout_ids.xml if you are using <b>Custom View</b> (by default viewType == layoutId)
-    val viewType: Int get() = layoutId //Override if you have two <b>viewType</b>s for the same <b>layoutId</b>
-
-    val decoration: ItemDecoration&lt;out Cell&lt;*&gt;&gt;? get() = null //<b>ItemDecoration</b> only for this <b>Cell&lt;T&gt;</b>
-
-    val onClickListener: ((ClickItem&lt;T&gt;) -&gt; Unit)? get() = null
-
-    fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-
-    fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: List&lt;Any&gt;): Boolean = false
-    fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
-
-    fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) = Unit
-    fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) = Unit
-
-    fun onViewRecycled(holder: RecyclerView.ViewHolder) = Unit
-
-    fun areItemsTheSame(newItem: Cell&lt;*&gt;): Boolean = viewType == newItem.viewType && uniqueId == newItem.uniqueId
-    fun areContentsTheSame(newItem: Cell&lt;*&gt;): Boolean = data == newItem.data
-    fun getChangePayload(newItem: Cell&lt;*&gt;): Any? = null
-    fun areDecorationsTheSame(newItem: Cell&lt;*&gt;): Boolean = decoration == newItem.decoration
-
-    fun onClicked(context: Context, holder: RecyclerView.ViewHolder, position: Int) {
-        onClickListener?.invoke(ClickItem(context, holder, position, data))
-    }
-}
-</pre>
-
-##  CompositeAdapter & CompositeItemDecoration
-
-  - Setup `RecyclerView` and submit data to adapter
-<pre>
+// You don't need to list the supported <b>ViewTypes</b> and <b>ViewHolders</b> for the <b>CompositeAdapter</b>.
 val adapter = CompositeAdapter()
 recyclerView.adapter = adapter
 recyclerView.layoutManager = TODO("layoutManager")
-//Don't forget to register <b>CompositeItemDecoration</b> to use <b>ItemDecoration</b> for each <b>Cell&lt;T&gt;</b>
+// Each <b>Cell</b> can have their own <b>ItemDecoration</b>.
+// To activate this functionality, don't forget to register <b>CompositeItemDecoration</b>.
 recyclerView.addItemDecoration(CompositeItemDecoration())
-...
-val items: List&lt;Cell&lt;*&gt;&gt; = TODO("data")
+</pre>
+## 3. Submit Data:
+<pre>
+val items: List&lt;GenericCell&gt; = listOf(SampleCell(...), HorizontallStoriesCell(...), TitleCell(...), NewsCell(...), ...)
 adapter.submitList(items)
 </pre>
 
-  - Forget about `androidx.recyclerview.widget.ItemDecoration` and use
-  `com.originsdigital.compositeadapter.decoration.ItemDecoration<Cell<T>>` with the additional parameter `Cell<T>` instead.
-```
-interface ItemDecoration<Item> {
+That's all.
 
-    fun getItemOffsets(
-        outRect: Rect,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State,
-        item: Item
-    ) = Unit
+# ItemDecorations
+Forget about `androidx.recyclerview.widget.ItemDecoration` and use [`com.originsdigital.compositeadapter.decoration.ItemDecoration<ITEM>`](https://github.com/netcosports/CompositeAdapter_Android/blob/main/composite-adapter/src/main/java/com/originsdigital/compositeadapter/decoration/ItemDecoration.kt) with the additional parameter `ITEM` instead.
+Each `Cell` can have their own `ItemDecoration` that only affects them.
+- [SpaceItemDecoration (from the library)](https://github.com/netcosports/CompositeAdapter_Android/blob/main/composite-adapter/src/main/java/com/originsdigital/compositeadapter/decoration/SpaceItemDecoration.kt)
+- [BackgroundItemDecoration (from the sample)](https://github.com/netcosports/CompositeAdapter_Android/blob/main/samples/decorations/src/main/java/com/originsdigital/compositeadapter/sample/decorations/ui/decorations/SampleItemDecoration.kt)
 
-    fun onDraw(canvas: Canvas,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State,
-        item: Item
-    ) = Unit
+# Advanced Usage
+In most cases we don't need a separate `ViewHolder` for each `Cell`, so we can remove this copy-paste, for example with the base implementation of `Cell`.
+## 1. Create a base ViewHolder:
+Forget about `ViewHolder`s for each `viewType`, you don't need it anymore. Instead, implement a simple and consistent `ViewHolder`, for example:
 
-    fun onDrawOver(canvas: Canvas,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State,
-        item: Item
-    ) = Unit
+### [ViewBinding](https://github.com/netcosports/CompositeAdapter_Android/blob/main/samples/different-bindings/src/main/java/com/originsdigital/compositeadapter/sample/differentbindings/ui/cell/viewbinding/base/ViewBindingViewHolder.kt):
+<pre>
+class ViewBindingViewHolder&lt;VIEW_BINDING : ViewBinding&gt;(
+    val binding: VIEW_BINDING
+) : ViewHolder(binding.root)
+</pre>
+
+### [DataBinding](https://github.com/netcosports/CompositeAdapter_Android/blob/main/samples/different-bindings/src/main/java/com/originsdigital/compositeadapter/sample/differentbindings/ui/cell/databinding/base/DataBindingViewHolder.kt):
+<pre>
+class DataBindingViewHolder&lt;DATA_BINDING : ViewDataBinding&gt;(
+    val binding: DATA_BINDING
+) : ViewHolder(binding.root) {
+
+    companion object {
+        fun &lt;DATA_BINDING : ViewDataBinding&gt; create(
+            inflater: LayoutInflater,
+            layoutResId: Int,
+            parent: ViewGroup
+        ): DataBindingViewHolder&lt;DATA_BINDING&gt; {
+            return DataBindingViewHolder(
+                DataBindingUtil.inflate(
+                    inflater,
+                    layoutResId,
+                    parent,
+                    false
+                ) as DATA_BINDING
+            )
+        }
+    }
 }
-```
-  For example colored background:
-```
-class SampleDecoration(@ColorInt colorInt: Int, space: Int) : SpaceItemDecoration<Cell<*>>(
-    top = space, bottom = space, start = space, end = space
-) {
+</pre>
+and use this `ViewHolder` in all `Cell`s.
 
-    private val itemBounds = Rect()
-    private val dividerPaint: Paint = Paint().apply {
-        this.color = colorInt
-        this.style = Paint.Style.FILL
-        this.isAntiAlias = true
+## 2. Create a base Cell:
+If you are using `ViewBinding` or `DataBinding`, its good idea to have a base `Cell` with default implementation of `onCreateViewHolder` and `onBindViewHolder`(the last one is for `DataBinding` only).
+
+### [ViewBinding](https://github.com/netcosports/CompositeAdapter_Android/blob/main/samples/different-bindings/src/main/java/com/originsdigital/compositeadapter/sample/differentbindings/ui/cell/viewbinding/base/ViewBindingCell.kt):
+<pre>
+abstract class ViewBindingCell&lt;DATA, VIEW_BINDING : ViewBinding&gt;
+    : Cell&lt;DATA, ViewBindingViewHolder&lt;VIEW_BINDING&gt;> {
+
+    abstract fun createViewBinding(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): VIEW_BINDING
+
+    final override fun onCreateViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewBindingViewHolder&lt;VIEW_BINDING&gt; {
+        return ViewBindingViewHolder(createViewBinding(inflater, parent, viewType))
+    }
+}
+</pre>
+
+### [DataBinding](https://github.com/netcosports/CompositeAdapter_Android/blob/main/samples/different-bindings/src/main/java/com/originsdigital/compositeadapter/sample/differentbindings/ui/cell/databinding/base/DataBindingCell.kt):
+<pre>
+abstract class DataBindingCell&lt;DATA, DATA_BINDING : ViewDataBinding&gt;
+    : Cell&lt;DATA, DataBindingViewHolder&lt;DATA_BINDING&gt;&gt; {
+
+    final override fun onCreateViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): DataBindingViewHolder&lt;DATA_BINDING&gt; {
+        return DataBindingViewHolder.create(inflater, layoutId, parent)
     }
 
-    override fun onDraw(
-        canvas: Canvas,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State,
-        item: Cell<*>
+    override fun onBindViewHolder(holder: DataBindingViewHolder&lt;DATA_BINDING&gt;, position: Int) {
+        (holder.binding).apply {
+            setVariable(BR.item, data)
+            executePendingBindings()
+        }
+    }
+}
+</pre>
+
+Now you don't need to copy and paste this code into every `Cell`.
+
+## 3. Create a real Cell using basic implementations
+### ViewBinding:
+<pre>
+data class SampleCell(
+    override val data: SampleEntity, // <b>Must be kotlin data class</b> or with correct <b>equals</b>
+    override val decoration: ItemDecoration&lt;*&gt;? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
+    override val onClickListener: ((GenericClickItem&lt;SampleEntity&gt;) -> Unit)? = null // Root View.OnClickListener
+) : ViewBindingCell&lt;SampleEntity, SampleCellBinding&gt;() {
+
+    override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b> (by default <b>viewType</b> == <b>layoutId</b>)
+    override val layoutId: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b> (by default <b>viewType</b> == <b>layoutId</b>)
+
+    override fun createViewBinding(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): SampleCellBinding {
+        return SampleCellBinding.inflate(inflater, parent, false)
+    }
+
+    override fun onBindViewHolder(
+        holder: ViewBindingViewHolder&lt;SampleCellBinding&gt;,
+        position: Int
     ) {
-        super.onDraw(canvas, view, parent, state, item)
-        parent.layoutManager?.getDecoratedBoundsWithMargins(view, itemBounds)
-        canvas.drawRect(
-            itemBounds.left.toFloat(),
-            itemBounds.top.toFloat(),
-            itemBounds.right.toFloat(),
-            itemBounds.bottom.toFloat(),
-            dividerPaint
-        )
+        holder.binding.text.text = data.text
     }
 }
-```
-  Or just use the existing `SpaceItemDecoration` if you don't need the `onDraw` methods.
+</pre>
+
+### DataBinding:
+<pre>
+data class SampleCell(
+    override val data: SampleEntity, // <b>Must be kotlin data class</b> or with correct <b>equals</b>
+    override val decoration: ItemDecoration&lt;*&gt;? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
+    override val onClickListener: ((GenericClickItem&lt;SampleEntity&gt;) -> Unit)? = null // Root View.OnClickListener
+) : ViewBindingCell&lt;SampleEntity, SampleCellBinding&gt;() {
+
+    override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b> (by default <b>viewType</b> == <b>layoutId</b>)
+    override val layoutId: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b> (by default <b>viewType</b> == <b>layoutId</b>)
+
+    // If you have all bindings inside the <b>R.layout.sample_cell</b>,
+    // you don't need to override <b>onBindViewHolder</b> because everything is done inside the <b>DataBindingCell</b>
+    // But you can move all bindings from <b>layout</b> to <b>onBindViewHolder</b>
+//    override fun onBindViewHolder(
+//        holder: DataBindingViewHolder&lt;SampleCellBinding&gt;,
+//        position: Int
+//    ) {
+//        super.onBindViewHolder(holder, position)
+//    }
+}
+</pre>
+
+`Cell` has all methods related to `ViewHolder`, `DiffUtil.ItemCallback` and `ItemDecoration`, [the full list is here](https://github.com/netcosports/CompositeAdapter_Android/blob/main/composite-adapter/src/main/java/com/originsdigital/compositeadapter/cell/Cell.kt).

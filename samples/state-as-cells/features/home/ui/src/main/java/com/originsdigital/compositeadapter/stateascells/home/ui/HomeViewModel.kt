@@ -23,13 +23,15 @@ class HomeViewModel(
     private val homeUIMapper: HomeUIMapper
 ) : BaseStateViewModel<HomeViewModel.State>() {
 
-    private val onStoriesRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit) = { onRefresh() }
-    private val onNewsRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit) = { onRefresh() }
+    private val onStoriesRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit) = {
+        loadStories()
+    }
+    private val onNewsRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit) = { loadNews() }
     private val onStoryClickListener: ((GenericClickItem<StoryEntity>) -> Unit) = { click ->
-        "clicked ${click.item}"
+        "Clicked ${click.item}"
     }
     private val onNewsClickListener: ((GenericClickItem<NewsEntity>) -> Unit) = { click ->
-        "clicked ${click.item}"
+        "Clicked ${click.item}"
     }
 
     private val storiesFlow = MutableStateFlow<Scene<List<StoryEntity>>>(Scene.Loading())
