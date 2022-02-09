@@ -108,7 +108,7 @@ class InnerRecyclerActivity : AppCompatActivity() {
         fun generateData(): List<GenericCell> {
             // Cells do the same, but
             // InnerRecycler1Cell - more code but more clearer and `correct`
-            // InnerRecycler2Cell - less code (can be less with `ViewBindingCell`)
+            // InnerRecycler2Cell - less code
             val useClearerVersion = Random.nextBoolean()
             return (0..20).map { recyclerId ->
                 val size = 10
