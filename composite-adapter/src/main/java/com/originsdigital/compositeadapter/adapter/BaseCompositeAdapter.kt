@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.cell.GenericCell
-import com.originsdigital.compositeadapter.utils.context
 import com.originsdigital.compositeadapter.utils.getCompositeAdapterItem
 import com.originsdigital.compositeadapter.utils.getCompositeAdapterViewHolder
 import com.originsdigital.compositeadapter.utils.setCompositeAdapterItem
@@ -24,12 +24,7 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
 ) : ListAdapter<GenericCell, RecyclerView.ViewHolder>(config) {
 
     private val innerClickListener: View.OnClickListener = View.OnClickListener { view ->
-        val holder = view.getCompositeAdapterViewHolder<RecyclerView.ViewHolder>()
-        val position = holder.bindingAdapterPosition
-        if (position != RecyclerView.NO_POSITION) {
-            val cell = holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
-            cell.onClicked(holder.context, holder, position)
-        }
+        dispatchClick(holder = view.getCompositeAdapterViewHolder())
     }
 
     private lateinit var inflater: LayoutInflater
@@ -102,6 +97,20 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
 
     protected open fun storeCellInHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.setCompositeAdapterItem(getItem(position))
+    }
+
+    protected open fun dispatchClick(holder: RecyclerView.ViewHolder) {
+        val position = holder.bindingAdapterPosition
+        if (position != RecyclerView.NO_POSITION) {
+            val cell = holder.getCompositeAdapterItem<Cell<Any?, RecyclerView.ViewHolder>>()
+            cell.onClickListener?.invoke(
+                ClickItem(
+                    holder = holder,
+                    position = position,
+                    item = cell.data
+                )
+            )
+        }
     }
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {

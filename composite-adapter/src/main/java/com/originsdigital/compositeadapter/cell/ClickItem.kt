@@ -4,13 +4,17 @@
 
 package com.originsdigital.compositeadapter.cell
 
-import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 
 typealias GenericClickItem<T> = ClickItem<T, RecyclerView.ViewHolder>
 
+/**
+ * [ClickItem] is used to dispatch [holder], [position] and [item] of the clicked [Cell].
+ *
+ * Used by the [com.originsdigital.compositeadapter.cell.Cell.onClickListener]
+ * Used by the [com.originsdigital.compositeadapter.adapter.BaseCompositeAdapter.dispatchClick]
+ */
 class ClickItem<out T, out VIEW_HOLDER : RecyclerView.ViewHolder>(
-    val context: Context,
     val holder: VIEW_HOLDER,
     val position: Int,
     val item: T
