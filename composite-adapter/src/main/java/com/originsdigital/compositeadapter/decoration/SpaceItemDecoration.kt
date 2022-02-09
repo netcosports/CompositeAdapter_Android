@@ -7,20 +7,21 @@ package com.originsdigital.compositeadapter.decoration
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.originsdigital.compositeadapter.cell.GenericCell
 
-open class SpaceItemDecoration<in ITEM>(
+open class SpaceItemDecoration(
     open val top: Int = 0,
     open val bottom: Int = 0,
     open val start: Int = 0,
     open val end: Int = 0
-) : ItemDecoration<ITEM> {
+) : ItemDecoration {
 
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: ITEM
+        cell: GenericCell
     ) {
         outRect.left = start
         outRect.top = top
@@ -32,7 +33,7 @@ open class SpaceItemDecoration<in ITEM>(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as SpaceItemDecoration<*>
+        other as SpaceItemDecoration
 
         if (top != other.top) return false
         if (bottom != other.bottom) return false

@@ -20,12 +20,12 @@ class HomeUIMapper(
     private val sceneMapper: SceneMapper
 ) {
 
-    private val firstStoryItemDecoration: SpaceItemDecoration<GenericCell>
-    private val middleStoryBigItemDecoration: SpaceItemDecoration<GenericCell>
-    private val lastStoryItemDecoration: SpaceItemDecoration<GenericCell>
-    private val firstNewsItemDecoration: SpaceItemDecoration<GenericCell>
-    private val middleNewsBigItemDecoration: SpaceItemDecoration<GenericCell>
-    private val lastNewsItemDecoration: SpaceItemDecoration<GenericCell>
+    private val firstStoryItemDecoration: SpaceItemDecoration
+    private val middleStoryBigItemDecoration: SpaceItemDecoration
+    private val lastStoryItemDecoration: SpaceItemDecoration
+    private val firstNewsItemDecoration: SpaceItemDecoration
+    private val middleNewsBigItemDecoration: SpaceItemDecoration
+    private val lastNewsItemDecoration: SpaceItemDecoration
 
     init {
         firstStoryItemDecoration = SpaceItemDecoration(

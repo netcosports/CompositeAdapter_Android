@@ -12,7 +12,7 @@ import com.originsdigital.compositeadapter.ui.cell.viewbinding.ViewBindingViewHo
 
 data class NewsCell(
     override val data: NewsEntity,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<NewsEntity>) -> Unit)? = null
 ) : ViewBindingCell<NewsEntity, NewsCellBinding>() {
 

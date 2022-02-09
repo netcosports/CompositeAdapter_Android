@@ -74,7 +74,7 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
      * Used by the [com.originsdigital.compositeadapter.decoration.CompositeItemDecoration]
      * to add a special drawing and layout offset for this [Cell] only.
      */
-    val decoration: ItemDecoration<*>?
+    val decoration: ItemDecoration?
 
 
     /**

@@ -17,7 +17,7 @@ import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.In
 
 data class InnerRecyclerItemCell(
     override val data: InnerRecyclerItemUI,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<InnerRecyclerItemUI>) -> Unit)? = null
 ) : Cell<InnerRecyclerItemUI, InnerRecyclerItemCell.SampleViewHolder> {
 

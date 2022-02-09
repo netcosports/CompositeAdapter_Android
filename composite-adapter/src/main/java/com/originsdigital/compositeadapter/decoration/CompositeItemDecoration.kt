@@ -9,25 +9,55 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.GenericCell
+import com.originsdigital.compositeadapter.utils.getCompositeAdapterItem
 
-open class CompositeItemDecoration : BaseCompositeItemDecoration<GenericCell>() {
+open class CompositeItemDecoration : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
-        state: RecyclerView.State,
-        item: GenericCell
+        state: RecyclerView.State
     ) {
-        getDecoration(item)?.getItemOffsets(outRect, view, parent, state, item)
+        getItemOffsets(
+            outRect = outRect,
+            view = view,
+            parent = parent,
+            state = state,
+            cell = getCellFromView(view)
+        )
+
+        if (parent.isRTL) {
+            outRect.supportRTL()
+        }
+    }
+
+    protected open fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+        cell: GenericCell
+    ) {
+        cell.decoration?.getItemOffsets(
+            outRect = outRect,
+            view = view,
+            parent = parent,
+            state = state,
+            cell = cell
+        )
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        val viewsCount = parent.childCount
-        for (position in 0 until viewsCount) {
+        for (position in 0 until parent.childCount) {
             val child = parent.getChildAt(position)
-
-            onDraw(c, child, parent, state, getItemFromView(child))
+            onDraw(
+                canvas = c,
+                view = child,
+                parent = parent,
+                state = state,
+                cell = getCellFromView(child)
+            )
         }
     }
 
@@ -36,17 +66,27 @@ open class CompositeItemDecoration : BaseCompositeItemDecoration<GenericCell>() 
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: GenericCell
+        cell: GenericCell
     ) {
-        getDecoration(item)?.onDraw(canvas, view, parent, state, item)
+        cell.decoration?.onDraw(
+            canvas = canvas,
+            view = view,
+            parent = parent,
+            state = state,
+            cell = cell
+        )
     }
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        val viewsCount = parent.childCount
-        for (position in 0 until viewsCount) {
+        for (position in 0 until parent.childCount) {
             val child = parent.getChildAt(position)
-
-            onDrawOver(c, child, parent, state, getItemFromView(child))
+            onDrawOver(
+                canvas = c,
+                view = child,
+                parent = parent,
+                state = state,
+                cell = getCellFromView(child)
+            )
         }
     }
 
@@ -55,13 +95,24 @@ open class CompositeItemDecoration : BaseCompositeItemDecoration<GenericCell>() 
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: GenericCell
+        cell: GenericCell
     ) {
-        getDecoration(item)?.onDrawOver(canvas, view, parent, state, item)
+        cell.decoration?.onDrawOver(
+            canvas = canvas,
+            view = view,
+            parent = parent,
+            state = state,
+            cell = cell
+        )
     }
 
-    protected fun getDecoration(cell: GenericCell): ItemDecoration<GenericCell>? {
-        @Suppress("UNCHECKED_CAST")
-        return cell.decoration as ItemDecoration<GenericCell>?
+    protected fun getCellFromView(view: View): GenericCell = view.getCompositeAdapterItem()
+
+    protected val View.isRTL get() = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
+
+    protected fun Rect.supportRTL() {
+        val temp = left
+        left = right
+        right = temp
     }
 }

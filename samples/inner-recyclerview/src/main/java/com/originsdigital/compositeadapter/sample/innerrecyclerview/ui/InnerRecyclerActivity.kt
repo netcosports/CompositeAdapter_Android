@@ -72,10 +72,10 @@ class InnerRecyclerActivity : AppCompatActivity() {
 
         private val scrollStatesHolder = ScrollStatesHolder()
 
-        private val singleItemDecoration: ItemDecoration<GenericCell>
-        private val firstItemDecoration: ItemDecoration<GenericCell>
-        private val middleItemDecoration: ItemDecoration<GenericCell>
-        private val lastItemDecoration: ItemDecoration<GenericCell>
+        private val singleItemDecoration: ItemDecoration
+        private val firstItemDecoration: ItemDecoration
+        private val middleItemDecoration: ItemDecoration
+        private val lastItemDecoration: ItemDecoration
 
         init {
             singleItemDecoration = SpaceItemDecoration(

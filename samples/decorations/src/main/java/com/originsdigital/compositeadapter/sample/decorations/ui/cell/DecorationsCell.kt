@@ -12,7 +12,7 @@ import com.originsdigital.compositeadapter.sample.decorations.ui.entity.Decorati
 
 data class DecorationsCell(
     override val data: DecorationsUI,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<DecorationsUI>) -> Unit)? = null
 ) : Cell<DecorationsUI, DecorationsCell.SampleViewHolder> {
 

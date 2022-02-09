@@ -8,15 +8,16 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.originsdigital.compositeadapter.cell.GenericCell
 
-interface ItemDecoration<in ITEM> {
+interface ItemDecoration {
 
     fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: ITEM
+        cell: GenericCell
     ) = Unit
 
     fun onDraw(
@@ -24,7 +25,7 @@ interface ItemDecoration<in ITEM> {
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: ITEM
+        cell: GenericCell
     ) = Unit
 
     fun onDrawOver(
@@ -32,6 +33,6 @@ interface ItemDecoration<in ITEM> {
         view: View,
         parent: RecyclerView,
         state: RecyclerView.State,
-        item: ITEM
+        cell: GenericCell
     ) = Unit
 }

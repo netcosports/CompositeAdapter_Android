@@ -16,7 +16,7 @@ import com.originsdigital.compositeadapter.sample.differentbindings.ui.entity.Di
 
 data class DifferentBindingsViewMessageCell(
     override val data: DifferentBindingsUI,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<DifferentBindingsUI>) -> Unit)? = null
 ) : Cell<DifferentBindingsUI, DifferentBindingsViewMessageCell.CustomViewHolder> {
 

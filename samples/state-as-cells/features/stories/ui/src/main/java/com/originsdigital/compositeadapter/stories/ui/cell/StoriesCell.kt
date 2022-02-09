@@ -15,7 +15,7 @@ import com.originsdigital.compositeadapter.ui.utils.initRecyclerView
 
 data class StoriesCell(
     override val data: List<StoryCell>,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<List<StoryCell>>) -> Unit)? = null,
 ) : Cell<List<StoryCell>, StoriesCell.CustomViewHolder> {
 

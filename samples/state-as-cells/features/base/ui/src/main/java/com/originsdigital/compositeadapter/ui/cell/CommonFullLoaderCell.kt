@@ -11,7 +11,7 @@ import com.originsdigital.compositeadapter.ui.databinding.CommonFullLoaderCellBi
 
 data class CommonFullLoaderCell(
     override val data: Any = Unit,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<Any>) -> Unit)? = null
 ) : ViewBindingCell<Any, CommonFullLoaderCellBinding>() {
 

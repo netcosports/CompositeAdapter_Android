@@ -82,10 +82,10 @@ class DecorationsActivity : AppCompatActivity() {
         @ColorInt backgroundColorInt: Int
     ) {
 
-        private val singleItemDecoration: ItemDecoration<DecorationsCell>
-        private val topItemDecoration: ItemDecoration<*>
-        private val middleItemDecoration: ItemDecoration<*>
-        private val bottomItemDecoration: ItemDecoration<*>
+        private val singleItemDecoration: ItemDecoration
+        private val topItemDecoration: ItemDecoration
+        private val middleItemDecoration: ItemDecoration
+        private val bottomItemDecoration: ItemDecoration
 
         init {
             singleItemDecoration = SampleItemDecoration(
@@ -144,7 +144,7 @@ class DecorationsActivity : AppCompatActivity() {
             val size = ids.size
             return ids.mapIndexed { index, id ->
                 val name: String
-                val decoration: ItemDecoration<*>
+                val decoration: ItemDecoration
                 when {
                     size == 1 -> {
                         name = "Single Cell id=$id"

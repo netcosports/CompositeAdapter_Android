@@ -13,7 +13,7 @@ import com.originsdigital.compositeadapter.sample.differentbindings.ui.entity.Di
 // ViewBinding is better anyway
 data class DifferentBindingsDataBinding2MessageCell(
     override val data: DifferentBindingsUI,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<DifferentBindingsUI>) -> Unit)? = null
 ) : Cell<DifferentBindingsUI, DifferentBindingsDataBinding2MessageCell.CustomViewHolder> {
 

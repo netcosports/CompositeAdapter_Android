@@ -21,7 +21,7 @@ class SceneMapper(
     val errorUIMapper: ErrorUIMapper
 ) {
 
-    private val stateItemDecoration: ItemDecoration<GenericCell>
+    private val stateItemDecoration: ItemDecoration
 
     init {
         val defaultSpace = TypedValue.applyDimension(
@@ -217,7 +217,7 @@ class SceneMapper(
 
     fun getSmallLoaderCell(
         uniqueLoaderId: String,
-        decoration: ItemDecoration<*>? = stateItemDecoration,
+        decoration: ItemDecoration? = stateItemDecoration,
         @DimenRes height: Int? = null
     ): GenericCell {
         return CommonLoaderCell(
@@ -232,7 +232,7 @@ class SceneMapper(
     fun getErrorCell(
         isFull: Boolean,
         error: CommonErrorUI,
-        decoration: ItemDecoration<*>? = stateItemDecoration,
+        decoration: ItemDecoration? = stateItemDecoration,
         onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return if (isFull) {
@@ -252,7 +252,7 @@ class SceneMapper(
 
     fun getFullErrorCell(
         error: CommonErrorUI,
-        decoration: ItemDecoration<*>? = null,
+        decoration: ItemDecoration? = null,
         onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return CommonFullErrorCell(
@@ -264,7 +264,7 @@ class SceneMapper(
 
     fun getSmallErrorCell(
         error: CommonErrorUI,
-        decoration: ItemDecoration<*>? = stateItemDecoration,
+        decoration: ItemDecoration? = stateItemDecoration,
         onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
     ): GenericCell {
         return CommonErrorCell(

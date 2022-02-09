@@ -12,7 +12,7 @@ import com.originsdigital.compositeadapter.ui.entity.CommonErrorUI
 
 data class CommonFullEmptyCell(
     override val data: CommonErrorUI,
-    override val decoration: ItemDecoration<*>? = null,
+    override val decoration: ItemDecoration? = null,
     override val onClickListener: ((GenericClickItem<CommonErrorUI>) -> Unit)? = null
 ) : ViewBindingCell<CommonErrorUI, CommonFullEmptyCellBinding>() {
 
