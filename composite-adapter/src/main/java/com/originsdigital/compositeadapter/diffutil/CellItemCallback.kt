@@ -30,7 +30,9 @@ open class CellItemCallback<CELL : GenericCell> : DiffUtil.ItemCallback<CELL>() 
 
     /**
      * Called to check whether two [cells][com.originsdigital.compositeadapter.cell.Cell]
-     * have the same [com.originsdigital.compositeadapter.cell.Cell.data].
+     * have the same [data][com.originsdigital.compositeadapter.cell.Cell.data],
+     * [decoration][com.originsdigital.compositeadapter.cell.Cell.decoration] and
+     * [onClickListener][com.originsdigital.compositeadapter.cell.Cell.onClickListener].
      *
      * @see [com.originsdigital.compositeadapter.cell.Cell.areContentsTheSame]
      * @see [com.originsdigital.compositeadapter.cell.Cell.areDecorationsTheSame]

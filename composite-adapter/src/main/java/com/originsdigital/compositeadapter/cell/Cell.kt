@@ -13,19 +13,20 @@ import com.originsdigital.compositeadapter.decoration.ItemDecoration
 typealias GenericCell = Cell<out Any?, out RecyclerView.ViewHolder>
 
 /**
- * The [Cell] is an [androidx.recyclerview.widget.RecyclerView.Adapter] item, that handles all work
- * with [androidx.recyclerview.widget.RecyclerView.ViewHolder],
- * [androidx.recyclerview.widget.DiffUtil.ItemCallback] and
- * [androidx.recyclerview.widget.RecyclerView.ItemDecoration].
+ * The [Cell] is an [Adapter][androidx.recyclerview.widget.RecyclerView.Adapter] item,
+ * that handles all work with [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder],
+ * [ItemCallback][androidx.recyclerview.widget.DiffUtil.ItemCallback] and
+ * [ItemDecoration][androidx.recyclerview.widget.RecyclerView.ItemDecoration].
  *
- * Must not store any reference to the [androidx.recyclerview.widget.RecyclerView.ViewHolder],
- * [android.view.View], [android.content.Context] or other Android component, that can be leaked.
+ * Must not store any reference to the
+ * [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder], [View][android.view.View],
+ * [Context][android.content.Context] or other Android component, that can be leaked.
  *
- * Can survive configuration changes inside [androidx.lifecycle.ViewModel] or any other way.
+ * Can survive configuration changes inside [ViewModel][androidx.lifecycle.ViewModel]
+ * or any other way.
  *
- * Used by the [com.originsdigital.compositeadapter.adapter.BaseCompositeAdapter]
- * Used by the [com.originsdigital.compositeadapter.diffutil.CellItemCallback]
- * Used by the [com.originsdigital.compositeadapter.cell.ClickItem]
+ * @see [com.originsdigital.compositeadapter.adapter.BaseCompositeAdapter]
+ * @see [com.originsdigital.compositeadapter.diffutil.CellItemCallback]
  */
 interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
@@ -40,6 +41,7 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
      * The data to bind in the [onBindViewHolder].
      *
      * Used by the [areContentsTheSame] to check whether two [cells][Cell] have the same [data].
+     *
      * Used by the [com.originsdigital.compositeadapter.adapter.BaseCompositeAdapter.dispatchClick]
      * to create a [ClickItem].
      */
@@ -62,6 +64,7 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
      * Default implementation returns [layoutId].
      *
      * Used by the [areItemsTheSame] to check whether two objects represent the same item.
+     *
      * Used by the [androidx.recyclerview.widget.RecyclerView.Adapter]
      * for the purposes of view recycling.
      */
@@ -79,7 +82,7 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
     /**
      * The root view click listener of the [Cell].
-     * Called to dispatch [com.originsdigital.compositeadapter.cell.ClickItem].
+     * Called to dispatch [ClickItem][com.originsdigital.compositeadapter.cell.ClickItem].
      *
      * Used by the [com.originsdigital.compositeadapter.adapter.BaseCompositeAdapter.dispatchClick]
      */
@@ -87,28 +90,26 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
 
     /**
-     * Called when [androidx.recyclerview.widget.RecyclerView]
-     * needs a new [androidx.recyclerview.widget.RecyclerView.ViewHolder]
-     * of the given [viewType] to represent this [Cell].
+     * Called when [RecyclerView][androidx.recyclerview.widget.RecyclerView]
+     * needs a new [VIEW_HOLDER] to represent this [Cell].
      *
      * @see [androidx.recyclerview.widget.RecyclerView.Adapter.onCreateViewHolder]
      */
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): VIEW_HOLDER
 
     /**
-     * Called by [androidx.recyclerview.widget.RecyclerView] to display the [data] with [payloads]
+     * Called by the [RecyclerView][androidx.recyclerview.widget.RecyclerView] to display the [data] with [payloads]
      *
      * @see [androidx.recyclerview.widget.RecyclerView.Adapter.onBindViewHolder]
      */
     fun onBindViewHolder(holder: VIEW_HOLDER, position: Int, payloads: List<Any>): Boolean = false
 
     /**
-     * Called by [androidx.recyclerview.widget.RecyclerView] to display the [data]
+     * Called by the [RecyclerView][androidx.recyclerview.widget.RecyclerView] to display the [data]
      *
      * @see [androidx.recyclerview.widget.RecyclerView.Adapter.onBindViewHolder]
      */
     fun onBindViewHolder(holder: VIEW_HOLDER, position: Int)
-
 
     /**
      * Called when a [VIEW_HOLDER] attached to this [Cell] has been attached to a window.
@@ -130,6 +131,16 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
      * @see [androidx.recyclerview.widget.RecyclerView.Adapter.onViewRecycled]
      */
     fun onViewRecycled(holder: VIEW_HOLDER) = Unit
+
+    /**
+     * Called by the [RecyclerView][androidx.recyclerview.widget.RecyclerView] if a [VIEW_HOLDER]
+     * created by this [Cell] cannot be recycled due to its transient state.
+     *
+     * Default implementation returns false.
+     *
+     * @see [androidx.recyclerview.widget.RecyclerView.Adapter.onFailedToRecycleView]
+     */
+    fun onFailedToRecycleView(holder: VIEW_HOLDER): Boolean = false
 
 
     /**
@@ -178,8 +189,8 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
     /**
      * When [areItemsTheSame] returns true for two [cells][Cell]
-     * and [areContentsTheSame]/[areDecorationsTheSame]/[areOnClickListenersTheSame]
-     * returns false for them, this method is called to get a payload about the change.
+     * and [areContentsTheSame] returns false for them,
+     * this method is called to get a payload about the change.
      *
      * Default implementation returns null.
      *
@@ -195,6 +206,7 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
          * but not the [data].
          *
          * Used by the [com.originsdigital.compositeadapter.adapter.BaseCompositeAdapter.onBindViewHolder]
+         *
          * Used by the [com.originsdigital.compositeadapter.diffutil.CellItemCallback.getChangePayload]
          *
          * @see [androidx.recyclerview.widget.DiffUtil.ItemCallback.getChangePayload]
