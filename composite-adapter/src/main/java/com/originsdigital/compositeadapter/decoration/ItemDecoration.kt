@@ -44,6 +44,9 @@ interface ItemDecoration {
      * Called by the [RecyclerView][androidx.recyclerview.widget.RecyclerView]
      * to draw decorations under the [view].
      *
+     * MUST NOT draw anything on any other [view][android.view.View] of the [parent]
+     * than the given [view].
+     *
      * @param view The [View][android.view.View] to decorate.
      * @param cell The [Cell][com.originsdigital.compositeadapter.cell.Cell]
      * attached to this [view].
@@ -61,6 +64,9 @@ interface ItemDecoration {
     /**
      * Called by the [RecyclerView][androidx.recyclerview.widget.RecyclerView]
      * to draw decorations over the [view].
+     *
+     * MUST NOT draw anything on any other [view][android.view.View] of the [parent]
+     * than the given [view].
      *
      * @param view The [View][android.view.View] to decorate.
      * @param cell The [Cell][com.originsdigital.compositeadapter.cell.Cell]

@@ -18,7 +18,7 @@ typealias GenericCell = Cell<out Any?, out RecyclerView.ViewHolder>
  * [ItemCallback][androidx.recyclerview.widget.DiffUtil.ItemCallback] and
  * [ItemDecoration][androidx.recyclerview.widget.RecyclerView.ItemDecoration].
  *
- * Must not store any reference to the
+ * MUST NOT store any reference to the
  * [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder], [View][android.view.View],
  * [Context][android.content.Context] or other Android component, that can be leaked.
  *
