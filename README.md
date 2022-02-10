@@ -28,7 +28,7 @@ implementation("io.github.netcosports.compositeadapter:composite-adapter:${compo
 <pre>
 data class SampleCell(
     override val data: SampleUI, // <b>Must be kotlin data class</b> or with correct <b>equals</b>
-    override val decoration: ItemDecoration&lt;*&gt;? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
+    override val decoration: ItemDecoration? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
     override val onClickListener: ((GenericClickItem&lt;SampleUI&gt;) -&gt; Unit)? = null // Root <b>View.OnClickListener</b>
 ) : Cell&lt;SampleUI, SampleCell.SampleViewHolder&gt; {
 
@@ -71,7 +71,7 @@ adapter.submitList(items)
 That's all.
 
 # ItemDecorations
-Forget about `androidx.recyclerview.widget.ItemDecoration` and use [`com.originsdigital.compositeadapter.decoration.ItemDecoration<ITEM>`](https://github.com/netcosports/CompositeAdapter_Android/blob/main/composite-adapter/src/main/java/com/originsdigital/compositeadapter/decoration/ItemDecoration.kt) with the additional parameter `ITEM` instead.
+Forget about `androidx.recyclerview.widget.ItemDecoration` and use [`com.originsdigital.compositeadapter.decoration.ItemDecoration`](https://github.com/netcosports/CompositeAdapter_Android/blob/main/composite-adapter/src/main/java/com/originsdigital/compositeadapter/decoration/ItemDecoration.kt) with the additional parameter `Cell` instead.
 Each `Cell` can have their own `ItemDecoration` that only affects them.
 - [SpaceItemDecoration (from the library)](https://github.com/netcosports/CompositeAdapter_Android/blob/main/composite-adapter/src/main/java/com/originsdigital/compositeadapter/decoration/SpaceItemDecoration.kt)
 - [BackgroundItemDecoration (from the sample)](https://github.com/netcosports/CompositeAdapter_Android/blob/main/samples/decorations/src/main/java/com/originsdigital/compositeadapter/sample/decorations/ui/decorations/SampleItemDecoration.kt)
@@ -167,7 +167,7 @@ Now you don't need to copy and paste this code into every `Cell`.
 <pre>
 data class SampleCell(
     override val data: SampleEntity, // <b>Must be kotlin data class</b> or with correct <b>equals</b>
-    override val decoration: ItemDecoration&lt;*&gt;? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
+    override val decoration: ItemDecoration? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
     override val onClickListener: ((GenericClickItem&lt;SampleEntity&gt;) -> Unit)? = null // Root View.OnClickListener
 ) : ViewBindingCell&lt;SampleEntity, SampleCellBinding&gt;() {
 
@@ -195,7 +195,7 @@ data class SampleCell(
 <pre>
 data class SampleCell(
     override val data: SampleEntity, // <b>Must be kotlin data class</b> or with correct <b>equals</b>
-    override val decoration: ItemDecoration&lt;*&gt;? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
+    override val decoration: ItemDecoration? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
     override val onClickListener: ((GenericClickItem&lt;SampleEntity&gt;) -> Unit)? = null // Root View.OnClickListener
 ) : ViewBindingCell&lt;SampleEntity, SampleCellBinding&gt;() {
 
