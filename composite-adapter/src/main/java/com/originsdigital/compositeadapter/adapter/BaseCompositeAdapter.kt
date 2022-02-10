@@ -19,9 +19,11 @@ import com.originsdigital.compositeadapter.utils.getCompositeAdapterViewHolder
 import com.originsdigital.compositeadapter.utils.setCompositeAdapterItem
 import com.originsdigital.compositeadapter.utils.setCompositeAdapterViewHolder
 
+private typealias TypedCell = Cell<Any?, RecyclerView.ViewHolder>
+
 abstract class BaseCompositeAdapter<CELL : GenericCell>(
-    config: AsyncDifferConfig<GenericCell>
-) : ListAdapter<GenericCell, RecyclerView.ViewHolder>(config) {
+    config: AsyncDifferConfig<CELL>
+) : ListAdapter<CELL, RecyclerView.ViewHolder>(config) {
 
     private val innerClickListener: View.OnClickListener = View.OnClickListener { view ->
         dispatchClick(holder = view.getCompositeAdapterViewHolder())
@@ -30,15 +32,10 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
     private lateinit var inflater: LayoutInflater
     private val typeInstances: SparseArray<GenericCell> = SparseArray()
 
-    public override fun getItem(position: Int): Cell<*, RecyclerView.ViewHolder> {
-        @Suppress("UNCHECKED_CAST")
-        return super.getItem(position) as Cell<*, RecyclerView.ViewHolder>
-    }
-
     override fun getItemViewType(position: Int): Int {
-        val cell = getItem(position)
-        return cell.viewType.also { viewType ->
-            typeInstances.put(viewType, cell)
+        val item = getItem(position)
+        return item.viewType.also { viewType ->
+            typeInstances.put(viewType, item)
         }
     }
 
@@ -46,8 +43,8 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
         if (!::inflater.isInitialized) {
             inflater = LayoutInflater.from(parent.context)
         }
-        val item = typeInstances[viewType]
-        return item.onCreateViewHolder(inflater, parent, item.viewType)
+        val cell = typeInstances[viewType]
+        return cell.onCreateViewHolder(inflater, parent, cell.viewType)
     }
 
     override fun onBindViewHolder(
@@ -55,54 +52,88 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
         position: Int,
         payloads: MutableList<Any>
     ) {
+        val cell = getCell(position)
         val isInternalPayloads = (payloads.isNotEmpty()
                 && payloads.all { payload -> payload == Cell.CELL_INTERNAL_PAYLOAD })
         if (isInternalPayloads) {
-            handleInternalPayload(holder, position, payloads)
-        } else {
-            if (!getItem(position).onBindViewHolder(holder, position, payloads)) {
-                super.onBindViewHolder(holder, position, payloads)
-            }
+            handleInternalPayload(holder, position, payloads, cell)
+        } else if (!cell.onBindViewHolder(holder, position, payloads)) {
+            super.onBindViewHolder(holder, position, payloads)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        storeHolderInView(holder, position)
-        storeCellInHolder(holder, position)
-        onBindClickListener(holder, position)
-        onBind(holder, position)
+        val cell = getCell(position)
+        storeHolderInView(holder, position, cell)
+        storeCellInHolder(holder, position, cell)
+        onBindClickListener(holder, position, cell)
+        onBind(holder, position, cell)
+    }
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        getCellFromHolder(holder).onViewAttachedToWindow(holder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+        getCellFromHolder(holder).onViewDetachedFromWindow(holder)
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        getCellFromHolder(holder).onViewRecycled(holder)
+    }
+
+    override fun onFailedToRecycleView(holder: RecyclerView.ViewHolder): Boolean {
+        return getCellFromHolder(holder).onFailedToRecycleView(holder)
     }
 
     protected open fun handleInternalPayload(
         holder: RecyclerView.ViewHolder,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
+        cell: TypedCell
     ) {
-        storeCellInHolder(holder, position)
-        onBindClickListener(holder, position)
+        storeHolderInView(holder, position, cell)
+        storeCellInHolder(holder, position, cell)
+        onBindClickListener(holder, position, cell)
     }
 
-    protected open fun storeHolderInView(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.setCompositeAdapterViewHolder(holder)
+    protected open fun storeHolderInView(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        cell: TypedCell
+    ) {
+        holder.setCompositeAdapterViewHolder()
     }
 
-    protected open fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
-        getItem(position).onBindViewHolder(holder, position)
+    protected open fun storeCellInHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        cell: TypedCell
+    ) {
+        holder.setCompositeAdapterItem(cell)
     }
 
-    protected open fun onBindClickListener(holder: RecyclerView.ViewHolder, position: Int) {
+    protected open fun onBindClickListener(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        cell: TypedCell
+    ) {
         holder.itemView.setOnClickListener(innerClickListener)
-        holder.itemView.isClickable = getItem(position).onClickListener != null
+        holder.itemView.isClickable = cell.onClickListener != null
     }
 
-    protected open fun storeCellInHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.setCompositeAdapterItem(getItem(position))
+    protected open fun onBind(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        cell: TypedCell
+    ) {
+        cell.onBindViewHolder(holder, position)
     }
 
     protected open fun dispatchClick(holder: RecyclerView.ViewHolder) {
         val position = holder.bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) {
-            val cell = holder.getCompositeAdapterItem<Cell<Any?, RecyclerView.ViewHolder>>()
+            val cell = getCellFromHolder(holder)
             cell.onClickListener?.invoke(
                 ClickItem(
                     holder = holder,
@@ -113,21 +144,12 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
         }
     }
 
-    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
-        super.onViewAttachedToWindow(holder)
-        holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
-            .onViewAttachedToWindow(holder)
+    protected fun getCell(position: Int): TypedCell {
+        @Suppress("UNCHECKED_CAST")
+        return getItem(position) as TypedCell
     }
 
-    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
-            .onViewDetachedFromWindow(holder)
-    }
-
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-        super.onViewRecycled(holder)
-        holder.getCompositeAdapterItem<Cell<*, RecyclerView.ViewHolder>>()
-            .onViewRecycled(holder)
+    protected fun getCellFromHolder(holder: RecyclerView.ViewHolder): TypedCell {
+        return holder.getCompositeAdapterItem()
     }
 }
