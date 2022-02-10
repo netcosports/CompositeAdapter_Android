@@ -9,6 +9,17 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.GenericCell
 
+/**
+ * [SpaceItemDecoration] used by the
+ * [CompositeItemDecoration][com.originsdigital.compositeadapter.decoration.CompositeItemDecoration]
+ * to add a special drawing and layout offset for only one
+ * [Cell][com.originsdigital.compositeadapter.cell.Cell].
+ *
+ * @see [com.originsdigital.compositeadapter.decoration.ItemDecoration]
+ * @see [com.originsdigital.compositeadapter.decoration.CompositeItemDecoration]
+ * @see [com.originsdigital.compositeadapter.cell.Cell]
+ * @see [androidx.recyclerview.widget.RecyclerView.ItemDecoration]
+ */
 open class SpaceItemDecoration(
     open val top: Int = 0,
     open val bottom: Int = 0,
@@ -16,6 +27,7 @@ open class SpaceItemDecoration(
     open val end: Int = 0
 ) : ItemDecoration {
 
+    /** @see [com.originsdigital.compositeadapter.decoration.ItemDecoration.getItemOffsets] */
     override fun getItemOffsets(
         outRect: Rect,
         view: View,

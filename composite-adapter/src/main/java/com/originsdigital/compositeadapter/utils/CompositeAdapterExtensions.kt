@@ -16,7 +16,7 @@ val RecyclerView.ViewHolder.context: Context get() = itemView.context
 /**
  * @receiver A root view of the [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]
  *
- * @return The stored [VIEW_HOLDER] from the tags of the given [View].
+ * @return the stored [VIEW_HOLDER] from the tags of the given [View].
  */
 fun <VIEW_HOLDER : RecyclerView.ViewHolder> View.getCompositeAdapterViewHolder(): VIEW_HOLDER {
     @Suppress("UNCHECKED_CAST")
@@ -24,10 +24,10 @@ fun <VIEW_HOLDER : RecyclerView.ViewHolder> View.getCompositeAdapterViewHolder()
 }
 
 /**
- * @receiver The [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder] to store.
- *
  * Stores this [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder] in the tags
  * of the [root view][androidx.recyclerview.widget.RecyclerView.ViewHolder.itemView].
+ *
+ * @receiver The [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder] to store.
  */
 fun RecyclerView.ViewHolder.setCompositeAdapterViewHolder() {
     itemView.setTag(R.id.composite_adapter_view_holder_tag, this)
