@@ -9,7 +9,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.GenericCell
-import com.originsdigital.compositeadapter.utils.getCompositeAdapterItem
+import com.originsdigital.compositeadapter.utils.getCompositeAdapterCell
 
 /**
  * [CompositeItemDecoration] is used to delegate
@@ -159,8 +159,8 @@ open class CompositeItemDecoration : RecyclerView.ItemDecoration() {
         )
     }
 
-    /** @see com.originsdigital.compositeadapter.utils.getCompositeAdapterItem */
-    protected fun getCellFromView(view: View): GenericCell = view.getCompositeAdapterItem()
+    /** @see com.originsdigital.compositeadapter.utils.getCompositeAdapterCell */
+    protected fun getCellFromView(view: View): GenericCell = view.getCompositeAdapterCell()
 
     /**
      * @return true if the orientation is RTL and false otherwise.

@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.ClickItem
 import com.originsdigital.compositeadapter.cell.GenericCell
-import com.originsdigital.compositeadapter.utils.getCompositeAdapterItem
+import com.originsdigital.compositeadapter.utils.getCompositeAdapterCell
 import com.originsdigital.compositeadapter.utils.getCompositeAdapterViewHolder
-import com.originsdigital.compositeadapter.utils.setCompositeAdapterItem
+import com.originsdigital.compositeadapter.utils.setCompositeAdapterCell
 import com.originsdigital.compositeadapter.utils.setCompositeAdapterViewHolder
 
 private typealias TypedCell = Cell<Any?, RecyclerView.ViewHolder>
@@ -110,7 +110,7 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
         position: Int,
         cell: TypedCell
     ) {
-        holder.setCompositeAdapterItem(cell)
+        holder.setCompositeAdapterCell(cell)
     }
 
     protected open fun onBindClickListener(
@@ -150,6 +150,6 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
     }
 
     protected fun getCellFromHolder(holder: RecyclerView.ViewHolder): TypedCell {
-        return holder.getCompositeAdapterItem()
+        return holder.getCompositeAdapterCell()
     }
 }

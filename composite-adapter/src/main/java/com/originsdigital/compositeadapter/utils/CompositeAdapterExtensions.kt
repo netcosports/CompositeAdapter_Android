@@ -35,13 +35,13 @@ fun RecyclerView.ViewHolder.setCompositeAdapterViewHolder() {
 
 
 /** @return the stored [CELL] from this [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]. */
-fun <CELL : GenericCell> RecyclerView.ViewHolder.getCompositeAdapterItem(): CELL {
-    return itemView.getCompositeAdapterItem()
+fun <CELL : GenericCell> RecyclerView.ViewHolder.getCompositeAdapterCell(): CELL {
+    return itemView.getCompositeAdapterCell()
 }
 
 /** Stores [CELL] in this [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]. */
-fun <CELL : GenericCell> RecyclerView.ViewHolder.setCompositeAdapterItem(cell: CELL) {
-    return itemView.setCompositeAdapterItem(cell)
+fun <CELL : GenericCell> RecyclerView.ViewHolder.setCompositeAdapterCell(cell: CELL) {
+    return itemView.setCompositeAdapterCell(cell)
 }
 
 /**
@@ -49,9 +49,9 @@ fun <CELL : GenericCell> RecyclerView.ViewHolder.setCompositeAdapterItem(cell: C
  *
  * @return the stored [CELL] from the tags of the given [View].
  */
-fun <CELL : GenericCell> View.getCompositeAdapterItem(): CELL {
+fun <CELL : GenericCell> View.getCompositeAdapterCell(): CELL {
     @Suppress("UNCHECKED_CAST")
-    return getTag(R.id.composite_adapter_item_tag) as CELL
+    return getTag(R.id.composite_adapter_cell_tag) as CELL
 }
 
 /**
@@ -59,6 +59,6 @@ fun <CELL : GenericCell> View.getCompositeAdapterItem(): CELL {
  *
  * [View] must be the root view of the [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]
  */
-fun <CELL : GenericCell> View.setCompositeAdapterItem(cell: CELL) {
-    setTag(R.id.composite_adapter_item_tag, cell)
+fun <CELL : GenericCell> View.setCompositeAdapterCell(cell: CELL) {
+    setTag(R.id.composite_adapter_cell_tag, cell)
 }
