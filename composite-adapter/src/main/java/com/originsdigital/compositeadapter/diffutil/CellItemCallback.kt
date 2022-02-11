@@ -9,8 +9,9 @@ import com.originsdigital.compositeadapter.cell.Cell
 import com.originsdigital.compositeadapter.cell.GenericCell
 
 /**
- * Callback for calculating the diff between two non-null
- * [cells][com.originsdigital.compositeadapter.cell.Cell].
+ * [CellItemCallback] is used to delegate all requests of the
+ * [DiffUtil.ItemCallback][androidx.recyclerview.widget.DiffUtil.ItemCallback]
+ * to the [Cell][com.originsdigital.compositeadapter.cell.Cell]
  *
  * @see androidx.recyclerview.widget.DiffUtil.ItemCallback
  */

@@ -12,8 +12,8 @@ import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.utils.getCompositeAdapterCell
 
 /**
- * [CompositeItemDecoration] is used to delegate
- * all [ItemDecoration's][androidx.recyclerview.widget.RecyclerView.ItemDecoration] requests
+ * [CompositeItemDecoration] is used to delegate all requests of the
+ * [ItemDecoration][androidx.recyclerview.widget.RecyclerView.ItemDecoration]
  * to the [decoration][com.originsdigital.compositeadapter.cell.Cell.decoration]
  * field of the [Cell][com.originsdigital.compositeadapter.cell.Cell]
  *

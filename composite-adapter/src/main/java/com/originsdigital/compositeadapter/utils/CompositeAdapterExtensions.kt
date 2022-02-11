@@ -39,7 +39,7 @@ fun <CELL : GenericCell> RecyclerView.ViewHolder.getCompositeAdapterCell(): CELL
     return itemView.getCompositeAdapterCell()
 }
 
-/** Stores [CELL] in this [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]. */
+/** Stores [cell] in this [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]. */
 fun <CELL : GenericCell> RecyclerView.ViewHolder.setCompositeAdapterCell(cell: CELL) {
     return itemView.setCompositeAdapterCell(cell)
 }
@@ -55,7 +55,7 @@ fun <CELL : GenericCell> View.getCompositeAdapterCell(): CELL {
 }
 
 /**
- * Stores [CELL] in the tags of the given [View].
+ * Stores [cell] in the tags of the given [View].
  *
  * [View] must be the root view of the [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]
  */

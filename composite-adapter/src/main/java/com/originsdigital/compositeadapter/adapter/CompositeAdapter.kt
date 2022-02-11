@@ -9,6 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.diffutil.CellItemCallback
 
+/**
+ * A [RecyclerView Adapter][androidx.recyclerview.widget.RecyclerView.Adapter],
+ * that delegates all work with [ViewHolder][androidx.recyclerview.widget.RecyclerView.ViewHolder]
+ * to the [cells][com.originsdigital.compositeadapter.cell.Cell].
+ *
+ * @see [com.originsdigital.compositeadapter.adapter.BaseCompositeAdapter]
+ * @see [com.originsdigital.compositeadapter.cell.Cell]
+ */
 open class CompositeAdapter(
     config: AsyncDifferConfig<GenericCell> = getDefaultCellAsyncDifferConfig()
 ) : BaseCompositeAdapter<GenericCell>(config) {

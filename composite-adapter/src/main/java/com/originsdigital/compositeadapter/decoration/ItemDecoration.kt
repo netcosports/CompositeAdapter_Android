@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.GenericCell
 
 /**
- * An [ItemDecoration] used by the
+ * [ItemDecoration] is used by the
  * [CompositeItemDecoration][com.originsdigital.compositeadapter.decoration.CompositeItemDecoration]
  * to add a special drawing and layout offset for only one
  * [Cell][com.originsdigital.compositeadapter.cell.Cell].
