@@ -48,7 +48,7 @@ abstract class BaseCompositeAdapter<CELL : GenericCell>(
     }
 
     private lateinit var inflater: LayoutInflater
-    private val typeInstances: SparseArray<GenericCell> = SparseArray()
+    private val typeInstances: SparseArray<CELL> = SparseArray()
 
     /**
      * Delegates the [getItemViewType] request to the
