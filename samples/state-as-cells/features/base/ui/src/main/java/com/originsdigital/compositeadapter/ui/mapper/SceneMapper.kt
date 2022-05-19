@@ -3,8 +3,8 @@ package com.originsdigital.compositeadapter.ui.mapper
 import android.app.Application
 import android.util.TypedValue
 import androidx.annotation.DimenRes
-import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.core.entity.Scene
 import com.originsdigital.compositeadapter.core.log
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
@@ -21,7 +21,7 @@ class SceneMapper(
     val errorUIMapper: ErrorUIMapper
 ) {
 
-    private val stateItemDecoration: ItemDecoration<Cell<*>>
+    private val stateItemDecoration: ItemDecoration
 
     init {
         val defaultSpace = TypedValue.applyDimension(
@@ -72,10 +72,10 @@ class SceneMapper(
 
     fun <DATA> mapSceneToCell(
         scene: Scene<DATA>,
-        loadingDelegate: (scene: Scene.Loading<DATA>) -> Cell<*> = { getFullLoaderCell() },
-        errorDelegate: (scene: Scene.Error<DATA>) -> Cell<*>,
-        dataDelegate: (Scene.Data<DATA>) -> Cell<*>
-    ): Cell<*> {
+        loadingDelegate: (scene: Scene.Loading<DATA>) -> GenericCell = { getFullLoaderCell() },
+        errorDelegate: (scene: Scene.Error<DATA>) -> GenericCell,
+        dataDelegate: (Scene.Data<DATA>) -> GenericCell
+    ): GenericCell {
         return mapScene(
             scene = scene,
             loadingDelegate = loadingDelegate,
@@ -86,10 +86,10 @@ class SceneMapper(
 
     fun <DATA> mapSceneToCellOrNull(
         scene: Scene<DATA>,
-        loadingDelegate: (scene: Scene.Loading<DATA>) -> Cell<*>? = { getFullLoaderCell() },
-        errorDelegate: (scene: Scene.Error<DATA>) -> Cell<*>?,
-        dataDelegate: (Scene.Data<DATA>) -> Cell<*>?
-    ): Cell<*>? {
+        loadingDelegate: (scene: Scene.Loading<DATA>) -> GenericCell? = { getFullLoaderCell() },
+        errorDelegate: (scene: Scene.Error<DATA>) -> GenericCell?,
+        dataDelegate: (Scene.Data<DATA>) -> GenericCell?
+    ): GenericCell? {
         return mapScene(
             scene = scene,
             loadingDelegate = loadingDelegate,
@@ -100,12 +100,12 @@ class SceneMapper(
 
     fun <DATA> mapSceneToCells(
         scene: Scene<DATA>,
-        loadingDelegate: (scene: Scene.Loading<DATA>) -> List<Cell<*>> = {
+        loadingDelegate: (scene: Scene.Loading<DATA>) -> List<GenericCell> = {
             listOf(getFullLoaderCell())
         },
-        errorDelegate: (scene: Scene.Error<DATA>) -> List<Cell<*>>,
-        dataDelegate: (Scene.Data<DATA>) -> List<Cell<*>>
-    ): List<Cell<*>> {
+        errorDelegate: (scene: Scene.Error<DATA>) -> List<GenericCell>,
+        dataDelegate: (Scene.Data<DATA>) -> List<GenericCell>
+    ): List<GenericCell> {
         return mapScene(
             scene = scene,
             loadingDelegate = loadingDelegate,
@@ -116,9 +116,9 @@ class SceneMapper(
 
     fun <DATA> mapSceneToCells(
         scene: Scene<DATA>,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit,
-        dataDelegate: (Scene.Data<DATA>) -> List<Cell<*>>
-    ): List<Cell<*>> {
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit,
+        dataDelegate: (Scene.Data<DATA>) -> List<GenericCell>
+    ): List<GenericCell> {
         return mapScene(
             scene = scene,
             loadingDelegate = { listOf(getFullLoaderCell()) },
@@ -141,9 +141,9 @@ class SceneMapper(
     fun <DATA> mapSmallSceneToCell(
         scene: Scene<DATA>,
         uniqueId: String,
-        onRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
-        dataDelegate: (Scene.Data<DATA>) -> Cell<*>
-    ): Cell<*> {
+        onRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
+        dataDelegate: (Scene.Data<DATA>) -> GenericCell
+    ): GenericCell {
         return mapSceneToCell(
             scene = scene,
             loadingDelegate = { getSmallLoaderCell(uniqueLoaderId = "loader=$uniqueId") },
@@ -164,9 +164,9 @@ class SceneMapper(
     fun <DATA> mapSmallSceneToCellOrNull(
         scene: Scene<DATA>,
         uniqueId: String,
-        onRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
-        dataDelegate: (Scene.Data<DATA>) -> Cell<*>?
-    ): Cell<*>? {
+        onRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
+        dataDelegate: (Scene.Data<DATA>) -> GenericCell?
+    ): GenericCell? {
         return mapSceneToCellOrNull(
             scene = scene,
             loadingDelegate = { getSmallLoaderCell(uniqueLoaderId = uniqueId) },
@@ -188,9 +188,9 @@ class SceneMapper(
     fun <DATA> mapSmallSceneToCells(
         scene: Scene<DATA>,
         uniqueId: String,
-        onRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit),
-        dataDelegate: (Scene.Data<DATA>) -> List<Cell<*>>
-    ): List<Cell<*>> {
+        onRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit),
+        dataDelegate: (Scene.Data<DATA>) -> List<GenericCell>
+    ): List<GenericCell> {
         return mapSceneToCells(
             scene = scene,
             loadingDelegate = { listOf(getSmallLoaderCell(uniqueLoaderId = uniqueId)) },
@@ -211,15 +211,15 @@ class SceneMapper(
         )
     }
 
-    fun getFullLoaderCell(): Cell<*> {
+    fun getFullLoaderCell(): GenericCell {
         return CommonFullLoaderCell()
     }
 
     fun getSmallLoaderCell(
         uniqueLoaderId: String,
-        decoration: ItemDecoration<Cell<*>>? = stateItemDecoration,
+        decoration: ItemDecoration? = stateItemDecoration,
         @DimenRes height: Int? = null
-    ): Cell<*> {
+    ): GenericCell {
         return CommonLoaderCell(
             data = loaderUIMapper.mapLoader(
                 id = uniqueLoaderId,
@@ -232,9 +232,9 @@ class SceneMapper(
     fun getErrorCell(
         isFull: Boolean,
         error: CommonErrorUI,
-        decoration: ItemDecoration<out Cell<*>>? = stateItemDecoration,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
-    ): Cell<*> {
+        decoration: ItemDecoration? = stateItemDecoration,
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
+    ): GenericCell {
         return if (isFull) {
             getFullErrorCell(
                 error = error,
@@ -252,9 +252,9 @@ class SceneMapper(
 
     fun getFullErrorCell(
         error: CommonErrorUI,
-        decoration: ItemDecoration<out Cell<*>>? = null,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
-    ): Cell<*> {
+        decoration: ItemDecoration? = null,
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
+    ): GenericCell {
         return CommonFullErrorCell(
             data = error,
             decoration = decoration,
@@ -264,9 +264,9 @@ class SceneMapper(
 
     fun getSmallErrorCell(
         error: CommonErrorUI,
-        decoration: ItemDecoration<out Cell<*>>? = stateItemDecoration,
-        onRetryClicked: (ClickItem<CommonErrorUI>) -> Unit
-    ): Cell<*> {
+        decoration: ItemDecoration? = stateItemDecoration,
+        onRetryClicked: (GenericClickItem<CommonErrorUI>) -> Unit
+    ): GenericCell {
         return CommonErrorCell(
             data = error,
             decoration = decoration,

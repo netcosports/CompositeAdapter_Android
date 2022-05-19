@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="composite_adapter_view_holder_tag" type="id"/>
-    <item name="composite_adapter_item_tag" type="id"/>
-    <item name="composite_adapter_viewbinding_tag" type="id"/>
+    <item name="composite_adapter_view_holder_tag" type="id" />
+    <item name="composite_adapter_cell_tag" type="id" />
 </resources>

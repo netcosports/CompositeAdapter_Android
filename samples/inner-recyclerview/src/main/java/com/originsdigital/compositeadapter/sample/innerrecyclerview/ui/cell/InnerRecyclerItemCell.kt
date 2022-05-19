@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.R
 import com.originsdigital.compositeadapter.sample.innerrecyclerview.databinding.InnerRecyclerItemCellBinding
@@ -17,9 +17,9 @@ import com.originsdigital.compositeadapter.sample.innerrecyclerview.ui.entity.In
 
 data class InnerRecyclerItemCell(
     override val data: InnerRecyclerItemUI,
-    override val decoration: ItemDecoration<out Cell<*>>? = null,
-    override val onClickListener: ((ClickItem<InnerRecyclerItemUI>) -> Unit)? = null
-) : Cell<InnerRecyclerItemUI> {
+    override val decoration: ItemDecoration? = null,
+    override val onClickListener: ((GenericClickItem<InnerRecyclerItemUI>) -> Unit)? = null
+) : Cell<InnerRecyclerItemUI, InnerRecyclerItemCell.SampleViewHolder> {
 
     override val uniqueId: String = data.id
     override val layoutId: Int = R.layout.inner_recycler_item_cell
@@ -28,7 +28,7 @@ data class InnerRecyclerItemCell(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
+    ): SampleViewHolder {
         return SampleViewHolder(
             InnerRecyclerItemCellBinding.inflate(inflater, parent, false).also { holder ->
                 holder.root.applyRoundCorners(holder.root.context.dpToPx(6f))
@@ -36,10 +36,8 @@ data class InnerRecyclerItemCell(
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as SampleViewHolder).binding.apply {
-            text.text = data.name
-        }
+    override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.binding.text.text = data.name
     }
 
     private fun Context.dpToPx(dp: Float): Float {
@@ -61,7 +59,7 @@ data class InnerRecyclerItemCell(
         clipToOutline = true
     }
 
-    private class SampleViewHolder(
+    class SampleViewHolder(
         val binding: InnerRecyclerItemCellBinding
     ) : RecyclerView.ViewHolder(binding.root)
 }

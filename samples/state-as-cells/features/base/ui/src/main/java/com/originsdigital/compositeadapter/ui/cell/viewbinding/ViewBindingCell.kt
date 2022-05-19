@@ -3,10 +3,10 @@ package com.originsdigital.compositeadapter.ui.cell.viewbinding
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.originsdigital.compositeadapter.ui.cell.base.BaseCell
+import com.originsdigital.compositeadapter.cell.Cell
 
 abstract class ViewBindingCell<DATA, VIEW_BINDING : ViewBinding>
-    : BaseCell<DATA, ViewBindingViewHolder<VIEW_BINDING>>() {
+    : Cell<DATA, ViewBindingViewHolder<VIEW_BINDING>> {
 
     abstract fun createViewBinding(
         inflater: LayoutInflater,
@@ -14,7 +14,7 @@ abstract class ViewBindingCell<DATA, VIEW_BINDING : ViewBinding>
         viewType: Int
     ): VIEW_BINDING
 
-    final override fun createViewHolder(
+    final override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int

@@ -8,6 +8,6 @@ class SamplesApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        StateAsCellsDI.init(this)
+        StateAsCellsDI.init(this) //required by :samples:state-as-cells module only
     }
 }

@@ -25,4 +25,5 @@ val IS_NOT_PRODUCTION_RELEASE_QUALIFIER: StringQualifier get() = named("IS_NOT_P
 val IS_DEBUG: Boolean get() = GlobalContext.get().get(IS_DEBUG_QUALIFIER)
 val IS_INTEGRATION: Boolean get() = GlobalContext.get().get(IS_INTEGRATION_QUALIFIER)
 val IS_PRODUCTION_BETA: Boolean get() = GlobalContext.get().get(IS_PRODUCTION_BETA_QUALIFIER)
-val IS_NOT_PRODUCTION_RELEASE: Boolean get() = GlobalContext.get().get(IS_NOT_PRODUCTION_RELEASE_QUALIFIER)
+val IS_NOT_PRODUCTION_RELEASE: Boolean
+    get() = GlobalContext.get().get(IS_NOT_PRODUCTION_RELEASE_QUALIFIER)

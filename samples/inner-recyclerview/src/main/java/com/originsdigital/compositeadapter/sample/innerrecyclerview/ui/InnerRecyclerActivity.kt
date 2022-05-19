@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
-import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.decoration.SpaceItemDecoration
@@ -72,10 +72,10 @@ class InnerRecyclerActivity : AppCompatActivity() {
 
         private val scrollStatesHolder = ScrollStatesHolder()
 
-        private val singleItemDecoration: ItemDecoration<Cell<*>>
-        private val firstItemDecoration: ItemDecoration<Cell<*>>
-        private val middleItemDecoration: ItemDecoration<Cell<*>>
-        private val lastItemDecoration: ItemDecoration<Cell<*>>
+        private val singleItemDecoration: ItemDecoration
+        private val firstItemDecoration: ItemDecoration
+        private val middleItemDecoration: ItemDecoration
+        private val lastItemDecoration: ItemDecoration
 
         init {
             singleItemDecoration = SpaceItemDecoration(
@@ -105,10 +105,10 @@ class InnerRecyclerActivity : AppCompatActivity() {
         }
 
         //should be inside ViewModel/UIMapper
-        fun generateData(): List<Cell<*>> {
+        fun generateData(): List<GenericCell> {
             // Cells do the same, but
             // InnerRecycler1Cell - more code but more clearer and `correct`
-            // InnerRecycler2Cell - less code (can be less with `ViewBindingCell`)
+            // InnerRecycler2Cell - less code
             val useClearerVersion = Random.nextBoolean()
             return (0..20).map { recyclerId ->
                 val size = 10

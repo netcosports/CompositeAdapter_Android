@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.originsdigital.compositeadapter.adapter.CompositeAdapter
-import com.originsdigital.compositeadapter.cell.Cell
+import com.originsdigital.compositeadapter.cell.GenericCell
 import com.originsdigital.compositeadapter.decoration.CompositeItemDecoration
 import com.originsdigital.compositeadapter.decoration.ItemDecoration
 import com.originsdigital.compositeadapter.sample.decorations.ui.cell.DecorationsCell
@@ -82,10 +82,10 @@ class DecorationsActivity : AppCompatActivity() {
         @ColorInt backgroundColorInt: Int
     ) {
 
-        private val singleItemDecoration: ItemDecoration<Cell<*>>
-        private val topItemDecoration: ItemDecoration<Cell<*>>
-        private val middleItemDecoration: ItemDecoration<Cell<*>>
-        private val bottomItemDecoration: ItemDecoration<Cell<*>>
+        private val singleItemDecoration: ItemDecoration
+        private val topItemDecoration: ItemDecoration
+        private val middleItemDecoration: ItemDecoration
+        private val bottomItemDecoration: ItemDecoration
 
         init {
             singleItemDecoration = SampleItemDecoration(
@@ -137,14 +137,14 @@ class DecorationsActivity : AppCompatActivity() {
         }
 
         //should be inside ViewModel/UIMapper
-        fun generateData(): List<Cell<*>> {
+        fun generateData(): List<GenericCell> {
             val ids = (0..(Random.nextInt(10))).filterIndexed { index, _ ->
                 index == 0 || Random.nextBoolean()
             }
             val size = ids.size
             return ids.mapIndexed { index, id ->
                 val name: String
-                val decoration: ItemDecoration<Cell<*>>
+                val decoration: ItemDecoration
                 when {
                     size == 1 -> {
                         name = "Single Cell id=$id"

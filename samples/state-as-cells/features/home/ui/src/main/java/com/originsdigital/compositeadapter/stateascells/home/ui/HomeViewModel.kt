@@ -1,8 +1,8 @@
 package com.originsdigital.compositeadapter.stateascells.home.ui
 
 import androidx.lifecycle.viewModelScope
-import com.originsdigital.compositeadapter.cell.Cell
-import com.originsdigital.compositeadapter.cell.ClickItem
+import com.originsdigital.compositeadapter.cell.GenericCell
+import com.originsdigital.compositeadapter.cell.GenericClickItem
 import com.originsdigital.compositeadapter.core.entity.Scene
 import com.originsdigital.compositeadapter.core.extensions.isEmpty
 import com.originsdigital.compositeadapter.home.core.repository.HomeRepository
@@ -23,11 +23,15 @@ class HomeViewModel(
     private val homeUIMapper: HomeUIMapper
 ) : BaseStateViewModel<HomeViewModel.State>() {
 
-    private val onStoriesRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit) = { onRefresh() }
-    private val onNewsRetryClicked: ((ClickItem<CommonErrorUI>) -> Unit) = { onRefresh() }
-    private val onStoryClickListener: ((ClickItem<StoryEntity>) -> Unit) = { click ->
+    private val onStoriesRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit) = {
+        loadStories()
     }
-    private val onNewsClickListener: ((ClickItem<NewsEntity>) -> Unit) = { click ->
+    private val onNewsRetryClicked: ((GenericClickItem<CommonErrorUI>) -> Unit) = { loadNews() }
+    private val onStoryClickListener: ((GenericClickItem<StoryEntity>) -> Unit) = { click ->
+        "Clicked ${click.item}"
+    }
+    private val onNewsClickListener: ((GenericClickItem<NewsEntity>) -> Unit) = { click ->
+        "Clicked ${click.item}"
     }
 
     private val storiesFlow = MutableStateFlow<Scene<List<StoryEntity>>>(Scene.Loading())
@@ -83,6 +87,6 @@ class HomeViewModel(
 
     data class State(
         val isRefreshing: Boolean,
-        val cells: List<Cell<*>>
+        val cells: List<GenericCell>
     )
 }
