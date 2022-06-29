@@ -49,26 +49,16 @@ interface Cell<T, VIEW_HOLDER : RecyclerView.ViewHolder> {
 
 
     /**
-     * The layout id to inflate in the [onCreateViewHolder].
-     *
-     * Can be generated via ids.xml in case of CustomViews
-     */
-    @get:LayoutRes
-    val layoutId: Int
-
-    /**
      * The view type of the [Cell]. Must be unique among all different [cells][Cell].
      *
      * Can be generated via ids.xml.
-     *
-     * Default implementation returns [layoutId].
      *
      * Used by the [areItemsTheSame] to check whether two objects represent the same item.
      *
      * Used by the [androidx.recyclerview.widget.RecyclerView.Adapter]
      * for the purposes of view recycling.
      */
-    val viewType: Int get() = layoutId
+    val viewType: Int
 
 
     /**

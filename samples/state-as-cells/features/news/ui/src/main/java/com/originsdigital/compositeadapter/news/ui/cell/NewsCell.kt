@@ -17,7 +17,7 @@ data class NewsCell(
 ) : ViewBindingCell<NewsEntity, NewsCellBinding>() {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.news_cell
+    override val viewType: Int = R.layout.news_cell
 
     override fun createViewBinding(
         inflater: LayoutInflater,

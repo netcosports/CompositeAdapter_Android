@@ -17,7 +17,7 @@ data class StoryCell(
 ) : ViewBindingCell<StoryEntity, StoryCellBinding>() {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.story_cell
+    override val viewType: Int = R.layout.story_cell
 
     override fun createViewBinding(
         inflater: LayoutInflater,

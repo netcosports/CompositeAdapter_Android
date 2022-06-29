@@ -32,8 +32,8 @@ data class SampleCell(
     override val onClickListener: ((GenericClickItem&lt;SampleUI&gt;) -&gt; Unit)? = null // Root <b>View.OnClickListener</b>
 ) : Cell&lt;SampleUI, SampleCell.SampleViewHolder&gt; {
 
-    override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b> (by default <b>viewType</b> == <b>layoutId</b>)
-    override val layoutId: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b> (by default <b>viewType</b> == <b>layoutId</b>)
+    override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b>
+    override val viewType: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b>
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -143,6 +143,11 @@ abstract class ViewBindingCell&lt;DATA, VIEW_BINDING : ViewBinding&gt;
 abstract class DataBindingCell&lt;DATA, DATA_BINDING : ViewDataBinding&gt;
     : Cell&lt;DATA, DataBindingViewHolder&lt;DATA_BINDING&gt;&gt; {
 
+    @get:LayoutRes
+    abstract val layoutId: Int
+
+    override val viewType: Int get() = layoutId
+
     final override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
@@ -171,8 +176,8 @@ data class SampleCell(
     override val onClickListener: ((GenericClickItem&lt;SampleEntity&gt;) -> Unit)? = null // Root View.OnClickListener
 ) : ViewBindingCell&lt;SampleEntity, SampleCellBinding&gt;() {
 
-    override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b> (by default <b>viewType</b> == <b>layoutId</b>)
-    override val layoutId: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b> (by default <b>viewType</b> == <b>layoutId</b>)
+    override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b>
+    override val viewType: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b>
 
     override fun createViewBinding(
         inflater: LayoutInflater,
@@ -197,7 +202,7 @@ data class SampleCell(
     override val data: SampleEntity, // <b>Must be kotlin data class</b> or with correct <b>equals</b>
     override val decoration: ItemDecoration? = null, // <b>ItemDecoration</b> for this <b>SampleCell</b> instance only
     override val onClickListener: ((GenericClickItem&lt;SampleEntity&gt;) -> Unit)? = null // Root View.OnClickListener
-) : ViewBindingCell&lt;SampleEntity, SampleCellBinding&gt;() {
+) : DataBindingCell&lt;SampleEntity, SampleCellBinding&gt;() {
 
     override val uniqueId: String = data.id // <b>Must be unique</b> for this <b>viewType</b> (by default <b>viewType</b> == <b>layoutId</b>)
     override val layoutId: Int = R.layout.sample_cell // Can be generated via <b>ids.xml</b> (by default <b>viewType</b> == <b>layoutId</b>)
