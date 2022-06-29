@@ -19,7 +19,7 @@ data class CommonLoaderCell(
 ) : ViewBindingCell<CommonLoaderUI, CommonLoaderCellBinding>() {
 
     override val uniqueId = data.id
-    override val layoutId = R.layout.common_loader_cell
+    override val viewType = R.layout.common_loader_cell
 
     override fun createViewBinding(
         inflater: LayoutInflater,

@@ -7,7 +7,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.originsdigital.compositeadapter.cell.GenericCell
-import com.originsdigital.compositeadapter.decoration.SpaceItemDecoration
+import com.originsdigital.compositeadapter.decoration.BaseSpaceItemDecoration
 import kotlin.math.roundToInt
 
 data class SampleItemDecoration(
@@ -21,7 +21,7 @@ data class SampleItemDecoration(
     override val bottom: Int = 0,
     override val start: Int = 0,
     override val end: Int = 0
-) : SpaceItemDecoration() {
+) : BaseSpaceItemDecoration() {
 
     private val dividerPaint = Paint().apply {
         color = dividerColorInt

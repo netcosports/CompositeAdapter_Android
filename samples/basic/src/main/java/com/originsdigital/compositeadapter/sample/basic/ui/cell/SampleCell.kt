@@ -17,7 +17,7 @@ data class SampleCell(
 ) : Cell<SampleUI, SampleCell.SampleViewHolder> {
 
     override val uniqueId: String = data.type.name
-    override val layoutId: Int = R.layout.sample_cell
+    override val viewType: Int = R.layout.sample_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,

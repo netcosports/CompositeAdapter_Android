@@ -20,7 +20,7 @@ data class StoriesCell(
 ) : Cell<List<StoryCell>, StoriesCell.CustomViewHolder> {
 
     override val uniqueId: String = "StoriesCell"
-    override val layoutId: Int = R.layout.stories_cell
+    override val viewType: Int = R.layout.stories_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,

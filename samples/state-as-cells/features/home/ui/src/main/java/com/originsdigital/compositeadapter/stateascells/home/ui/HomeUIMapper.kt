@@ -34,10 +34,7 @@ class HomeUIMapper(
             start = app.dpToPx(8f).toInt()
         )
         middleStoryBigItemDecoration = firstStoryItemDecoration
-        lastStoryItemDecoration = SpaceItemDecoration(
-            top = firstStoryItemDecoration.top,
-            bottom = firstStoryItemDecoration.bottom,
-            start = firstStoryItemDecoration.start,
+        lastStoryItemDecoration = firstStoryItemDecoration.copy(
             end = firstStoryItemDecoration.start
         )
         firstNewsItemDecoration = SpaceItemDecoration(
@@ -46,11 +43,8 @@ class HomeUIMapper(
             end = app.dpToPx(8f).toInt()
         )
         middleNewsBigItemDecoration = firstNewsItemDecoration
-        lastNewsItemDecoration = SpaceItemDecoration(
-            top = firstStoryItemDecoration.top,
+        lastNewsItemDecoration = firstNewsItemDecoration.copy(
             bottom = firstStoryItemDecoration.top,
-            start = firstStoryItemDecoration.start,
-            end = firstStoryItemDecoration.end
         )
     }
 

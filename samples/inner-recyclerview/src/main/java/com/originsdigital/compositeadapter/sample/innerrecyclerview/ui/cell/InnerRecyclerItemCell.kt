@@ -22,7 +22,7 @@ data class InnerRecyclerItemCell(
 ) : Cell<InnerRecyclerItemUI, InnerRecyclerItemCell.SampleViewHolder> {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.inner_recycler_item_cell
+    override val viewType: Int = R.layout.inner_recycler_item_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,

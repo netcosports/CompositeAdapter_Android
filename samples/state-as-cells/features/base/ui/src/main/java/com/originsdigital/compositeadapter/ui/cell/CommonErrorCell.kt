@@ -17,7 +17,7 @@ data class CommonErrorCell(
 ) : ViewBindingCell<CommonErrorUI, CommonErrorCellBinding>() {
 
     override val uniqueId = data.id
-    override val layoutId = R.layout.common_error_cell
+    override val viewType = R.layout.common_error_cell
 
     override fun createViewBinding(
         inflater: LayoutInflater,

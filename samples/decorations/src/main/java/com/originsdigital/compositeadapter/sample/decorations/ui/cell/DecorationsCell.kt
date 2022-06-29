@@ -17,7 +17,7 @@ data class DecorationsCell(
 ) : Cell<DecorationsUI, DecorationsCell.SampleViewHolder> {
 
     override val uniqueId: String = data.id
-    override val layoutId: Int = R.layout.decorations_cell
+    override val viewType: Int = R.layout.decorations_cell
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
