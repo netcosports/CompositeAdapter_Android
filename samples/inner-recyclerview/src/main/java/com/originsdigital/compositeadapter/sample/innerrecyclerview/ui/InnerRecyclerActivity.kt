@@ -84,23 +84,15 @@ class InnerRecyclerActivity : AppCompatActivity() {
                 start = space,
                 end = space
             )
-            firstItemDecoration = SpaceItemDecoration(
-                top = space,
-                bottom = space,
-                start = space,
+            firstItemDecoration = singleItemDecoration.copy(
                 end = space / 2
             )
-            middleItemDecoration = SpaceItemDecoration(
-                top = space,
-                bottom = space,
+            middleItemDecoration = singleItemDecoration.copy(
                 start = space / 2,
                 end = space / 2
             )
-            lastItemDecoration = SpaceItemDecoration(
-                top = space,
-                bottom = space,
+            lastItemDecoration = singleItemDecoration.copy(
                 start = space / 2,
-                end = space
             )
         }
 

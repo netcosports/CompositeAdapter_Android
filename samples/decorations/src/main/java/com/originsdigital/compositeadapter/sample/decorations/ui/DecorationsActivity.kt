@@ -100,39 +100,18 @@ class DecorationsActivity : AppCompatActivity() {
                 start = space,
                 end = space
             )
-            topItemDecoration = SampleItemDecoration(
+            topItemDecoration = singleItemDecoration.copy(
                 type = SampleItemDecoration.Type.TOP,
-                radius = radius,
-                strokeWidth = strokeWidth,
-                dividerHeight = dividerHeight,
-                dividerColorInt = dividerColorInt,
-                backgroundColorInt = backgroundColorInt,
-                top = space,
-                start = space,
-                end = space,
-                bottom = dividerHeight
+                bottom = dividerHeight,
             )
-            middleItemDecoration = SampleItemDecoration(
+            middleItemDecoration = singleItemDecoration.copy(
                 type = SampleItemDecoration.Type.MIDDLE,
-                radius = radius,
-                strokeWidth = strokeWidth,
-                dividerHeight = dividerHeight,
-                dividerColorInt = dividerColorInt,
-                backgroundColorInt = backgroundColorInt,
-                start = space,
-                end = space,
-                bottom = dividerHeight
+                top = 0,
+                bottom = dividerHeight,
             )
-            bottomItemDecoration = SampleItemDecoration(
+            bottomItemDecoration = singleItemDecoration.copy(
                 type = SampleItemDecoration.Type.BOTTOM,
-                radius = radius,
-                strokeWidth = strokeWidth,
-                dividerHeight = dividerHeight,
-                dividerColorInt = dividerColorInt,
-                backgroundColorInt = backgroundColorInt,
-                bottom = space,
-                start = space,
-                end = space
+                top = 0,
             )
         }
 
